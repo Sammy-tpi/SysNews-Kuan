@@ -1,50 +1,26 @@
 [
   {
     "category": "General Tech & Startups",
-    "title": "OpenAI 釋出 GPT-5 首個測試版",
-    "summary": "OpenAI 今日宣布即將推出 GPT-5 測試版，強調在多模態理解和推理能力上取得新突破，預計將吸引企業關注。",
+    "title": "Meta 與 Scale AI 合作重啟 AI 戰略",
+    "summary": "Meta 成立新實驗室，邀請 Scale AI CEO Alexandr Wang 領軍，挑戰 GPT-5。",
     "source": "TechCrunch",
     "read_time": "5 min read",
-    "url": "https://techcrunch.com/2025/06/11/openai-gpt5-preview"
+    "url": "https://techcrunch.com/2025/06/11/can-scale-ai-and-alexandr-wang-reignite-metas-ai-efforts/"
   },
   {
-    "category": "General Tech & Startups",
-    "title": "微軟收購新創打造雲端 GPU 服務",
-    "summary": "微軟宣布收購專攻分散式 GPU 運算的新創公司，以滿足生成式 AI 的龐大需求，整合進 Azure 雲端平台。",
+    "category": "Applied AI & Fintech",
+    "title": "Stripe 推出新 AI 風控系統",
+    "summary": "Stripe 運用機器學習提升詐騙檢測準確度，降低交易風險。",
     "source": "The Verge",
-    "read_time": "4 min read",
-    "url": "https://www.theverge.com/2025/06/10/microsoft-acquires-gpu-startup"
-  },
-  {
-    "category": "Applied AI & Fintech",
-    "title": "Visa 推行即時 AI 反欺詐方案",
-    "summary": "Visa 透過即時機器學習模型監測交易，強調能在毫秒內阻擋可疑付款，預計年底覆蓋全球商戶。",
-    "source": "Reuters",
     "read_time": "3 min read",
-    "url": "https://www.reuters.com/technology/visa-real-time-ai-fraud-prevention"
-  },
-  {
-    "category": "Applied AI & Fintech",
-    "title": "台灣銀行導入 GPT 金融客服",
-    "summary": "國內銀行與新創合作，導入大型語言模型提供 24 小時中文與英語服務，提升客戶滿意度並減少人力成本。",
-    "source": "經濟日報",
-    "read_time": "2 min read",
-    "url": "https://money.udn.com/story/5612/7969690"
+    "url": "https://www.theverge.com/2025/06/11/stripe-new-ai-fraud-detection"
   },
   {
     "category": "Blockchain & Crypto",
-    "title": "比特幣 ETF 交易量創新高",
-    "summary": "美國數家交易所的比特幣 ETF 一週內交易量突破 20 億美元，顯示傳統市場正快速接受加密資產。",
+    "title": "以太坊升級帶來更快的交易速度",
+    "summary": "最新的升級大幅改善了以太坊網路的效率，擴展 DeFi 應用。",
     "source": "CoinDesk",
     "read_time": "4 min read",
-    "url": "https://www.coindesk.com/2025/06/11/bitcoin-etf-volume-record"
-  },
-  {
-    "category": "Blockchain & Crypto",
-    "title": "以太坊社群討論 L2 解決方案",
-    "summary": "開發者在最新論壇中分享多種 Layer 2 方案，希望降低手續費並加速應用擴張，DeFi 領域尤其受益。",
-    "source": "BlockTempo",
-    "read_time": "3 min read",
-    "url": "https://www.blocktempo.com/ethereum-layer2-forum"
+    "url": "https://www.coindesk.com/2025/06/11/ethereum-upgrade-speeds"
   }
 ]
