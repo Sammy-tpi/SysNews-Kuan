@@ -18,9 +18,10 @@ TEMPLATE = """
         margin: 20px;
     }
     .container {
-        max-width: 800px;
+        width: 90%;
+        max-width: 1024px;
         margin: 0 auto;
-        padding: 20px;
+        padding: 24px;
     }
     h1 {
         font-family: 'Playfair Display', serif;
