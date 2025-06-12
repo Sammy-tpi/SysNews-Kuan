@@ -15,6 +15,11 @@ TEMPLATE = """
         background-color: #fff;
         margin: 20px;
     }
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
     .card {
         background-color: #f9f9f9;
         border: 1px solid #eee;
@@ -29,7 +34,7 @@ TEMPLATE = """
         text-decoration: none;
     }
     .summary {
-        font-size: 14px;
+        font-size: 16px;
         color: #333;
         margin: 10px 0;
         line-height: 1.6;
@@ -46,6 +51,7 @@ TEMPLATE = """
     </style>
 </head>
 <body>
+<div class="container">
 <h1>Polaris 每日 AI 與 Fintech 新聞摘要 — {{ date }}</h1>
 <p>由 Polaris 系統生成 ┃ 揭露最新的 AI 與 Fintech 動向</p>
 {% for category, articles in grouped.items() %}
@@ -64,6 +70,7 @@ TEMPLATE = """
 </div>
 {% endfor %}
 {% endfor %}
+</div>
 </body>
 </html>
 """
