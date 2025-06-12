@@ -10,8 +10,9 @@ TEMPLATE = """
     <meta charset="UTF-8">
     <title>📬 Polaris Daily Digest – {{ date }}</title>
     <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
     body {
-        font-family: Arial, sans-serif;
+        font-family: 'Playfair Display', serif;
         background-color: #fff;
         margin: 20px;
     }
