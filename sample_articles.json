@@ -1,0 +1,26 @@
+[
+  {
+    "category": "General Tech & Startups",
+    "title": "Meta 與 Scale AI 合作重啟 AI 戰略",
+    "summary": "Meta 成立新實驗室，邀請 Scale AI CEO Alexandr Wang 領軍，挑戰 GPT-5。",
+    "source": "TechCrunch",
+    "read_time": "5 min read",
+    "url": "https://techcrunch.com/2025/06/11/can-scale-ai-and-alexandr-wang-reignite-metas-ai-efforts/"
+  },
+  {
+    "category": "Applied AI & Fintech",
+    "title": "Stripe 推出新 AI 風控系統",
+    "summary": "Stripe 運用機器學習提升詐騙檢測準確度，降低交易風險。",
+    "source": "The Verge",
+    "read_time": "3 min read",
+    "url": "https://www.theverge.com/2025/06/11/stripe-new-ai-fraud-detection"
+  },
+  {
+    "category": "Blockchain & Crypto",
+    "title": "以太坊升級帶來更快的交易速度",
+    "summary": "最新的升級大幅改善了以太坊網路的效率，擴展 DeFi 應用。",
+    "source": "CoinDesk",
+    "read_time": "4 min read",
+    "url": "https://www.coindesk.com/2025/06/11/ethereum-upgrade-speeds"
+  }
+]
