@@ -1,4 +1,5 @@
-import yagmail
+import smtplib
+from email.message import EmailMessage
 from datetime import datetime
 from generate_digest import load_articles, generate_html
 
@@ -20,8 +21,16 @@ def main():
     date_str = datetime.now().strftime("%Y-%m-%d")
     subject = f"📬 Polaris Daily Digest – {date_str}"
 
-    yag = yagmail.SMTP(SENDER, PASSWORD)
-    yag.send(to=RECIPIENT, subject=subject, contents=html_content)
+    msg = EmailMessage()
+    msg['Subject'] = subject
+    msg['From'] = SENDER
+    msg['To'] = RECIPIENT
+    msg.set_content('This email requires an HTML capable client.')
+    msg.add_alternative(html_content, subtype='html')
+
+    with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+        smtp.login(SENDER, PASSWORD)
+        smtp.send_message(msg)
     print("\u2705 Email sent.")
 
 if __name__ == '__main__':
