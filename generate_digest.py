@@ -8,7 +8,7 @@ TEMPLATE = """
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
-    <title>Polaris 每日 AI 與 Fintech 新聞摘要 — {{ date }}</title>
+    <title>📬 Polaris Daily Digest – {{ date }}</title>
     <style>
     body {
         font-family: Arial, sans-serif;
@@ -52,8 +52,7 @@ TEMPLATE = """
 </head>
 <body>
 <div class="container">
-<h1>Polaris 每日 AI 與 Fintech 新聞摘要 — {{ date }}</h1>
-<p>由 Polaris 系統生成 ┃ 揭露最新的 AI 與 Fintech 動向</p>
+<h1>📬 Polaris Daily Digest – {{ date }}</h1>
 {% for category, articles in grouped.items() %}
 <div class="category-title">{{ emoji[category] }} {{ category }}</div>
 {% for article in articles %}
