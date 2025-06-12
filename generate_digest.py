@@ -9,8 +9,8 @@ TEMPLATE = """
 <head>
     <meta charset="UTF-8">
     <title>📬 Polaris Daily Digest – {{ date }}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
     body {
         font-family: Arial, sans-serif;
         background-color: #f2f1ee;  /* Grayer cream */
