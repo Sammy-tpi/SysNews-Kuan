@@ -12,14 +12,22 @@ TEMPLATE = """
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
     body {
-        font-family: 'Playfair Display', serif;
-        background-color: #fff;
+        font-family: Arial, sans-serif;
+        background-color: #fdf6e3;
+        color: #3b2f2f;
         margin: 20px;
     }
     .container {
         max-width: 800px;
         margin: 0 auto;
         padding: 20px;
+    }
+    h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: 28px;
+        font-weight: 700;
+        color: #3b2f2f;
+        margin-bottom: 10px;
     }
     .card {
         background-color: #f9f9f9;
@@ -31,23 +39,29 @@ TEMPLATE = """
     .title a {
         font-size: 16px;
         font-weight: bold;
-        color: #1a0dab;
+        color: #6e2f3c;
         text-decoration: none;
+    }
+
+    .title a:hover {
+        text-decoration: underline;
+        color: #3b2f2f;
     }
     .summary {
         font-size: 16px;
-        color: #333;
+        color: #3b2f2f;
         margin: 10px 0;
         line-height: 1.6;
     }
     .source {
         font-size: 12px;
-        color: #666;
+        color: #3b2f2f;
     }
     .category-title {
         font-size: 18px;
         font-weight: bold;
         margin: 30px 0 10px;
+        color: #3b2f2f;
     }
     </style>
 </head>
