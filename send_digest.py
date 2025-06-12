@@ -3,7 +3,7 @@ from datetime import datetime
 from generate_digest import load_articles, generate_html
 
 SENDER = "chenkuan.wu@tpisoftware.com"
-PASSWORD = "chenkuan0330!"  # TODO: move to env var
+PASSWORD = "xkvmgajsgqyunanw"  # TODO: move to env var
 RECIPIENT = "kuan940330@gmail.com"
 
 JSON_PATH = "sample_articles.json"
