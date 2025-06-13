@@ -10,50 +10,50 @@
   <meta charset="UTF-8">
   <title>📬 Polaris Daily Digest – {{ date }}</title>
 </head>
-<body style="font-family:Arial, sans-serif; background-color:#f2f1ee; color:#2b211d; margin:0;">
-  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="font-family: Arial, sans-serif; max-width: 720px; margin:0 auto;">
+<body style="font-family:'Inter', 'Georgia', 'Arial', 'Verdana', sans-serif; background-color:#f2f1ee; color:#2b211d; margin:0;">
+  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="font-family:'Inter', 'Georgia', 'Arial', 'Verdana', sans-serif; max-width: 720px; margin:0 auto;">
   <tr>
     <td style="padding: 16px;">
     <!-- 🌍 Global Section -->
-    <h2>🌍 Global</h2>
+    <h2 style="font-family:'Playfair Display', Georgia, 'Times New Roman', serif; font-weight:600;">🌍 Global</h2>
     {% for category, articles in global_articles|groupby('category') %}
-      <h2 style="font-size: 18px; font-weight: bold; margin-top: 40px;">
+      <h2 style="font-size: 18px; font-weight: 600; margin-top: 40px; font-family:'Playfair Display', Georgia, 'Times New Roman', serif;">
         {{ icons.get(category, '') }} {{ category }}
       </h2>
       {% for article in articles %}
         <div style="margin-bottom: 36px; background: #f9f9f9; border-radius: 12px; padding: 20px;">
-          <a href="{{ article.url }}" style="color: #000000; text-decoration: none; font-weight: bold; font-size: 16px;">{{ article.title }}</a>
-          <p style="font-size:14px;line-height:1.6;margin-top:10px;">{{ article.summary }}</p>
+          <a href="{{ article.url }}" style="color: #000000; text-decoration: none; font-family:'Playfair Display', Georgia, 'Times New Roman', serif; font-weight:600; font-size: 16px;">{{ article.title }}</a>
+          <p style="font-size:14px;line-height:1.6;margin-top:10px;font-family:'Inter', 'Georgia', 'Arial', 'Verdana', sans-serif; font-weight:400;">{{ article.summary }}</p>
           {% if article.tags %}
             <div style="margin-top: 8px;">
               {% for tag in article.tags %}
-                <span style="display: inline-block; background: #eaeaea; color: #333; font-size: 11px; padding: 4px 10px; border-radius: 999px; margin-right: 6px;">{{ tag }}</span>
+                  <span style="display: inline-block; background: #eaeaea; color: #333; font-size: 11px; font-family:'Inter', 'Georgia', 'Arial', 'Verdana', sans-serif; font-weight:400; padding: 4px 10px; border-radius: 999px; margin-right: 6px;">{{ tag }}</span>
               {% endfor %}
             </div>
           {% endif %}
-          <div style="font-size:12px;color:#999;margin-top:6px;">{{ article.source }} \u2503 {{ article.published_at or article.read_time }}</div>
+          <div style="font-size:12px;color:#999;margin-top:6px;font-family:'Inter', 'Georgia', 'Arial', 'Verdana', sans-serif; font-weight:400;">{{ article.source }} \u2503 {{ article.published_at or article.read_time }}</div>
         </div>
       {% endfor %}
     {% endfor %}
 
     <!-- 🌏 East Asia Section -->
-    <h2>🌏 East Asia</h2>
+    <h2 style="font-family:'Playfair Display', Georgia, 'Times New Roman', serif; font-weight:600;">🌏 East Asia</h2>
     {% for category, articles in east_asian_articles|groupby('category') %}
-      <h2 style="font-size: 18px; font-weight: bold; margin-top: 40px;">
+      <h2 style="font-size: 18px; font-weight: 600; margin-top: 40px; font-family:'Playfair Display', Georgia, 'Times New Roman', serif;">
         {{ icons.get(category, '') }} {{ category }}
       </h2>
       {% for article in articles %}
         <div style="margin-bottom: 36px; background: #f9f9f9; border-radius: 12px; padding: 20px;">
-          <a href="{{ article.url }}" style="color: #000000; text-decoration: none; font-weight: bold; font-size: 16px;">{{ article.title }}</a>
-          <p style="font-size:14px;line-height:1.6;margin-top:10px;">{{ article.summary }}</p>
+          <a href="{{ article.url }}" style="color: #000000; text-decoration: none; font-family:'Playfair Display', Georgia, 'Times New Roman', serif; font-weight:600; font-size: 16px;">{{ article.title }}</a>
+          <p style="font-size:14px;line-height:1.6;margin-top:10px;font-family:'Inter', 'Georgia', 'Arial', 'Verdana', sans-serif; font-weight:400;">{{ article.summary }}</p>
           {% if article.tags %}
             <div style="margin-top: 8px;">
               {% for tag in article.tags %}
-                <span style="display: inline-block; background: #eaeaea; color: #333; font-size: 11px; padding: 4px 10px; border-radius: 999px; margin-right: 6px;">{{ tag }}</span>
+                  <span style="display: inline-block; background: #eaeaea; color: #333; font-size: 11px; font-family:'Inter', 'Georgia', 'Arial', 'Verdana', sans-serif; font-weight:400; padding: 4px 10px; border-radius: 999px; margin-right: 6px;">{{ tag }}</span>
               {% endfor %}
             </div>
           {% endif %}
-          <div style="font-size:12px;color:#999;margin-top:6px;">{{ article.source }} \u2503 {{ article.published_at or article.read_time }}</div>
+          <div style="font-size:12px;color:#999;margin-top:6px;font-family:'Inter', 'Georgia', 'Arial', 'Verdana', sans-serif; font-weight:400;">{{ article.source }} \u2503 {{ article.published_at or article.read_time }}</div>
         </div>
       {% endfor %}
     {% endfor %}
