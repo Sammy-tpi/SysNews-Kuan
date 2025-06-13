@@ -64,16 +64,32 @@ TEMPLATE = """
         color: #2b211d;
     }
     .region-toggle button {
-        margin-right: 10px;
-        padding: 6px 12px;
+        font-size: 1.1rem;
+        font-weight: bold;
+        padding: 8px 16px;
+        margin: 4px;
+        border: none;
+        border-radius: 6px;
+        background-color: #f2f2f2;
+        cursor: pointer;
+    }
+    .region-toggle button.active {
+        background-color: #1c1c1c;
+        color: white;
     }
     </style>
     <script>
-    function showRegion(id) {
+    function showRegion(id, btn) {
         document.querySelectorAll('.region').forEach(function(el) {
             el.style.display = 'none';
         });
         document.getElementById(id).style.display = 'block';
+        document.querySelectorAll('.region-toggle button').forEach(function(b){
+            b.classList.remove('active');
+        });
+        if (btn) {
+            btn.classList.add('active');
+        }
     }
     </script>
 </head>
@@ -81,8 +97,8 @@ TEMPLATE = """
 <div class=\"container\">
 <h1>📬 Polaris Daily Digest – {{ date }}</h1>
 <div class=\"region-toggle\">
-  <button onclick=\"showRegion('east-asia')\">🌏 East Asia</button>
-  <button onclick=\"showRegion('foreign-countries')\">🌍 Foreign Countries</button>
+  <button onclick=\"showRegion('east-asia', this)\" class=\"active\">🌏 East Asia</button>
+  <button onclick=\"showRegion('global', this)\">🌍 Global</button>
 </div>
 {% for region, categories in grouped.items() %}
 <div class=\"region\" id=\"{{ region_ids[region] }}\" {% if not loop.first %}style=\"display:none;\"{% endif %}>
@@ -119,8 +135,8 @@ EMOJIS = {
     "Applied AI & Fintech": "💳",
     "Blockchain & Crypto": "🪙",
 }
-REGIONS = ["East Asia", "Foreign Countries"]
-REGION_IDS = {"East Asia": "east-asia", "Foreign Countries": "foreign-countries"}
+REGIONS = ["East Asia", "Global"]
+REGION_IDS = {"East Asia": "east-asia", "Global": "global"}
 
 def load_articles(path: str):
     with open(path, 'r', encoding='utf-8') as f:
@@ -129,7 +145,7 @@ def load_articles(path: str):
 def group_articles_by_region(articles):
     grouped = {r: {c: [] for c in CATEGORIES} for r in REGIONS}
     for article in articles:
-        region = article.get('region', 'Foreign Countries')
+        region = article.get('region', 'Global')
         category = article.get('category')
         if region in grouped and category in grouped[region]:
             grouped[region][category].append(article)
