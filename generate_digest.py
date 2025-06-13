@@ -53,6 +53,20 @@ TEMPLATE = """
         margin: 10px 0;
         line-height: 1.6;
     }
+    .article-tags {
+        margin-top: 8px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+    .article-tag {
+        font-size: 0.75rem;
+        background-color: #f0f0f0;
+        color: #333;
+        padding: 4px 10px;
+        border-radius: 999px;
+        white-space: nowrap;
+    }
     .source {
         font-size: 12px;
         color: #5c2c35;
@@ -112,6 +126,13 @@ TEMPLATE = """
     <div class=\"summary\">
         {{ article.summary }}
     </div>
+    {% if article.tags %}
+      <div class=\"article-tags\">
+        {% for tag in article.tags %}
+          <span class=\"article-tag\">{{ tag }}</span>
+        {% endfor %}
+      </div>
+    {% endif %}
     <div class=\"source\">
         {{ article.source }} ┃ {{ article.read_time }}
     </div>
