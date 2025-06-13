@@ -1,11 +1,15 @@
+import os
 import smtplib
 from email.message import EmailMessage
 from datetime import datetime
+from dotenv import load_dotenv
 from generate_digest import load_articles, generate_html
 
-SENDER = "chenkuan.wu@tpisoftware.com"
-PASSWORD = "xkvmgajsgqyunanw"  # TODO: move to env var
-RECIPIENT = "kuan940330@gmail.com"
+load_dotenv()
+
+SENDER = os.getenv("DIGEST_SENDER")
+PASSWORD = os.getenv("DIGEST_PASSWORD")
+RECIPIENT = os.getenv("DIGEST_RECIPIENT")
 
 JSON_PATH = "news_data.json"
 

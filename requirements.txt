@@ -1,3 +1,4 @@
 jinja2
 yagmail
 requests
+python-dotenv
