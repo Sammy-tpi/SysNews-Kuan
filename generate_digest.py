@@ -1,9 +1,9 @@
 import json
 import sys
 from datetime import datetime
-from jinja2 import Template
+from jinja2 import Environment, FileSystemLoader
 
-TEMPLATE_FILE = "templates/digest_single_column.html"
+env = Environment(loader=FileSystemLoader("templates"))
 
 REGIONS = ["East Asia", "Global"]
 
@@ -29,8 +29,7 @@ def generate_html(articles):
     for article in global_articles + east_asian_articles:
         if "published_at" not in article:
             article["published_at"] = article.get("read_time", "")
-    with open(TEMPLATE_FILE, "r", encoding="utf-8") as f:
-        template = Template(f.read())
+    template = env.get_template("digest_single_column.html")
     date_str = datetime.now().strftime("%Y-%m-%d")
     return template.render(
         date=date_str,
