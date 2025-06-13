@@ -1,4 +1,5 @@
 import json
+import os
 from typing import List, Dict
 
 import requests
@@ -8,15 +9,18 @@ import requests
 NEWSAPI_AI_KEY = "ef315c01-6412-4e85-b81e-8953cda71193"
 NEWSAPI_AI_URL = "https://eventregistry.org/api/v1/article/getArticles"
 
-NUM_ARTICLES = 10
-OUTPUT_FILE = "news_data.json"
+# Fetch only one article per run to keep testing inexpensive
+NUM_AI_ARTICLES = 1
+
+# Persist the results inside the ``data`` directory
+OUTPUT_FILE = "data/news_data.json"
 
 
 def fetch_newsapi_ai_articles() -> List[Dict]:
     params = {
         "keyword": "AI Fintech",
         "articlesPage": 1,
-        "articlesCount": NUM_ARTICLES,
+        "articlesCount": NUM_AI_ARTICLES,
         "resultType": "articles",
         "lang": "eng",
         "apiKey": NEWSAPI_AI_KEY,
@@ -68,6 +72,9 @@ def generate_dataset() -> List[Dict]:
 
 
 def main() -> None:
+    # Ensure the output directory exists so tests can run without extra setup
+    os.makedirs("data", exist_ok=True)
+
     articles = generate_dataset()
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         json.dump(articles, f, ensure_ascii=False, indent=2)
