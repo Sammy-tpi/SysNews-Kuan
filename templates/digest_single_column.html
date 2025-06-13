@@ -15,7 +15,8 @@
   <tr>
     <td style="padding: 16px;">
     <!-- 🌍 Global Section -->
-    <h2 style="font-family:'Playfair Display', Georgia, 'Times New Roman', serif; font-weight:600;">🌍 Global</h2>
+    <div style="background-color:#f9f9f6; padding:16px; border-radius:8px; margin-bottom:20px;">
+    <h2 style="font-family:'Playfair Display', Georgia, 'Times New Roman', serif; font-weight:600; font-size:24px; margin:0 0 10px 0;">🌍 Global</h2>
     {% for category, articles in global_articles|groupby('category') %}
       <h2 style="font-size: 18px; font-weight: 600; margin-top: 40px; font-family:'Playfair Display', Georgia, 'Times New Roman', serif;">
         {{ icons.get(category, '') }} {{ category }}
@@ -37,9 +38,11 @@
         </div>
       {% endfor %}
     {% endfor %}
+    </div>
 
     <!-- 🌏 East Asia Section -->
-    <h2 style="font-family:'Playfair Display', Georgia, 'Times New Roman', serif; font-weight:600;">🌏 East Asia</h2>
+    <div style="background-color:#f4f4f9; padding:16px; border-radius:8px; margin-bottom:20px;">
+    <h2 style="font-family:'Playfair Display', Georgia, 'Times New Roman', serif; font-weight:600; font-size:24px; margin:0 0 10px 0;">🌏 East Asia</h2>
     {% for category, articles in east_asian_articles|groupby('category') %}
       <h2 style="font-size: 18px; font-weight: 600; margin-top: 40px; font-family:'Playfair Display', Georgia, 'Times New Roman', serif;">
         {{ icons.get(category, '') }} {{ category }}
@@ -61,6 +64,7 @@
         </div>
       {% endfor %}
     {% endfor %}
+    </div>
         </td>
     </tr>
   </table>
