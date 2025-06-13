@@ -31,7 +31,7 @@
               {% endfor %}
             </div>
           {% endif %}
-          <div style="font-size:12px;color:#999;margin-top:6px;font-family:'Inter', 'Georgia', 'Arial', 'Verdana', sans-serif; font-weight:400;">{{ article.source }} \u2503 {{ article.published_at or article.read_time }}</div>
+          <div style="font-size:12px;color:#999;margin-top:6px;font-family:'Inter', 'Georgia', 'Arial', 'Verdana', sans-serif; font-weight:400;">{{ article.source }} · {{ article.published_at or article.read_time }}</div>
         </div>
       {% endfor %}
     {% endfor %}
@@ -53,7 +53,7 @@
               {% endfor %}
             </div>
           {% endif %}
-          <div style="font-size:12px;color:#999;margin-top:6px;font-family:'Inter', 'Georgia', 'Arial', 'Verdana', sans-serif; font-weight:400;">{{ article.source }} \u2503 {{ article.published_at or article.read_time }}</div>
+          <div style="font-size:12px;color:#999;margin-top:6px;font-family:'Inter', 'Georgia', 'Arial', 'Verdana', sans-serif; font-weight:400;">{{ article.source }} · {{ article.published_at or article.read_time }}</div>
         </div>
       {% endfor %}
     {% endfor %}
