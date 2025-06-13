@@ -2,26 +2,31 @@ import json
 import os
 from typing import List, Dict
 
+from dotenv import load_dotenv
 import requests
+
+# Load environment variables
+load_dotenv()
 
 # Toggle this flag to ``False`` when running in production
 TEST_MODE = True
 
-NEWSAPI_KEY = "9d217822f10348cda2442c455e120ef2"
-GNEWS_KEY = "0e5e3a8d6f331bfdc614553393804bae"
-NEWSAPI_AI_KEY = "ef315c01-6412-4e85-b81e-8953cda71193"
+# Load keys from environment or fallback for test mode
+NEWSAPI_KEY = os.getenv("NEWSAPI_KEY") or "9d217822f10348cda2442c455e120ef2"
+GNEWS_KEY = os.getenv("GNEWS_KEY") or "0e5e3a8d6f331bfdc614553393804bae"
+NEWSAPI_AI_KEY = os.getenv("NEWSAPI_AI_KEY") or "ef315c01-6412-4e85-b81e-8953cda71193"
 
 NUM_ARTICLES = 3 if TEST_MODE else 10
 NUM_AI_ARTICLES = 1 if TEST_MODE else 10
 
 NEWSAPI_URL = (
     "https://newsapi.org/v2/everything?q=AI%20Fintech&language=en&"
-    f"pageSize={NUM_ARTICLES}&sortBy=publishedAt&apiKey=" + NEWSAPI_KEY
+    f"pageSize={NUM_ARTICLES}&sortBy=publishedAt&apiKey={NEWSAPI_KEY}"
 )
 
 GNEWS_URL = (
     "https://gnews.io/api/v4/search?q=AI%20Fintech&lang=en&country=us&"
-    f"max={NUM_ARTICLES}&apikey=" + GNEWS_KEY
+    f"max={NUM_ARTICLES}&apikey={GNEWS_KEY}"
 )
 
 NEWSAPI_AI_URL = "https://eventregistry.org/api/v1/article/getArticles"
@@ -107,12 +112,11 @@ def main():
     gnews_filename = "gnews_articles_test.json" if TEST_MODE else "gnews_articles.json"
     save_json(gnews_articles, gnews_filename)
 
-    if TEST_MODE:
-        print("🔍 [Info] Skipping summarization for NewsAPI & GNews (test mode only)")
+    ai_articles = fetch_newsapi_ai_articles()
+    ai_filename = "newsapi_ai_articles_test.json" if TEST_MODE else "newsapi_ai_articles.json"
+    save_json(ai_articles, ai_filename)
 
-    newsapi_ai_articles = fetch_newsapi_ai_articles()
-    save_json(newsapi_ai_articles, "newsapi_ai_articles.json")
-
-
+    
 if __name__ == "__main__":
     main()
+
