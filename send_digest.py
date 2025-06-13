@@ -7,7 +7,7 @@ SENDER = "chenkuan.wu@tpisoftware.com"
 PASSWORD = "xkvmgajsgqyunanw"  # TODO: move to env var
 RECIPIENT = "kuan940330@gmail.com"
 
-JSON_PATH = "sample_articles.json"
+JSON_PATH = "news_data.json"
 
 
 def main():
