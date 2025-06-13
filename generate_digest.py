@@ -1,10 +1,10 @@
 import json
-import sys
 from datetime import datetime
 from jinja2 import Template
 
 TEMPLATE_FILE = "templates/digest_single_column.html"
-
+JSON_PATH = "data/news_data.json"
+OUTPUT_FILE = "digest.html"
 REGIONS = ["East Asia", "Global"]
 
 def load_articles(path: str):
@@ -12,7 +12,6 @@ def load_articles(path: str):
         return json.load(f)
 
 def group_articles_by_region(articles):
-    """Return lists of articles for each region."""
     grouped = {r: [] for r in REGIONS}
     for article in articles:
         region = article.get("region", "Global")
@@ -29,8 +28,10 @@ def generate_html(articles):
     for article in global_articles + east_asian_articles:
         if "published_at" not in article:
             article["published_at"] = article.get("read_time", "")
+
     with open(TEMPLATE_FILE, "r", encoding="utf-8") as f:
         template = Template(f.read())
+
     date_str = datetime.now().strftime("%Y-%m-%d")
     return template.render(
         date=date_str,
@@ -39,16 +40,11 @@ def generate_html(articles):
     )
 
 def main():
-    if len(sys.argv) > 1:
-        json_path = sys.argv[1]
-    else:
-        json_path = 'news_data.json'
-    articles = load_articles(json_path)
+    articles = load_articles(JSON_PATH)
     html = generate_html(articles)
-    output_file = 'digest.html'
-    with open(output_file, 'w', encoding='utf-8') as f:
+    with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
         f.write(html)
-    print(f"Generated {output_file}")
+    print(f"✅ Generated {OUTPUT_FILE}")
 
 if __name__ == '__main__':
     main()

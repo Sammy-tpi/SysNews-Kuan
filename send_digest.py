@@ -1,28 +1,18 @@
-import os
 import smtplib
 from email.message import EmailMessage
 from datetime import datetime
-from dotenv import load_dotenv
 from generate_digest import load_articles, generate_html
 
-load_dotenv()
+# ✅ 直接填入你的發件人資訊（不用 .env）
+SENDER = "chenkuan.wu@tpisoftware.com"
+PASSWORD = "dyuavxpiqnjtbljx"  # ← Gmail App 密碼（無空格）
+RECIPIENT = "chenkuan.wu@tpisoftware.com"
 
-SENDER = os.getenv("DIGEST_SENDER")
-PASSWORD = os.getenv("DIGEST_PASSWORD")
-RECIPIENT = os.getenv("DIGEST_RECIPIENT")
-if not all([SENDER, PASSWORD, RECIPIENT]):
-    raise RuntimeError(
-        "DIGEST_SENDER, DIGEST_PASSWORD, and DIGEST_RECIPIENT must be set"
-    )
-
-JSON_PATH = "news_data.json"
-
+# ✅ 正確的 JSON 檔案位置
+JSON_PATH = "data/news_data.json"
 
 def main():
     """Generate the digest HTML and email it."""
-    # Use the generator from ``generate_digest.py`` which already defines a
-    # clean multiline HTML template. This avoids inserting ``<br>`` tags in the
-    # ``<style>`` block and keeps the CSS valid for email clients.
     articles = load_articles(JSON_PATH)
     html_content = generate_html(articles)
 
@@ -42,13 +32,12 @@ def main():
             smtp.send_message(msg)
     except smtplib.SMTPAuthenticationError as exc:
         raise RuntimeError(
-            "Authentication failed. Ensure that the Gmail address and app "
-            "password are correct and that IMAP/SMTP access is enabled for "
-            "your account."
+            "❌ Authentication failed. Double-check Gmail & app password."
         ) from exc
     except Exception as exc:
-        raise RuntimeError(f"Failed to send email: {exc}") from exc
-    print("\u2705 Email sent.")
+        raise RuntimeError(f"❌ Failed to send email: {exc}") from exc
+
+    print("✅ Email sent.")
 
 if __name__ == '__main__':
     main()
