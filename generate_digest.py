@@ -5,16 +5,16 @@ from jinja2 import Template
 
 TEMPLATE = """
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang=\"zh-Hant\">
 <head>
-    <meta charset="UTF-8">
+    <meta charset=\"UTF-8\">
     <title>📬 Polaris Daily Digest – {{ date }}</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link href=\"https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap\" rel=\"stylesheet\">
     <style>
     body {
         font-family: Arial, sans-serif;
-        background-color: #f2f1ee;  /* Grayer cream */
-        color: #2b211d;             /* Deep Oxford Brown */
+        background-color: #f2f1ee;
+        color: #2b211d;
         margin: 20px;
     }
     .container {
@@ -27,7 +27,7 @@ TEMPLATE = """
         font-family: 'Playfair Display', serif;
         font-size: 28px;
         font-weight: 700;
-        color: #2b211d;             /* Deep Oxford Brown */
+        color: #2b211d;
         margin-bottom: 10px;
     }
     .card {
@@ -40,50 +40,69 @@ TEMPLATE = """
     .title a {
         font-size: 16px;
         font-weight: bold;
-        color: #5c2c35;             /* Dusty Burgundy */
+        color: #5c2c35;
         text-decoration: none;
     }
-
     .title a:hover {
         text-decoration: underline;
-        color: #2b211d;             /* Hover: back to Oxford Brown */
+        color: #2b211d;
     }
     .summary {
         font-size: 16px;
-        color: #2b211d;             /* Match all text */
+        color: #2b211d;
         margin: 10px 0;
         line-height: 1.6;
     }
     .source {
         font-size: 12px;
-        color: #5c2c35;             /* Burgundy accent for source line */
+        color: #5c2c35;
     }
     .category-title {
         font-size: 18px;
         font-weight: bold;
         margin: 30px 0 10px;
-        color: #2b211d;             /* Deep Oxford Brown */
+        color: #2b211d;
+    }
+    .region-toggle button {
+        margin-right: 10px;
+        padding: 6px 12px;
     }
     </style>
+    <script>
+    function showRegion(id) {
+        document.querySelectorAll('.region').forEach(function(el) {
+            el.style.display = 'none';
+        });
+        document.getElementById(id).style.display = 'block';
+    }
+    </script>
 </head>
 <body>
-<div class="container">
+<div class=\"container\">
 <h1>📬 Polaris Daily Digest – {{ date }}</h1>
-{% for category, articles in grouped.items() %}
-<div class="category-title">{{ emoji[category] }} {{ category }}</div>
+<div class=\"region-toggle\">
+  <button onclick=\"showRegion('east-asia')\">🌏 East Asia</button>
+  <button onclick=\"showRegion('foreign-countries')\">🌍 Foreign Countries</button>
+</div>
+{% for region, categories in grouped.items() %}
+<div class=\"region\" id=\"{{ region_ids[region] }}\" {% if not loop.first %}style=\"display:none;\"{% endif %}>
+{% for category, articles in categories.items() %}
+<div class=\"category-title\">{{ emoji[category] }} {{ category }}</div>
 {% for article in articles %}
-<div class="card">
-    <div class="title">
-        <a href="{{ article.url }}">{{ article.title }}</a>
+<div class=\"card\">
+    <div class=\"title\">
+        <a href=\"{{ article.url }}\">{{ article.title }}</a>
     </div>
-    <div class="summary">
+    <div class=\"summary\">
         {{ article.summary }}
     </div>
-    <div class="source">
+    <div class=\"source\">
         {{ article.source }} ┃ {{ article.read_time }}
     </div>
 </div>
 {% endfor %}
+{% endfor %}
+</div>
 {% endfor %}
 </div>
 </body>
@@ -100,24 +119,27 @@ EMOJIS = {
     "Applied AI & Fintech": "💳",
     "Blockchain & Crypto": "🪙",
 }
+REGIONS = ["East Asia", "Foreign Countries"]
+REGION_IDS = {"East Asia": "east-asia", "Foreign Countries": "foreign-countries"}
 
 def load_articles(path: str):
     with open(path, 'r', encoding='utf-8') as f:
         return json.load(f)
 
-def group_articles(articles):
-    grouped = {c: [] for c in CATEGORIES}
+def group_articles_by_region(articles):
+    grouped = {r: {c: [] for c in CATEGORIES} for r in REGIONS}
     for article in articles:
-        cat = article.get('category')
-        if cat in grouped:
-            grouped[cat].append(article)
+        region = article.get('region', 'Foreign Countries')
+        category = article.get('category')
+        if region in grouped and category in grouped[region]:
+            grouped[region][category].append(article)
     return grouped
 
 def generate_html(articles):
-    grouped = group_articles(articles)
+    grouped = group_articles_by_region(articles)
     template = Template(TEMPLATE)
     date_str = datetime.now().strftime('%Y-%m-%d')
-    return template.render(date=date_str, grouped=grouped, emoji=EMOJIS)
+    return template.render(date=date_str, grouped=grouped, emoji=EMOJIS, region_ids=REGION_IDS)
 
 def main():
     if len(sys.argv) > 1:
