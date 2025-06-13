@@ -59,16 +59,32 @@
         color: #2b211d;
     }
     .region-toggle button {
-        margin-right: 10px;
-        padding: 6px 12px;
+        font-size: 1.1rem;
+        font-weight: bold;
+        padding: 8px 16px;
+        margin: 4px;
+        border: none;
+        border-radius: 6px;
+        background-color: #f2f2f2;
+        cursor: pointer;
+    }
+    .region-toggle button.active {
+        background-color: #1c1c1c;
+        color: white;
     }
     </style>
     <script>
-    function showRegion(id) {
+    function showRegion(id, btn) {
         document.querySelectorAll('.region').forEach(function(el) {
             el.style.display = 'none';
         });
         document.getElementById(id).style.display = 'block';
+        document.querySelectorAll('.region-toggle button').forEach(function(b){
+            b.classList.remove('active');
+        });
+        if (btn) {
+            btn.classList.add('active');
+        }
     }
     </script>
 </head>
@@ -76,8 +92,8 @@
 <div class="container">
 <h1>📬 Polaris Daily Digest – 2025-06-13</h1>
 <div class="region-toggle">
-  <button onclick="showRegion('east-asia')">🌏 East Asia</button>
-  <button onclick="showRegion('foreign-countries')">🌍 Foreign Countries</button>
+  <button onclick="showRegion('east-asia', this)" class="active">🌏 East Asia</button>
+  <button onclick="showRegion('global', this)">🌍 Global</button>
 </div>
 
 <div class="region" id="east-asia" >
@@ -129,7 +145,7 @@
 
 </div>
 
-<div class="region" id="foreign-countries" style="display:none;">
+<div class="region" id="global" style="display:none;">
 
 <div class="category-title">📱 General Tech & Startups</div>
 
