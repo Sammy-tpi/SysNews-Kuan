@@ -3,13 +3,13 @@
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
-    <title>📬 Polaris Daily Digest – 2025-06-12</title>
+    <title>📬 Polaris Daily Digest – 2025-06-13</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     <style>
     body {
         font-family: Arial, sans-serif;
-        background-color: #f2f1ee;  /* Grayer cream */
-        color: #2b211d;             /* Deep Oxford Brown */
+        background-color: #f2f1ee;
+        color: #2b211d;
         margin: 20px;
     }
     .container {
@@ -22,7 +22,7 @@
         font-family: 'Playfair Display', serif;
         font-size: 28px;
         font-weight: 700;
-        color: #2b211d;             /* Deep Oxford Brown */
+        color: #2b211d;
         margin-bottom: 10px;
     }
     .card {
@@ -35,35 +35,101 @@
     .title a {
         font-size: 16px;
         font-weight: bold;
-        color: #5c2c35;             /* Dusty Burgundy */
+        color: #5c2c35;
         text-decoration: none;
     }
-
     .title a:hover {
         text-decoration: underline;
-        color: #2b211d;             /* Hover: back to Oxford Brown */
+        color: #2b211d;
     }
     .summary {
         font-size: 16px;
-        color: #2b211d;             /* Match all text */
+        color: #2b211d;
         margin: 10px 0;
         line-height: 1.6;
     }
     .source {
         font-size: 12px;
-        color: #5c2c35;             /* Burgundy accent for source line */
+        color: #5c2c35;
     }
     .category-title {
         font-size: 18px;
         font-weight: bold;
         margin: 30px 0 10px;
-        color: #2b211d;             /* Deep Oxford Brown */
+        color: #2b211d;
+    }
+    .region-toggle button {
+        margin-right: 10px;
+        padding: 6px 12px;
     }
     </style>
+    <script>
+    function showRegion(id) {
+        document.querySelectorAll('.region').forEach(function(el) {
+            el.style.display = 'none';
+        });
+        document.getElementById(id).style.display = 'block';
+    }
+    </script>
 </head>
 <body>
 <div class="container">
-<h1>📬 Polaris Daily Digest – 2025-06-12</h1>
+<h1>📬 Polaris Daily Digest – 2025-06-13</h1>
+<div class="region-toggle">
+  <button onclick="showRegion('east-asia')">🌏 East Asia</button>
+  <button onclick="showRegion('foreign-countries')">🌍 Foreign Countries</button>
+</div>
+
+<div class="region" id="east-asia" >
+
+<div class="category-title">📱 General Tech & Startups</div>
+
+<div class="card">
+    <div class="title">
+        <a href="https://www.bnext.com.tw/article/12345/appworks-new-fund">台灣新創 AppWorks 宣布新基金</a>
+    </div>
+    <div class="summary">
+        台灣創投加速器 AppWorks 將推出新一期 3 億美元的基金，聚焦於 AI 與 Web3 領域的早期投資，並持續深耕東南亞與台灣市場。
+    </div>
+    <div class="source">
+        數位時代 ┃ 3 分鐘閱讀
+    </div>
+</div>
+
+
+<div class="category-title">💳 Applied AI & Fintech</div>
+
+<div class="card">
+    <div class="title">
+        <a href="https://www.nikkei.com/article/ai-regulatory-platform">日本銀行導入 AI 監理平台</a>
+    </div>
+    <div class="summary">
+        日本金融監理機構宣布測試新的 AI 平台，用於即時監測金融交易與防堵洗錢活動，預計 2026 年全面上線。
+    </div>
+    <div class="source">
+        日經新聞 ┃ 4 分鐘閱讀
+    </div>
+</div>
+
+
+<div class="category-title">🪙 Blockchain & Crypto</div>
+
+<div class="card">
+    <div class="title">
+        <a href="https://www.yna.co.kr/blockchain-new-regulation">韓國通過區塊鏈監管新法案</a>
+    </div>
+    <div class="summary">
+        韓國國會通過一項針對加密貨幣交易所的新監管法案，要求更嚴格的 KYC 與資產隔離措施，以保護投資人權益。
+    </div>
+    <div class="source">
+        韓聯社 ┃ 5 分鐘閱讀
+    </div>
+</div>
+
+
+</div>
+
+<div class="region" id="foreign-countries" style="display:none;">
 
 <div class="category-title">📱 General Tech & Startups</div>
 
@@ -109,6 +175,8 @@
     </div>
 </div>
 
+
+</div>
 
 </div>
 </body>
