@@ -10,6 +10,10 @@ load_dotenv()
 SENDER = os.getenv("DIGEST_SENDER")
 PASSWORD = os.getenv("DIGEST_PASSWORD")
 RECIPIENT = os.getenv("DIGEST_RECIPIENT")
+if not all([SENDER, PASSWORD, RECIPIENT]):
+    raise RuntimeError(
+        "DIGEST_SENDER, DIGEST_PASSWORD, and DIGEST_RECIPIENT must be set"
+    )
 
 JSON_PATH = "news_data.json"
 
@@ -32,9 +36,12 @@ def main():
     msg.set_content('This email requires an HTML capable client.')
     msg.add_alternative(html_content, subtype='html')
 
-    with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
-        smtp.login(SENDER, PASSWORD)
-        smtp.send_message(msg)
+    try:
+        with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+            smtp.login(SENDER, PASSWORD)
+            smtp.send_message(msg)
+    except Exception as exc:
+        raise RuntimeError(f"Failed to send email: {exc}") from exc
     print("\u2705 Email sent.")
 
 if __name__ == '__main__':
