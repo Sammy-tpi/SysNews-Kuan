@@ -2,10 +2,13 @@ import json
 import os
 from typing import List, Dict
 
+from dotenv import load_dotenv
 import requests
 
-NEWSAPI_KEY = "9d217822f10348cda2442c455e120ef2"
-GNEWS_KEY = "0e5e3a8d6f331bfdc614553393804bae"
+load_dotenv()
+
+NEWSAPI_KEY = os.getenv("NEWSAPI_KEY")
+GNEWS_KEY = os.getenv("GNEWS_KEY")
 
 NEWSAPI_URL = (
     "https://newsapi.org/v2/everything?q=AI%20Fintech&language=en&"
