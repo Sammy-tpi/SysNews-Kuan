@@ -8,6 +8,10 @@ import requests
 load_dotenv()
 
 NEWSAPI_AI_KEY = os.getenv("NEWSAPI_AI_KEY")
+if not NEWSAPI_AI_KEY:
+    raise RuntimeError(
+        "NEWSAPI_AI_KEY environment variable is required to fetch articles"
+    )
 NEWSAPI_AI_URL = "https://eventregistry.org/api/v1/article/getArticles"
 
 NUM_ARTICLES = 10
@@ -23,8 +27,11 @@ def fetch_newsapi_ai_articles() -> List[Dict]:
         "lang": "eng",
         "apiKey": NEWSAPI_AI_KEY,
     }
-    resp = requests.get(NEWSAPI_AI_URL, params=params, timeout=10)
-    resp.raise_for_status()
+    try:
+        resp = requests.get(NEWSAPI_AI_URL, params=params, timeout=10)
+        resp.raise_for_status()
+    except requests.RequestException as exc:
+        raise RuntimeError(f"Failed to fetch articles: {exc}") from exc
     data = resp.json()
     articles = []
     for item in data.get("articles", {}).get("results", []):
