@@ -1,17 +1,11 @@
 import json
-import os
 from typing import List, Dict
 
-from dotenv import load_dotenv
 import requests
 
-load_dotenv()
-
-NEWSAPI_AI_KEY = os.getenv("NEWSAPI_AI_KEY")
-if not NEWSAPI_AI_KEY:
-    raise RuntimeError(
-        "NEWSAPI_AI_KEY environment variable is required to fetch articles"
-    )
+# Hard coded API key for local testing. This avoids needing a .env file.
+# In production, consider loading this from an environment variable instead.
+NEWSAPI_AI_KEY = "ef315c01-6412-4e85-b81e-8953cda71193"
 NEWSAPI_AI_URL = "https://eventregistry.org/api/v1/article/getArticles"
 
 NUM_ARTICLES = 10
@@ -31,6 +25,9 @@ def fetch_newsapi_ai_articles() -> List[Dict]:
         resp = requests.get(NEWSAPI_AI_URL, params=params, timeout=10)
         resp.raise_for_status()
     except requests.RequestException as exc:
+        print(
+            "\u274c Failed to fetch articles from EventRegistry. Please check if your API key is valid or if the network is blocking access."
+        )
         raise RuntimeError(f"Failed to fetch articles: {exc}") from exc
     data = resp.json()
     articles = []
