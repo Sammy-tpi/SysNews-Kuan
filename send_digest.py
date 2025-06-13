@@ -37,9 +37,15 @@ def main():
     msg.add_alternative(html_content, subtype='html')
 
     try:
-        with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+        with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
             smtp.login(SENDER, PASSWORD)
             smtp.send_message(msg)
+    except smtplib.SMTPAuthenticationError as exc:
+        raise RuntimeError(
+            "Authentication failed. Ensure that the Gmail address and app "
+            "password are correct and that IMAP/SMTP access is enabled for "
+            "your account."
+        ) from exc
     except Exception as exc:
         raise RuntimeError(f"Failed to send email: {exc}") from exc
     print("\u2705 Email sent.")
