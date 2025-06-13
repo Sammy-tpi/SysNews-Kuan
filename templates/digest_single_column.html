@@ -24,13 +24,15 @@
         <div style="margin-bottom: 36px; background: #f9f9f9; border-radius: 12px; padding: 20px;">
           <a href="{{ article.url }}" style="color: #000000; text-decoration: none; font-family:'Playfair Display', Georgia, 'Times New Roman', serif; font-weight:600; font-size: 16px;">{{ article.title }}</a>
           <p style="font-size:14px;line-height:1.6;margin-top:10px;font-family:'Inter', 'Georgia', 'Arial', 'Verdana', sans-serif; font-weight:400;">{{ article.summary }}</p>
-          {% if article.tags %}
-            <div style="margin-top: 8px;">
+          <div style="margin-top: 8px;">
+            {% if article.tags %}
               {% for tag in article.tags %}
-                  <span style="display: inline-block; background: #eaeaea; color: #333; font-size: 11px; font-family:'Inter', 'Georgia', 'Arial', 'Verdana', sans-serif; font-weight:400; padding: 4px 10px; border-radius: 999px; margin-right: 6px;">{{ tag }}</span>
+                <span style="display: inline-block; background: #eaeaea; color: #333; font-size: 11px; font-family:'Inter', 'Georgia', 'Arial', 'Verdana', sans-serif; font-weight:400; padding: 4px 10px; border-radius: 999px; margin-right: 6px;">{{ tag }}</span>
               {% endfor %}
-            </div>
-          {% endif %}
+            {% else %}
+              <span style="display: inline-block; background: #eaeaea; color: #333; font-size: 11px; font-family:'Inter', 'Georgia', 'Arial', 'Verdana', sans-serif; font-weight:400; padding: 4px 10px; border-radius: 999px; margin-right: 6px;">#General</span>
+            {% endif %}
+          </div>
           <div style="font-size:12px;color:#999;margin-top:6px;font-family:'Inter', 'Georgia', 'Arial', 'Verdana', sans-serif; font-weight:400;">{{ article.source }} · {{ article.published_at or article.read_time }}</div>
         </div>
       {% endfor %}
@@ -46,13 +48,15 @@
         <div style="margin-bottom: 36px; background: #f9f9f9; border-radius: 12px; padding: 20px;">
           <a href="{{ article.url }}" style="color: #000000; text-decoration: none; font-family:'Playfair Display', Georgia, 'Times New Roman', serif; font-weight:600; font-size: 16px;">{{ article.title }}</a>
           <p style="font-size:14px;line-height:1.6;margin-top:10px;font-family:'Inter', 'Georgia', 'Arial', 'Verdana', sans-serif; font-weight:400;">{{ article.summary }}</p>
-          {% if article.tags %}
-            <div style="margin-top: 8px;">
+          <div style="margin-top: 8px;">
+            {% if article.tags %}
               {% for tag in article.tags %}
-                  <span style="display: inline-block; background: #eaeaea; color: #333; font-size: 11px; font-family:'Inter', 'Georgia', 'Arial', 'Verdana', sans-serif; font-weight:400; padding: 4px 10px; border-radius: 999px; margin-right: 6px;">{{ tag }}</span>
+                <span style="display: inline-block; background: #eaeaea; color: #333; font-size: 11px; font-family:'Inter', 'Georgia', 'Arial', 'Verdana', sans-serif; font-weight:400; padding: 4px 10px; border-radius: 999px; margin-right: 6px;">{{ tag }}</span>
               {% endfor %}
-            </div>
-          {% endif %}
+            {% else %}
+              <span style="display: inline-block; background: #eaeaea; color: #333; font-size: 11px; font-family:'Inter', 'Georgia', 'Arial', 'Verdana', sans-serif; font-weight:400; padding: 4px 10px; border-radius: 999px; margin-right: 6px;">#General</span>
+            {% endif %}
+          </div>
           <div style="font-size:12px;color:#999;margin-top:6px;font-family:'Inter', 'Georgia', 'Arial', 'Verdana', sans-serif; font-weight:400;">{{ article.source }} · {{ article.published_at or article.read_time }}</div>
         </div>
       {% endfor %}

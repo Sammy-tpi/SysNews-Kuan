@@ -28,15 +28,17 @@
                 <tr>
                   <td style="font-size:16px; color:#2b211d; margin-top:10px; line-height:1.6; font-family:'Inter', 'Georgia', 'Arial', 'Verdana', sans-serif; font-weight:400;">{{ article.summary }}</td>
                 </tr>
-                {% if article.tags %}
                 <tr>
                   <td style="padding-top:8px;">
-                    {% for tag in article.tags %}
-                      <span style="font-size:12px; background-color:#f0f0f0; color:#333; font-family:'Inter', 'Georgia', 'Arial', 'Verdana', sans-serif; font-weight:400; padding:4px 10px; border-radius:999px; white-space:nowrap; margin-right:4px;">{{ tag }}</span>
-                    {% endfor %}
+                    {% if article.tags %}
+                      {% for tag in article.tags %}
+                        <span style="font-size:12px; background-color:#f0f0f0; color:#333; font-family:'Inter', 'Georgia', 'Arial', 'Verdana', sans-serif; font-weight:400; padding:4px 10px; border-radius:999px; white-space:nowrap; margin-right:4px;">{{ tag }}</span>
+                      {% endfor %}
+                    {% else %}
+                      <span style="font-size:12px; background-color:#f0f0f0; color:#333; font-family:'Inter', 'Georgia', 'Arial', 'Verdana', sans-serif; font-weight:400; padding:4px 10px; border-radius:999px; white-space:nowrap; margin-right:4px;">#General</span>
+                    {% endif %}
                   </td>
                 </tr>
-                {% endif %}
                 <tr>
                   <td style="font-size:12px; color:#5c2c35; font-family:'Inter', 'Georgia', 'Arial', 'Verdana', sans-serif; font-weight:400;">{{ article.source }} · {{ article.read_time }}</td>
                 </tr>
@@ -58,15 +60,17 @@
                 <tr>
                   <td style="font-size:16px; color:#2b211d; margin-top:10px; line-height:1.6; font-family:'Inter', 'Georgia', 'Arial', 'Verdana', sans-serif; font-weight:400;">{{ article.summary }}</td>
                 </tr>
-                {% if article.tags %}
                 <tr>
                   <td style="padding-top:8px;">
-                    {% for tag in article.tags %}
-                      <span style="font-size:12px; background-color:#f0f0f0; color:#333; font-family:'Inter', 'Georgia', 'Arial', 'Verdana', sans-serif; font-weight:400; padding:4px 10px; border-radius:999px; white-space:nowrap; margin-right:4px;">{{ tag }}</span>
-                    {% endfor %}
+                    {% if article.tags %}
+                      {% for tag in article.tags %}
+                        <span style="font-size:12px; background-color:#f0f0f0; color:#333; font-family:'Inter', 'Georgia', 'Arial', 'Verdana', sans-serif; font-weight:400; padding:4px 10px; border-radius:999px; white-space:nowrap; margin-right:4px;">{{ tag }}</span>
+                      {% endfor %}
+                    {% else %}
+                      <span style="font-size:12px; background-color:#f0f0f0; color:#333; font-family:'Inter', 'Georgia', 'Arial', 'Verdana', sans-serif; font-weight:400; padding:4px 10px; border-radius:999px; white-space:nowrap; margin-right:4px;">#General</span>
+                    {% endif %}
                   </td>
                 </tr>
-                {% endif %}
                 <tr>
                   <td style="font-size:12px; color:#5c2c35; font-family:'Inter', 'Georgia', 'Arial', 'Verdana', sans-serif; font-weight:400;">{{ article.source }} · {{ article.read_time }}</td>
                 </tr>
