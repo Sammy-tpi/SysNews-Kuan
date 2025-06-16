@@ -37,3 +37,10 @@ account. Refer to Google's documentation if authentication fails.
    ```bash
    python send_digest.py
    ```
+
+## News Sources
+
+The file `data/source_data.json` lists the RSS, RSSHub, and API providers used
+by this project. Each source includes its region, topics, and whether full-text
+content is available. Extend this file if you need to pull articles from new
+outlets.

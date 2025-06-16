@@ -1,0 +1,155 @@
+{
+  "rss_sources": [
+    {
+      "name": "TechCrunch",
+      "region": "Global",
+      "topics": ["AI", "FinTech", "Tech"],
+      "full_text": true,
+      "source_type": "rss"
+    },
+    {
+      "name": "VentureBeat",
+      "region": "Global",
+      "topics": ["AI", "Blockchain", "Tech"],
+      "full_text": true,
+      "source_type": "rss"
+    },
+    {
+      "name": "TechNode (\u52d5\u9ede\u79d1\u6280)",
+      "region": "China/Global",
+      "topics": ["AI", "Blockchain", "Tech"],
+      "full_text": true,
+      "source_type": "rss"
+    },
+    {
+      "name": "HKET (\u9999\u6e2f\u7d93\u6fdf\u65e5\u5831)",
+      "region": "Hong Kong",
+      "topics": ["Finance", "Tech"],
+      "full_text": true,
+      "source_type": "rss"
+    },
+    {
+      "name": "TechNews (\u81fa\u7063)",
+      "region": "Taiwan",
+      "topics": ["Tech", "AI"],
+      "full_text": true,
+      "source_type": "rss"
+    },
+    {
+      "name": "Decrypt",
+      "region": "Global",
+      "topics": ["Blockchain", "Crypto"],
+      "full_text": true,
+      "source_type": "rss"
+    },
+    {
+      "name": "The Next Web (TNW)",
+      "region": "Global",
+      "topics": ["Tech", "Startups"],
+      "full_text": true,
+      "source_type": "rss"
+    },
+    {
+      "name": "Android Authority",
+      "region": "Global",
+      "topics": ["Tech", "Mobile"],
+      "full_text": true,
+      "source_type": "rss"
+    },
+    {
+      "name": "TechNewsWorld",
+      "region": "Global",
+      "topics": ["Tech"],
+      "full_text": true,
+      "source_type": "rss"
+    },
+    {
+      "name": "Ubergizmo",
+      "region": "Global",
+      "topics": ["Tech", "Gadgets"],
+      "full_text": true,
+      "source_type": "rss"
+    },
+    {
+      "name": "Recode",
+      "region": "Global",
+      "topics": ["Tech", "Biz"],
+      "full_text": true,
+      "source_type": "rss"
+    },
+    {
+      "name": "CryptoSlate",
+      "region": "Global",
+      "topics": ["Blockchain", "Crypto"],
+      "full_text": true,
+      "source_type": "rss"
+    },
+    {
+      "name": "Asian Banking & Finance",
+      "region": "Asia",
+      "topics": ["Finance", "Banking"],
+      "full_text": true,
+      "source_type": "rss"
+    }
+  ],
+  "rsshub_sources": [
+    {
+      "name": "Nikkei Asia",
+      "region": "Japan/Asia",
+      "topics": ["Finance", "Tech"],
+      "full_text": true,
+      "source_type": "rsshub"
+    },
+    {
+      "name": "Caixin (\u8d22\u65b0\u7f51)",
+      "region": "China",
+      "topics": ["Finance", "Tech"],
+      "full_text": true,
+      "source_type": "rsshub"
+    },
+    {
+      "name": "\u65e5\u7d4c\u4e2d\u6587\u7db2 (Nikkei Chinese)",
+      "region": "Japan/China",
+      "topics": ["Finance", "Tech"],
+      "full_text": true,
+      "source_type": "rsshub"
+    },
+    {
+      "name": "\u5171\u540c\u7db2 (Kyodo News)",
+      "region": "Japan/China",
+      "topics": ["Finance", "Tech"],
+      "full_text": true,
+      "source_type": "rsshub"
+    },
+    {
+      "name": "\u4fe1\u5831\u8ca1\u7d93\u65b0\u805e (HKEJ)",
+      "region": "Hong Kong",
+      "topics": ["Finance", "Tech"],
+      "full_text": true,
+      "source_type": "rsshub"
+    }
+  ],
+  "api_sources": [
+    {
+      "name": "The Guardian",
+      "region": "Global",
+      "topics": ["General", "Tech", "Finance"],
+      "full_text": true,
+      "source_type": "api"
+    },
+    {
+      "name": "Bloomberg",
+      "region": "Global",
+      "topics": ["Finance", "Market Data"],
+      "full_text": true,
+      "source_type": "api"
+    },
+    {
+      "name": "Financial Times",
+      "region": "Global",
+      "topics": ["Finance", "Business"],
+      "full_text": true,
+      "source_type": "api"
+    }
+  ]
+}
