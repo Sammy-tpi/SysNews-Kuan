@@ -1,12 +1,20 @@
+import os
 import smtplib
 from email.message import EmailMessage
 from datetime import datetime
+from dotenv import load_dotenv
 from generate_digest import load_articles, generate_html
 
-# ✅ 直接填入你的發件人資訊（不用 .env）
-SENDER = "chenkuan.wu@tpisoftware.com"
-PASSWORD = "dyuavxpiqnjtbljx"  # ← Gmail App 密碼（無空格）
-RECIPIENT = "chenkuan.wu@tpisoftware.com"
+# Load email credentials from environment variables
+load_dotenv()
+SENDER = os.getenv("DIGEST_SENDER")
+PASSWORD = os.getenv("DIGEST_PASSWORD")
+RECIPIENT = os.getenv("DIGEST_RECIPIENT")
+
+if not all([SENDER, PASSWORD, RECIPIENT]):
+    raise RuntimeError(
+        "Missing DIGEST_SENDER, DIGEST_PASSWORD or DIGEST_RECIPIENT in environment"
+    )
 
 # ✅ 正確的 JSON 檔案位置
 JSON_PATH = "data/news_data.json"

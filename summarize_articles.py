@@ -1,13 +1,18 @@
 import json
+import os
 from typing import Dict, List, Tuple
 
 import openai
+from dotenv import load_dotenv
 
 INPUT_FILE = "data/newsapi_ai_articles.json"
 OUTPUT_FILE = "data/news_data.json"
 
-# TODO: Replace with loading from environment using os.getenv
-openai.api_key = "YOUR_OPENAI_API_KEY"
+load_dotenv()
+openai.api_key = os.getenv("OPENAI_API_KEY")
+
+if not openai.api_key:
+    raise RuntimeError("Missing OPENAI_API_KEY in environment")
 
 
 def load_articles() -> List[Dict]:
