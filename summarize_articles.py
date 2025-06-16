@@ -5,7 +5,8 @@ from typing import Dict, List
 import openai
 from dotenv import load_dotenv
 
-INPUT_FILE = "data/newsapi_ai_articles.json"
+NEWSAPI_INPUT_FILE = "data/newsapi_ai_articles.json"
+RSS_INPUT_FILE = "data/rss_articles.json"
 OUTPUT_FILE = "data/news_data.json"
 
 load_dotenv()
@@ -16,8 +17,17 @@ if not openai.api_key:
 
 
 def load_articles() -> List[Dict]:
-    with open(INPUT_FILE, 'r', encoding='utf-8') as f:
-        return json.load(f)
+    """Load raw articles from NewsAPI.ai and RSS sources."""
+    articles: List[Dict] = []
+    for path in (NEWSAPI_INPUT_FILE, RSS_INPUT_FILE):
+        if not os.path.exists(path):
+            continue
+        with open(path, "r", encoding="utf-8") as f:
+            try:
+                articles.extend(json.load(f))
+            except json.JSONDecodeError:
+                raise RuntimeError(f"Invalid JSON in {path}")
+    return articles
 
 
 def gpt_summarize(title: str, body: str) -> str:
