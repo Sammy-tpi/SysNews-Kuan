@@ -3,10 +3,12 @@ import os
 from typing import List, Dict
 
 import requests
+from dotenv import load_dotenv
 
-# Hard coded API key for local testing. This avoids needing a .env file.
-# In production, consider loading this from an environment variable instead.
-NEWSAPI_AI_KEY = "ef315c01-6412-4e85-b81e-8953cda71193"
+load_dotenv()
+NEWSAPI_AI_KEY = os.getenv("NEWSAPI_AI_KEY")
+if not NEWSAPI_AI_KEY:
+    raise RuntimeError("Missing NEWSAPI_AI_KEY in environment")
 NEWSAPI_AI_URL = "https://eventregistry.org/api/v1/article/getArticles"
 
 # Fetch only one article per run to keep testing inexpensive

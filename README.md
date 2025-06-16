@@ -4,13 +4,15 @@ This repository contains utilities for generating and sending a daily news diges
 
 ## Configuration
 
-Email credentials are loaded from environment variables using `python-dotenv`.
+Credentials and API keys are loaded from environment variables using `python-dotenv`.
 Create a `.env` file in the project root containing:
 
 ```
 DIGEST_SENDER=<your Gmail address>
 DIGEST_PASSWORD=<your Gmail app password>
 DIGEST_RECIPIENT=<recipient address>
+OPENAI_API_KEY=<your OpenAI API key>
+NEWSAPI_AI_KEY=<your EventRegistry key>
 ```
 
 Use a Gmail app password, which requires enabling two-factor authentication on your
