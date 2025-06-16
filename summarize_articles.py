@@ -1,6 +1,6 @@
 import json
 import os
-from typing import Dict, List, Tuple
+from typing import Dict, List
 
 import openai
 from dotenv import load_dotenv
@@ -20,22 +20,29 @@ def load_articles() -> List[Dict]:
         return json.load(f)
 
 
-def gpt_summarize(title: str, body: str) -> Tuple[str, str]:
-    """Return English and Traditional Chinese summaries using GPT-4o."""
-    prompt = (
-        "Summarize the following news article in 2-3 sentences in English, "
-        "then in 2-3 sentences in Traditional Chinese."
-    )
+def gpt_summarize(title: str, body: str) -> str:
+    """Return a Traditional Chinese summary highlighting tech terms."""
+    prompt = f'''
+You are a bilingual AI assistant summarizing news articles about AI and FinTech.
+
+Task:
+- Summarize the following article in **Traditional Chinese** (繁體中文).
+- Keep the summary concise (3–5 sentences).
+- Identify key technical terms related to AI, FinTech, Blockchain, Machine Learning, NLP, etc.
+- For each term, include its **original English** in parentheses after the **Chinese term**.
+
+Example output format:
+該公司正在開發生成式人工智慧（Generative AI）平台，並使用大型語言模型（LLM）提升金融數據處理效率。
+
+Article:
+"""{body}"""
+'''
     messages = [
         {"role": "system", "content": prompt},
-        {"role": "user", "content": f"Title: {title}\n\n{body}"},
+        {"role": "user", "content": f"Title: {title}"},
     ]
     response = openai.chat.completions.create(model="gpt-4o", messages=messages)
-    content = response.choices[0].message.content.split("\n")
-    # Assume first block is English, second is Chinese
-    summary_en = content[0].strip()
-    summary_zh = content[-1].strip()
-    return summary_en, summary_zh
+    return response.choices[0].message.content.strip()
 
 
 def main() -> None:
@@ -44,14 +51,12 @@ def main() -> None:
     for art in articles:
         title = art.get('title', '')
         body = art.get('content', '')
-        summary_en, summary_zh = gpt_summarize(title, body)
-        print('EN:', summary_en)
+        summary_zh = gpt_summarize(title, body)
         print('ZH:', summary_zh)
         summarized.append({
             'region': 'Global',
             'category': 'General Tech & Startups',
             'title': title,
-            'summary_en': summary_en,
             'summary_zh': summary_zh,
             'source': art.get('source', {}).get('name'),
             'read_time': '1 min read',
