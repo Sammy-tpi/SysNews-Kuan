@@ -25,8 +25,7 @@
       {% for article in articles %}
         <div style="margin-bottom: 36px; background: #f9f9f9; border-radius: 12px; padding: 20px;">
           <a href="{{ article.url }}" style="color: #000000; text-decoration: none; font-family:'Playfair Display', Georgia, 'Times New Roman', serif; font-weight:600; font-size: 16px;">{{ article.title }}</a>
-          <p style="font-size:14px;line-height:1.6;margin-top:10px;"><strong>EN:</strong> {{ article.summary_en }}</p>
-          <p style="font-size:14px;line-height:1.6;margin-top:4px;"><strong>ZH:</strong> {{ article.summary_zh }}</p>
+          <p style="font-size:14px;line-height:1.6;margin-top:10px;">{{ article.summary_zh }}</p>
           <div style="margin-top: 8px;">
             {% if article.tags %}
               {% for tag in article.tags %}
@@ -52,8 +51,7 @@
       {% for article in articles %}
         <div style="margin-bottom: 36px; background: #f9f9f9; border-radius: 12px; padding: 20px;">
           <a href="{{ article.url }}" style="color: #000000; text-decoration: none; font-family:'Playfair Display', Georgia, 'Times New Roman', serif; font-weight:600; font-size: 16px;">{{ article.title }}</a>
-          <p style="font-size:14px;line-height:1.6;margin-top:10px;"><strong>EN:</strong> {{ article.summary_en }}</p>
-          <p style="font-size:14px;line-height:1.6;margin-top:4px;"><strong>ZH:</strong> {{ article.summary_zh }}</p>
+          <p style="font-size:14px;line-height:1.6;margin-top:10px;">{{ article.summary_zh }}</p>
           <div style="margin-top: 8px;">
             {% if article.tags %}
               {% for tag in article.tags %}
