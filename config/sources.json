@@ -1,0 +1,14 @@
+{
+  "sources": [
+    {
+      "name": "TechCrunch",
+      "rss_url": "https://techcrunch.com/feed/",
+      "type": "rss"
+    },
+    {
+      "name": "VentureBeat",
+      "rss_url": "https://venturebeat.com/feed/",
+      "type": "rss"
+    }
+  ]
+}

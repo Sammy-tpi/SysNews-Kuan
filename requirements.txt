@@ -3,3 +3,5 @@ yagmail
 requests
 python-dotenv
 openai
+feedparser
+beautifulsoup4
