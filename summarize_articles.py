@@ -15,14 +15,6 @@ def load_articles() -> List[Dict]:
         return json.load(f)
 
 
-def simple_summary(text: str, limit: int = 2) -> str:
-    """Return the first few sentences of the text as a crude summary."""
-    if not text:
-        return ""
-    sentences = text.split('. ')
-    return '. '.join(sentences[:limit]).strip()
-
-
 def gpt_summarize(title: str, body: str) -> Tuple[str, str]:
     """Return English and Traditional Chinese summaries using GPT-4o."""
     prompt = (

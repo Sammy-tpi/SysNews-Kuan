@@ -13,7 +13,7 @@ NEWSAPI_AI_URL = "https://eventregistry.org/api/v1/article/getArticles"
 NUM_AI_ARTICLES = 1
 
 # Persist the results inside the ``data`` directory
-OUTPUT_FILE = "data/news_data.json"
+OUTPUT_FILE = "data/newsapi_ai_articles.json"
 
 
 def fetch_newsapi_ai_articles() -> List[Dict]:
@@ -46,36 +46,16 @@ def fetch_newsapi_ai_articles() -> List[Dict]:
     return articles
 
 
-def simple_summary(text: str, limit: int = 2) -> str:
-    if not text:
-        return ""
-    sentences = text.split(". ")
-    return ". ".join(sentences[:limit]).strip()
-
-
-def generate_dataset() -> List[Dict]:
-    raw_articles = fetch_newsapi_ai_articles()
-    summarized = []
-    for art in raw_articles:
-        summary = simple_summary(art.get("content", ""))
-        summarized.append({
-            "region": "Global",
-            "category": "General Tech & Startups",
-            "title": art.get("title"),
-            "summary": summary,
-            "source": art.get("source", {}).get("name"),
-            "read_time": "1 min read",
-            "url": art.get("url"),
-            "tags": [],
-        })
-    return summarized
+def fetch_and_store() -> List[Dict]:
+    """Fetch raw articles and return them without any summarization."""
+    return fetch_newsapi_ai_articles()
 
 
 def main() -> None:
     # Ensure the output directory exists so tests can run without extra setup
     os.makedirs("data", exist_ok=True)
 
-    articles = generate_dataset()
+    articles = fetch_and_store()
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         json.dump(articles, f, ensure_ascii=False, indent=2)
     print(f"Wrote {OUTPUT_FILE}")
