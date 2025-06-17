@@ -70,7 +70,11 @@ async def fetch_full_text_async(
     return None
 
 
-async def process_feed_async(src: Dict, session: aiohttp.ClientSession) -> List[Dict]:
+async def process_feed_async(
+    src: Dict,
+    session: aiohttp.ClientSession,
+    keywords: List[str],
+) -> List[Dict]:
     """Fetch a single RSS feed and return processed articles."""
     name = src.get("name", "")
     url = src.get("rss_url")
@@ -91,6 +95,9 @@ async def process_feed_async(src: Dict, session: aiohttp.ClientSession) -> List[
         link = entry.get("link")
         if not title or not link:
             continue
+        # Skip articles whose title doesn't match any keywords
+        if keyword_score(title, keywords) == 0:
+            continue
         entries.append(entry)
         tasks.append(fetch_full_text_async(link, session))
     if not tasks:
@@ -100,15 +107,16 @@ async def process_feed_async(src: Dict, session: aiohttp.ClientSession) -> List[
     for entry, content in zip(entries, contents):
         if not content:
             continue
-        articles.append(
-            {
-                "title": entry.get("title"),
-                "content": content,
-                "url": entry.get("link"),
-                "source": {"name": name},
-                "publishedAt": parse_timestamp(entry),
-            }
-        )
+        article = {
+            "title": entry.get("title"),
+            "content": content,
+            "url": entry.get("link"),
+            "source": {"name": name},
+            "publishedAt": parse_timestamp(entry),
+        }
+        text = f"{article['title']} {article['content']}"
+        if keyword_score(text, keywords) > 0:
+            articles.append(article)
     return articles
 
 
@@ -118,7 +126,7 @@ async def fetch_rss_articles_async() -> List[Dict]:
     all_keywords = [kw for group in keywords_cfg.values() for kw in group]
     async with aiohttp.ClientSession() as session:
         results = await asyncio.gather(
-            *(process_feed_async(src, session) for src in sources)
+            *(process_feed_async(src, session, all_keywords) for src in sources)
         )
     articles: List[Dict] = []
     for batch in results:
