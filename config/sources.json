@@ -1,14 +1,150 @@
 {
-  "sources": [
+  "rss_sources": [
     {
       "name": "TechCrunch",
       "rss_url": "https://techcrunch.com/feed/",
-      "type": "rss"
+      "source_type": "rss",
+      "region": "Global",
+      "topics": ["AI", "FinTech", "Tech"],
+      "full_text": true
     },
     {
       "name": "VentureBeat",
-      "rss_url": "https://venturebeat.com/feed/",
-      "type": "rss"
+      "rss_url": "http://feeds.venturebeat.com/venturebeat",
+      "source_type": "rss",
+      "region": "Global",
+      "topics": ["AI", "Blockchain", "Tech"],
+      "full_text": true
+    },
+    {
+      "name": "TechNode (動點科技)",
+      "rss_url": "https://technode.com/feed/",
+      "source_type": "rss",
+      "region": "China/Global",
+      "topics": ["AI", "Blockchain", "Tech"],
+      "full_text": true
+    },
+    {
+      "name": "HKET (香港經濟日報)",
+      "rss_url": "https://hk01.com/rss",
+      "source_type": "rss",
+      "region": "Hong Kong",
+      "topics": ["Finance", "Tech"],
+      "full_text": true
+    },
+    {
+      "name": "TechNews (台灣)",
+      "rss_url": "https://technews.tw/feed/",
+      "source_type": "rss",
+      "region": "Taiwan",
+      "topics": ["Tech", "AI"],
+      "full_text": true
+    },
+    {
+      "name": "Decrypt",
+      "rss_url": "https://decrypt.co/feed",
+      "source_type": "rss",
+      "region": "Global",
+      "topics": ["Blockchain", "Crypto"],
+      "full_text": true
+    },
+    {
+      "name": "The Next Web (TNW)",
+      "rss_url": "https://thenextweb.com/feed",
+      "source_type": "rss",
+      "region": "Global",
+      "topics": ["Tech", "Startups"],
+      "full_text": true
+    },
+    {
+      "name": "Android Authority",
+      "rss_url": "https://www.androidauthority.com/feed/",
+      "source_type": "rss",
+      "region": "Global",
+      "topics": ["Tech", "Mobile"],
+      "full_text": true
+    },
+    {
+      "name": "TechNewsWorld",
+      "rss_url": "https://www.technewsworld.com/perl/syndication/rssfull.pl",
+      "source_type": "rss",
+      "region": "Global",
+      "topics": ["Tech"],
+      "full_text": true
+    },
+    {
+      "name": "Ubergizmo",
+      "rss_url": "https://www.ubergizmo.com/feed/",
+      "source_type": "rss",
+      "region": "Global",
+      "topics": ["Tech", "Gadgets"],
+      "full_text": true
+    },
+    {
+      "name": "Recode",
+      "rss_url": "https://www.vox.com/rss/recode/index.xml",
+      "source_type": "rss",
+      "region": "Global",
+      "topics": ["Tech", "Biz"],
+      "full_text": true
+    },
+    {
+      "name": "CryptoSlate",
+      "rss_url": "https://cryptoslate.com/feed/",
+      "source_type": "rss",
+      "region": "Global",
+      "topics": ["Blockchain", "Crypto"],
+      "full_text": true
+    },
+    {
+      "name": "Asian Banking & Finance",
+      "rss_url": "https://asianbankingandfinance.net/feed/",
+      "source_type": "rss",
+      "region": "Asia",
+      "topics": ["Finance", "Banking"],
+      "full_text": true
+    }
+  ],
+  "rsshub_sources": [
+    {
+      "name": "Nikkei Asia",
+      "rss_url": "https://rsshub.app/nikkei/index",
+      "source_type": "rsshub",
+      "region": "Japan/Asia",
+      "topics": ["Finance", "Tech"],
+      "full_text": true
+    },
+    {
+      "name": "Caixin (财新网)",
+      "rss_url": "https://rsshub.app/caixin/roll?mode=fulltext",
+      "source_type": "rsshub",
+      "region": "China",
+      "topics": ["Finance", "Tech"],
+      "full_text": true
+    },
+    {
+      "name": "日経中文網 (Nikkei Chinese)",
+      "rss_url": "https://rsshub.app/nikkei/chinese",
+      "source_type": "rsshub",
+      "region": "Japan/China",
+      "topics": ["Finance", "Tech"],
+      "full_text": true
+    },
+    {
+      "name": "共同網 (Kyodo News)",
+      "rss_url": "https://rsshub.app/kyodonews/world",
+      "source_type": "rsshub",
+      "region": "Japan/China",
+      "topics": ["Finance", "Tech"],
+      "full_text": true
+    },
+    {
+      "name": "信報財經新聞 (HKEJ)",
+      "rss_url": "https://rsshub.app/hkej/latest",
+      "source_type": "rsshub",
+      "region": "Hong Kong",
+      "topics": ["Finance", "Tech"],
+      "full_text": true
     }
   ]
 }
