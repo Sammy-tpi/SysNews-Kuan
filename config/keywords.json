@@ -18,7 +18,12 @@
     "AI-driven asset management",
     "AI-based compliance",
     "AI risk models",
-    "AI-powered customer service"
+    "AI-powered customer service",
+    "AI 金融",
+    "機器人投顧",
+    "詐欺偵測",
+    "信用評分",
+    "自動化核保"
   ],
   "startup_ai": [
     "AI startup",
@@ -35,7 +40,12 @@
     "AI SaaS",
     "AI-powered SaaS",
     "AI talent",
-    "AI disruption"
+    "AI disruption",
+    "AI 新創",
+    "AI 創業",
+    "AI 加速器",
+    "生成式 AI 企業",
+    "AI 生態系"
   ],
   "blockchain_ai": [
     "Blockchain AI",
@@ -52,6 +62,11 @@
     "AI-powered mining",
     "AI tokenization",
     "CBDC AI",
-    "AI crypto analytics"
+    "AI crypto analytics",
+    "區塊鏈 AI",
+    "加密貨幣 AI",
+    "智能合約 AI",
+    "AI 驅動 NFT",
+    "去中心化金融 AI"
   ]
 }

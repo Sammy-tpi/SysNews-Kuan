@@ -19,7 +19,7 @@ NUM_AI_ARTICLES = 1
 OUTPUT_FILE = "data/newsapi_ai_articles.json"
 
 
-def fetch_newsapi_ai_articles() -> List[Dict]:
+def fetch_newsapi_ai_articles(keywords: List[str]) -> List[Dict]:
     params = {
         "keyword": "AI Fintech",
         "articlesPage": 1,
@@ -39,27 +39,27 @@ def fetch_newsapi_ai_articles() -> List[Dict]:
     data = resp.json()
     articles = []
     for item in data.get("articles", {}).get("results", []):
-        articles.append({
-            "title": item.get("title"),
+        title = item.get("title", "")
+        if keyword_score(title, keywords) == 0:
+            continue
+        article = {
+            "title": title,
             "content": item.get("body"),
             "url": item.get("url"),
             "source": {"name": item.get("source", {}).get("title")},
             "publishedAt": item.get("date"),
-        })
+        }
+        text = f"{article['title']} {article['content']}"
+        if keyword_score(text, keywords) > 0:
+            articles.append(article)
     return articles
 
 
 def fetch_and_store() -> List[Dict]:
     """Fetch articles that match keywords and store them."""
-    articles = fetch_newsapi_ai_articles()
     keywords_cfg = load_keywords()
     all_keywords = [kw for group in keywords_cfg.values() for kw in group]
-    filtered: List[Dict] = []
-    for art in articles:
-        text = f"{art.get('title', '')} {art.get('content', '')}"
-        if keyword_score(text, all_keywords) > 0:
-            filtered.append(art)
-    return filtered
+    return fetch_newsapi_ai_articles(all_keywords)
 
 
 def main() -> None:
