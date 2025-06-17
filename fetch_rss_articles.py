@@ -30,10 +30,10 @@ def load_sources() -> List[Dict]:
         return []
     
     # ✅ 改成讀 "rss_sources"
-    rss_sources = data.get("rss_sources", [])
+    rss_sources = [s for s in data.get("rss_sources", []) if s.get("source_type") == "rss"]
+    rsshub_sources = [s for s in data.get("rsshub_sources", []) if s.get("source_type") == "rsshub"]
+    return rss_sources + rsshub_sources
 
-    # ✅ 過濾條件也改成 source_type
-    return [s for s in rss_sources if s.get("source_type") == "rss"]
 
 
 def parse_timestamp(entry: dict) -> str:

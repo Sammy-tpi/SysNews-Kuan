@@ -1,6 +1,6 @@
 import json
 import os
-from typing import Dict, List
+from typing import Dict, List, Tuple
 
 import openai
 from dotenv import load_dotenv
@@ -30,42 +30,79 @@ def load_articles() -> List[Dict]:
     return articles
 
 
-def gpt_summarize(title: str, body: str) -> str:
-    """Return a Traditional Chinese summary highlighting tech terms."""
+def gpt_summarize(title: str, body: str) -> Tuple[str, str]:
+    """Return a Traditional Chinese summary and its classified category."""
+
     prompt = f'''
-You are a bilingual AI assistant summarizing news articles about AI and FinTech.
+You are a bilingual AI assistant helping summarize and classify news articles related to AI, FinTech, and emerging technology.
 
 Task:
-- Summarize the following article in **Traditional Chinese** (繁體中文).
-- Keep the summary concise (5 sentences).
-- Identify key technical terms related to AI, FinTech, Blockchain, Machine Learning, NLP, etc.
-- For each term, include its **original English** in parentheses after the **Chinese term**.
+1. Summarize the article in **Traditional Chinese** (4-5 sentences). Include key technical terms such as AI, FinTech, Blockchain, Machine Learning, NLP, etc. For each term, place its **original English term in parentheses** after the Traditional Chinese term.
+2. Classify the article into one of the following **6 fixed categories**. Return only the best-fitting one.
 
-Example output format:
-該公司正在開發生成式人工智慧（Generative AI）平台，並使用大型語言模型（LLM）提升金融數據處理效率。
+**Categories**:
+1. Global – General Tech & Startups  
+2. Global – Applied AI & FinTech  
+3. Global – Blockchain & Crypto  
+4. East Asia – General Tech & Startups  
+5. East Asia – Applied AI & FinTech  
+6. East Asia – Blockchain & Crypto
 
-Article:
-"""{body}"""
+**Title**:  
+{title}
+
+**Article Content**:  
+{body}
+
+**Output Format**:
+---
+Summary: [Your Traditional Chinese summary here]  
+Category: [Best-fit category from the list above]
 '''
+
     messages = [
-        {"role": "system", "content": prompt},
-        {"role": "user", "content": f"Title: {title}"},
+        {"role": "system", "content": prompt}
     ]
     response = openai.chat.completions.create(model="gpt-4o", messages=messages)
-    return response.choices[0].message.content.strip()
+    output = response.choices[0].message.content.strip()
+
+    summary = ""
+    category = ""
+    for line in output.splitlines():
+        if line.startswith("Summary:"):
+            summary = line.replace("Summary:", "").strip()
+        elif line.startswith("Category:"):
+            category = line.replace("Category:", "").strip()
+
+    return summary, category
+
+
+def parse_region(category: str) -> str:
+    """Infer region from the category."""
+    return "East Asia" if category.startswith("East Asia") else "Global"
 
 
 def main() -> None:
     articles = load_articles()
     summarized = []
+
     for art in articles:
         title = art.get('title', '')
         body = art.get('content', '')
-        summary_zh = gpt_summarize(title, body)
-        print('ZH:', summary_zh)
+        if not title or not body:
+            continue
+
+        summary_zh, category = gpt_summarize(title, body)
+        region = parse_region(category)
+
+        print("✅ Title:", title)
+        print("📝 Category:", category)
+        print("🈶 Summary:", summary_zh)
+        print("-----")
+
         summarized.append({
-            'region': 'Global',
-            'category': 'General Tech & Startups',
+            'region': region,
+            'category': category,
             'title': title,
             'summary_zh': summary_zh,
             'source': art.get('source', {}).get('name'),
@@ -73,9 +110,11 @@ def main() -> None:
             'url': art.get('url'),
             'tags': []
         })
+
     with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
         json.dump(summarized, f, ensure_ascii=False, indent=2)
-    print(f"Wrote summaries to {OUTPUT_FILE}")
+
+    print(f"✅ Wrote summaries to {OUTPUT_FILE}")
 
 
 if __name__ == '__main__':
