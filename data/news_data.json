@@ -1,9 +1,9 @@
 [
   {
-    "region": "Global",
-    "category": "Global – Applied AI & FinTech",
+    "region": "East Asia",
+    "category": "East Asia – Applied AI & FinTech",
     "title": "Mirai School of Technology Is Changing Engineering in India - Here's How Students Are Learning AI from Day One",
-    "summary_zh": "Mirai技術學院在印度革新工程教育，讓學生從第一學期就開始學習人工智慧（AI）。這個學院的課程不同於傳統，重視實作與專業指導，包括建設應用程式、設計AI工具和解決實際問題。學生將學會機器學習（Machine Learning）、自然語言處理（NLP）及深度學習（Deep Learning），並體驗大型語言模型（LLM）等前沿技術。在四年制的課程中，學生將參與實習並開發商業就緒的AI產品，準備未來的職業生涯。",
+    "summary_zh": "Mirai 科技學校（Mirai School of Technology）正改變印度的工程教育，讓學生從第一天起就學習人工智慧（AI, Artificial Intelligence）。在這四年制的計劃中，學生會在第一學年學習 Python、JavaScript 和 C++ 等核心編程語言，並開始構建現實世界的項目。第二年，他們深入研究機器學習（Machine Learning）、自然語言處理（NLP, Natural Language Processing）和深度學習（Deep Learning）。在第三年，學生專注於大型語言模型（LLM, Large Language Models）、生成式AI、網絡安全和區塊鏈（Blockchain），並進行實習。最終年，學生會創建工業級應用，並為未來的工作做好準備。Mirai 科技學校的這種創新學習模式是為了填補印度對AI專業人才的巨大需求。",
     "source": "Sri Lanka Source",
     "read_time": "1 min read",
     "url": "https://www.srilankasource.com/news/278284163/mirai-school-of-technology-is-changing-engineering-in-india-here-how-students-are-learning-ai-from-day-one",
@@ -11,139 +11,9 @@
   },
   {
     "region": "Global",
-    "category": "Global – Applied AI & FinTech",
-    "title": "The cracks in the OpenAI-Microsoft relationship are reportedly widening",
-    "summary_zh": "根據《華爾街日報》的報導，OpenAI與微軟的合作關係可能正面臨轉折點。報導指出OpenAI高層考慮公開指責微軟在合作過程中涉嫌反競爭行為，並可能尋求聯邦監管機構審查其合同。OpenAI希望降低對微軟在雲服務上的依賴，並試圖阻止微軟從OpenAI正在收購的AI編碼初創公司Windsurf獲取知識產權（intellectual property），這可能增強微軟自己的AI編碼工具GitHub Copilot。這種緊張關係意圖在OpenAI轉型為營利機構時尋求更多自主權。",
-    "source": "TechCrunch",
-    "read_time": "1 min read",
-    "url": "https://techcrunch.com/2025/06/16/the-cracks-in-the-openai-microsoft-relationship-are-reportedly-widening/",
-    "tags": []
-  },
-  {
-    "region": "Global",
-    "category": "Global – General Tech & Startups",
-    "title": "Finland warms up the world’s largest sand battery, and the economics look appealing",
-    "summary_zh": "芬蘭啟用了世界最大的砂電池（sand battery），這是一種熱能儲存系統，利用砂子或碎石儲存熱量。電力通常來源於可再生能源，用於加熱砂子，然後這些熱量可以用於供暖建築等。此技術經濟效益顯著，尤其在芬蘭一小城鎮用作集中供暖系統的一部分，可減少碳排放和對石油的依賴。砂電池可以儲存1,000兆瓦時的熱量，損失僅10%至15%，並能減少木屑燃燒量達60%。此外，越來越便宜的再生能源促使對熱能電池的興趣增長，各類初創公司積極開發相關技術。",
-    "source": "TechCrunch",
-    "read_time": "1 min read",
-    "url": "https://techcrunch.com/2025/06/16/finland-warms-up-the-worlds-largest-sand-battery-and-the-economics-look-appealing/",
-    "tags": []
-  },
-  {
-    "region": "Global",
-    "category": "Global – General Tech & Startups",
-    "title": "Instagram tests a reposts feature",
-    "summary_zh": "Instagram 正在測試讓用戶重新發布 (repost) 貼文的功能，這項功能自 2022 年起就已在開發中。部分用戶表示，除了重新發布他人的貼文外，用戶還可以重新發布自己的內容，這讓人們能夠更方便地分享和放大有趣的內容。目前，許多人使用第三方應用程式來重新發布內容，因此這項官方功能的推出有助於消除替代方法的需求。此外，創作者可以藉此功能增強其內容的曝光度和可見性，確保原創貼文獲得應有的認可。",
-    "source": "TechCrunch",
-    "read_time": "1 min read",
-    "url": "https://techcrunch.com/2025/06/16/instagram-tests-a-reposts-feature/",
-    "tags": []
-  },
-  {
-    "region": "East Asia",
-    "category": "East Asia – General Tech & Startups",
-    "title": "WeChat’s HarmonyOS version surpasses six million installs",
-    "summary_zh": "根據華為應用商店的數據，HarmonyOS版本的微信（WeChat）安裝量已超過六百萬次，每日約有十萬次下載。自1月推出以來，該應用穩步增加功能，現已支持包括消息、微信支付（WeChat Pay）、小程序和視頻頻道等核心功能。最新更新引入了如轉發已保存內容和文本消息長按翻譯等新功能。隨著越來越多的華為設備預裝HarmonyOS這一獨立於安卓（Android）和iOS開發的操作系統，預計使用者基數將進一步增加。這一趨勢突顯了Harmony生態系在社交應用領域的擴展角色。",
-    "source": "TechNode (動點科技)",
-    "read_time": "1 min read",
-    "url": "https://technode.com/2025/06/16/wechats-harmonyos-version-surpasses-six-million-installs/",
-    "tags": []
-  },
-  {
-    "region": "East Asia",
-    "category": "East Asia – General Tech & Startups",
-    "title": "Chinese phone maker Transsion rapidly expanding electric scooter business in Africa",
-    "summary_zh": "中國手機製造商Transsion近日設立了一個移動部門，以探索電動兩輪車及相關行業的機會。據消息人士稱，該公司在非洲及其他大陸的發展中國家迅速擴展其電動兩輪車業務。為支持這一擴張，Transsion正在招聘幾個關鍵職位，包括移動主管及海外重點客戶經理。根據中國職場平台Boss Zhipin的信息，位於科特迪瓦的移動主管將負責Transsion在該國的電動兩輪車業務運營，並專注於與本地企業的合作及構建支持客戶需求的團隊。",
-    "source": "TechNode (動點科技)",
-    "read_time": "1 min read",
-    "url": "https://technode.com/2025/06/16/chinese-phone-maker-transsion-rapidly-expanding-electric-scooter-business-in-africa/",
-    "tags": []
-  },
-  {
-    "region": "East Asia",
-    "category": "East Asia – General Tech & Startups",
-    "title": "CATL to build 10 battery swap stations in Hong Kong by 2027",
-    "summary_zh": "中國電池巨頭寧德時代（CATL）計劃在2026年底之前，在香港建設10個電動汽車的換電站。這一舉措可顯著縮短電動車（EV，Electric Vehicle）充電時間，並提升當地計程車司機的工作效率。寧德時代將與中國國有汽車製造商一汽（FAW）和香港上市的能源基礎設施提供商龍鑫新能源（Dragon Rise New Energy Holdings Ltd）合作推廣這項技術。此外，一汽的紅旗品牌將推出右駕版本的電動轎車，並在車輛中融合可更換的寧德時代電池。寧德時代早在去年12月宣布，計畫在2025年於中國建立1,000個換電站。",
-    "source": "TechNode (動點科技)",
-    "read_time": "1 min read",
-    "url": "https://technode.com/2025/06/16/catl-to-build-10-battery-swap-stations-in-hong-kong-by-2027/",
-    "tags": []
-  },
-  {
-    "region": "Global",
-    "category": "Global – Applied AI & FinTech",
-    "title": "道奇隊前老闆 Frank McCourt 擬購買 TikTok，將拋棄演算法核心",
-    "summary_zh": "前道奇隊老闆 Frank McCourt 計劃以 200 億美元收購 TikTok，並將其轉型為一個去中心化的社交網路協議（Decentralized Social Networking Protocol, DSNP），使用戶能夠在不同應用程式間自由攜帶身分和內容。他強調不依賴 TikTok 的算法（Algorithm），並對現有的平台規則持批評態度，希望能改變內容分發方式。儘管面對挑戰，McCourt 對未來的數位世界充滿希望，希望為下一代創造更好的網路環境。收購提案已提交給字節跳動與美國司法部。",
-    "source": "TechNews (台灣)",
-    "read_time": "1 min read",
-    "url": "https://technews.tw/2025/06/17/frank-mccourt-plan-to-buy-tiktok/",
-    "tags": []
-  },
-  {
-    "region": "Global",
-    "category": "Global – General Tech & Startups",
-    "title": "外國投機者炒房，西班牙人抗議居住不正義",
-    "summary_zh": "西班牙的住房市場面臨外國投機者的強烈影響，這些投資者看準了市場潛力，推高了房價，使當地居民面對住房價格的壓力。特別是在旅遊旺季，短期租屋需求激增。政府正努力出台新法律，如對非歐盟買家徵稅以及終止「黃金簽證」計畫，以減緩房價飆升帶來的問題。儘管如此，短期內的效果依然難以預測，而當地人因房租高企而面臨生活困難。",
-    "source": "TechNews (台灣)",
-    "read_time": "1 min read",
-    "url": "https://technews.tw/2025/06/17/spain-living-crisis/",
-    "tags": []
-  },
-  {
-    "region": "Global",
-    "category": "Global – General Tech & Startups",
-    "title": "外媒：G7 擬共同維護關鍵礦產供應，惟川普未點頭",
-    "summary_zh": "根據報導，七大工業國組織（G7）在加拿大亞伯達省舉行的峰會上達成初步共識，計畫保護關鍵礦產的供應以促進經濟發展，但美國總統川普尚未表態支持。有關草案指出，當前市場受到非市場行為和不公平政策的威脅，因此G7將加強預警機制，以應對稀土與關鍵礦產的短缺風險。此外，草案強調與G7外的夥伴合作和多元化供應來源，特別是減少對中國的依賴。關於國際衝突，草案提到關注以色列與伊朗的緊張局勢，川普並沒有計劃簽署聯合聲明。",
-    "source": "TechNews (台灣)",
-    "read_time": "1 min read",
-    "url": "https://technews.tw/2025/06/17/g7-mineral-trump/",
-    "tags": []
-  },
-  {
-    "region": "East Asia",
-    "category": "East Asia – General Tech & Startups",
-    "title": "China’s $9 AI Video Tool Kling 2.1 Adds Audio—Can It Beat Google’s $250 Veo 3?",
-    "summary_zh": "中國推出了一款名為 Kling 2.1 的人工智慧（AI）影片工具，售價為 9 美元，最近更新增加了音頻功能。該工具被設計用來與谷歌（Google）定價 250 美元的 Veo 3 競爭。Kling 2.1 目前的亮點在於其低價策略以及音頻配套功能，吸引大量使用者關注。這表明中國在輸出創新 AI 產品上有望挑戰國際科技巨頭。",
-    "source": "Decrypt",
-    "read_time": "1 min read",
-    "url": "https://decrypt.co/325459/kling-ai-video-tool-audio-beat-googles-250-veo-3",
-    "tags": []
-  },
-  {
-    "region": "Global",
-    "category": "Global – Blockchain & Crypto",
-    "title": "Avalanche Launches Free Gaming 'Battle Pass' With AVAX and NFT Rewards",
-    "summary_zh": "Avalanche推出了一款免費的遊戲「戰鬥通行證」，此遊戲中用戶可以獲得以AVAX和NFT（Non-Fungible Token）獎勵。Avalanche平台主要利用區塊鏈技術（Blockchain）來提升遊戲經驗，並讓玩家在虛擬世界中獲得數字資產。這類區塊鏈遊戲常結合加密貨幣讓遊戲更具互動性及持續吸引力。此舉也反映了區塊鏈技術（Blockchain）在娛樂和遊戲產業中的新應用。",
-    "source": "Decrypt",
-    "read_time": "1 min read",
-    "url": "https://decrypt.co/325391/avalanche-launches-gaming-battle-pass-rewards",
-    "tags": []
-  },
-  {
-    "region": "Global",
-    "category": "Global – Blockchain & Crypto",
-    "title": "Cantor Sees 75% Upside in Solana-Focused Stocks With New Analyst Coverage",
-    "summary_zh": "這篇文章報導了Cantor Fitzgerald針對Solana區塊鏈(Solana Blockchain)相關股票的新分析覆蓋，該分析報告預測相關股票可能有75%的上漲空間。Solana是一種專注於去中心化應用程式的區塊鏈技術，具有高效能和低交易費用的特點。這樣的預測表明，Solana在加密貨幣和區塊鏈(Crypto & Blockchain)市場中的潛力較大。這種技術的增長可能會吸引更多投資者和開發者進一步探索其應用。",
-    "source": "Decrypt",
-    "read_time": "1 min read",
-    "url": "https://decrypt.co/325457/cantor-solana-focused-stocks-analyst-coverage",
-    "tags": []
-  },
-  {
-    "region": "Global",
-    "category": "Global – General Tech & Startups",
-    "title": "Artificial solar eclipse engineered in Europe offers new look at Sun",
-    "summary_zh": "歐洲科技團隊成功利用兩顆衛星創造出人造日蝕，讓科學家得以觀察太陽最外層的日冕。這項任務由歐洲太空總署（ESA）以及四十多家太空科技公司合作完成，其中包括幾家新創公司，為任務提供了關鍵技術如太陽追蹤傳感器（sensors for solar tracking）和光檢測器。這兩顆衛星以150米距離繞地球飛行，一枚衛星模擬月亮遮擋太陽，讓另一枚衛星觀測日冕。這項技術突破，讓人造日蝕長達6小時，比自然日蝕提供更長的研究時間。",
-    "source": "The Next Web (TNW)",
-    "read_time": "1 min read",
-    "url": "https://thenextweb.com/news/artificial-solar-eclipse-startup-tech-europe-space",
-    "tags": []
-  },
-  {
-    "region": "Global",
     "category": "Global – General Tech & Startups",
     "title": "Opinion: Space startups are pivoting to defence. That’s great for innovation",
-    "summary_zh": "最近，許多太空新創公司正從商業應用轉向防衛投資。這樣的轉型源於地緣政治的變化，例如烏克蘭的衝突。全球政府在2024年的太空計劃支出達到1350億美元，上升10%，主要原因是防衛預算增加。這種趨勢促進了航空和深科技（deep-tech）的創新發展，例如光學通信、地球觀測和合成孔徑雷達（SAR）。然而，成功轉型的公司能獲得穩定的長期資金支援，將防衛科技商業化，把國防科技拓展到商業應用中，促進更廣泛的商業進步。",
+    "summary_zh": "最近，許多太空新創公司逐漸轉向國防投資，這一轉變被認為有助於促進航空航太和深層技術的創新。此現象主要受到地緣政治變化影響，例如烏克蘭衝突，以及全球對國際秩序改變的認識。許多新創公司透過開發「雙重用途技術」，在商業和國防市場中找到平衡點，如合成孔徑雷達（Synthetic Aperture Radar, SAR）和光學通信等。儘管國防合約帶來繁瑣的合規要求和現金流挑戰，但它也提供了長期的穩定性和技術商業化的機會。",
     "source": "The Next Web (TNW)",
     "read_time": "1 min read",
     "url": "https://thenextweb.com/news/space-startups-defence-tech-pivot",
@@ -152,8 +22,28 @@
   {
     "region": "Global",
     "category": "Global – General Tech & Startups",
+    "title": "You can now set up double dates with friends on Tinder",
+    "summary_zh": "Tinder近日推出了一項新功能——雙人約會（Double Date），藉此吸引年輕用戶。這項功能讓用戶可以與朋友組成二人組，並與其他有共同偏好的雙人組進行聊天，例如對性別和性取向的偏好。雙人約會旨在減少單獨約會常見的壓力和焦慮，創造更舒適的環境。根據Tinder的內部數據，參與雙人約會的用戶發送的消息量比傳統一對一聊天多了25%，特別是29歲以下的用戶。",
+    "source": "TechCrunch",
+    "read_time": "1 min read",
+    "url": "https://techcrunch.com/2025/06/16/you-can-now-arrange-a-double-date-with-friends-on-tinder/",
+    "tags": []
+  },
+  {
+    "region": "Global",
+    "category": "Global – General Tech & Startups",
+    "title": "Finland warms up the world’s largest sand battery, and the economics look appealing",
+    "summary_zh": "芬蘭在小鎮Pornainen啟用了全球最大的沙粒電池，這是一種熱能儲存系統，其主要材料為沙或碎石，用於儲存由可再生能源轉化而來的熱量，以此來幫助建築物取暖。這個系統可以每週儲存1,000兆瓦小時的熱量，大幅降低了該鎮的碳排放，並減少了對燃燒木屑的依賴約60%。此技術的經濟性極具吸引力，與鋰離子電池相比，成本低廉，並兼具環保效益。隨著可再生能源的價格下降，許多初創公司也在開發類似的熱能電池技術。",
+    "source": "TechCrunch",
+    "read_time": "1 min read",
+    "url": "https://techcrunch.com/2025/06/16/finland-warms-up-the-worlds-largest-sand-battery-and-the-economics-look-appealing/",
+    "tags": []
+  },
+  {
+    "region": "Global",
+    "category": "Global – General Tech & Startups",
     "title": "Quantum art, multiball, and AI selfies: TNW 2025’s best side quests",
-    "summary_zh": "量子力學（Quantum Mechanics）是一個奇異的領域，TU Delft 的一群學生在 TNW 大會上通過抽象藝術展覽將其呈現給大家。他們的項目 Emergence Delft 結合了科學與創造力，並通過名為 Coexist 的燈光裝置來展示量子力學中兼具多狀態的性質。在這個展覽中，觀眾可以使用偏光濾鏡來觀察光線的變化，就如同量子力學中觀測行為改變可觀察現象般。此外，TNW 大會還有許多其他活動，包括混合現實遊戲 Multiball 和生成人工智能（GenAI）相片亭等，讓人們能夠沉浸於不同的技術體驗中。",
+    "summary_zh": "於TNW 2025會議中，一組來自Delft理工大學的學生展示了一個關於量子藝術的展覽。這個名為Emergence Delft的項目把科學與創意融合，特別展示了一個光藝術裝置Coexist，來詮釋量子力學（Quantum Mechanics）的超位置（Superposition）現象。展覽讓參觀者通過特殊的偏光過濾器觀察光波的互動，就如在量子力學中，觀察會改變觀察對象。除此之外，會議還包含了許多其他的活動，如混合現實遊戲Multiball以及AI生成自拍的DataSnipper GenAI照相亭。",
     "source": "The Next Web (TNW)",
     "read_time": "1 min read",
     "url": "https://thenextweb.com/news/tnw-conference-2025-art-games-tech-side-events",
@@ -162,18 +52,28 @@
   {
     "region": "Global",
     "category": "Global – General Tech & Startups",
+    "title": "Artificial solar eclipse engineered in Europe offers new look at Sun",
+    "summary_zh": "歐洲的人工日食技術是通過兩顆裝載了歐洲科技的衛星實現的，這讓科學家得以前所未有地觀察太陽的日冕（corona）。由歐洲太空總署（ESA）與超過40家太空科技公司共同研發，啟動自印度的Satish Dhawan太空中心。日冕的溫度高於太陽表面，是太陽風暴和日冕物質拋射（coronal mass ejections）的來源，這可能會干擾地球的通訊。相比於自然日食的短暫，人工日食能維持長達六個小時，裝載的精密儀器提供超高的軌道準確性與調整能力。",
+    "source": "The Next Web (TNW)",
+    "read_time": "1 min read",
+    "url": "https://thenextweb.com/news/artificial-solar-eclipse-startup-tech-europe-space",
+    "tags": []
+  },
+  {
+    "region": "Global",
+    "category": "Global – General Tech & Startups",
     "title": "Instagram’s New Features: Spotify Integration To Notes And Customizable Grid",
-    "summary_zh": "Instagram推出了新的功能，將Spotify音樂整合（integration）到Notes功能中，使用者可以及時分享他們正在收聽的歌曲。這項更新讓使用者感受到回到早期MSN等訊息平台的懷舊感，相較於以往只能手動添加音樂，現在的整合過程能讓音樂變得更動態和即時。此外，Instagram也增加了手動調整個人檔案網格（grid）的功能，讓使用者可以照自己的心意展示內容。這些新功能旨在減少使用者在公開發佈內容時的壓力，並激發創意與即興分享。",
+    "summary_zh": "Instagram 最近推出新功能，將 Spotify 整合到 Notes 中，使用者可以即時分享正在收聽的歌曲。這項更新提升了 Stories 區域的臨時狀態功能，讓 Spotify (Spotify) 的音樂能夠隨著變更而更新。Instagram 表示，這是其「Anyway」專案的一部分，旨在減少用戶壓力並鼓勵創造和自發分享。此外，用戶將可以手動重新排列個人主頁的發帖順序，賦予更多控制權，尤其對於創作者和品牌有利。此外，Instagram 正在擴大試用功能，讓創作者能在新的受眾群體中預覽視頻。Meta 也確認 iPad 專用的 Instagram 應用程式正在開發中，這是長期以來的需求。",
     "source": "Ubergizmo",
     "read_time": "1 min read",
     "url": "https://www.ubergizmo.com/2025/06/instagram-spotify-notes-grid/",
     "tags": []
   },
   {
-    "region": "East Asia",
-    "category": "East Asia – General Tech & Startups",
+    "region": "Global",
+    "category": "Global – General Tech & Startups",
     "title": "iPhone 17 Pro: Apple A19 Pro Chip Could Match M4’s Performance",
-    "summary_zh": "據可靠消息來源Digital Chat Station的最新爆料，蘋果即將推出的A19 Pro晶片預計將供應iPhone 17 Pro，並在單核性能上達到令人矚目的提升，甚至可能逼近目前iPad Pro和某些Mac使用的M4處理器的性能水準。根據Geekbench 6的初步基準測試，A19 Pro的單核性能可能得分超過4,000點，比當前的A18 Pro提高了18%，且很可能超越M4，並接近蘋果最強大的M4 Max。A19 Pro的多核性能也預計將超過10,000點，亦比A18 Pro提高了18%。此外，iPhone 17全系列將配置高刷新率顯示屏，使基本款型號更具競爭力和吸引力。雖然最終規格和基準成績尚未確認，但此消息顯示蘋果在性能和效率上持續追求大幅提升。",
+    "summary_zh": "有消息透露，Apple 預計將在即將推出的 iPhone 17 Pro 使用 Apple A19 Pro 晶片，該晶片的單核效能可能媲美目前最新使用於 iPad Pro 和多款 Mac 的 M4 處理器。根據迄今為止的 Geekbench 6 基準測試，A19 Pro 的單核得分預計超過 4,000 分，較 A18 Pro 高出 18%。多核性能方面，A19 Pro 預計會超過 10,000 分，再次比 A18 Pro 提升 18%。儘管如此，A19 Pro 仍可能面臨高端 Android 晶片如 Snapdragon 和 MediaTek 的競爭挑戰。傳聞中，iPhone 17 系列每款型號將配備高刷新率顯示器，這一改變可能提高基礎型號的競爭力。",
     "source": "Ubergizmo",
     "read_time": "1 min read",
     "url": "https://www.ubergizmo.com/2025/06/iphone-17-pro-apple-a19-pro-m4/",
@@ -183,10 +83,130 @@
     "region": "Global",
     "category": "Global – General Tech & Startups",
     "title": "RedMagic Gaming Tablet 3 Pro Debuts With Snapdragon 8 Elite And 165 Hz OLED Display",
-    "summary_zh": "RedMagic 正式推出了 Gaming Tablet 3 Pro，一款專為遊戲玩家設計的高性能平板電腦，並全球推出名為 RedMagic Astra Gaming Tablet。該平板配備9.06英吋OLED（OLED）顯示器，擁有2.4K解析度和165 Hz刷新率，利用Snapdragon 8 Elite（Snapdragon 8 Elite）處理器及專屬的RedCore R3 Pro（RedCore R3 Pro）晶片提升性能和系統反應能力。內存選項包括12 GB、16 GB或24 GB的LPDDR5T（LPDDR5T），儲存量達到1 TB的UFS 4.1 Pro（UFS 4.1 Pro）。該平板還搭載主動冷卻系統，搭配8200mAh電池和80W快充，並支援Wi-Fi、藍牙、NFC和USB-C 3.2 Gen 2端口。其操作系統為Android 15（Android 15）和RedMagic OS 10.5（RedMagic OS 10.5），提供AI（AI）助理和專為遊戲優化的用戶界面。",
+    "summary_zh": "RedMagic推出了新款RedMagic Astra Gaming Tablet 3 Pro，這是一款專為遊戲玩家設計的高性能平板電腦，目標競爭機型包括Lenovo Legion Y700 Gen 4。該裝置配備9.06英寸OLED（OLED）顯示屏，提供2.4K解析度、165 Hz刷新率和5,280 Hz PWM調光的護眼功能，並搭載Snapdragon 8 Elite處理器和RedCore R3 Pro芯片。這款平板還擁有12至24 GB的LPDDR5T記憶體和最多1 TB的UFS 4.1 Pro儲存空間，以及內建風扇和液態金屬的主動冷卻系統。同時，RedMagic還推出了一系列遊戲配件，包括製冰刀磁性鍵盤和低延遲耳機。",
     "source": "Ubergizmo",
     "read_time": "1 min read",
     "url": "https://www.ubergizmo.com/2025/06/redmagic-gaming-tablet-3-pro/",
+    "tags": []
+  },
+  {
+    "region": "Global",
+    "category": "Global – Blockchain & Crypto",
+    "title": "Eric Trump Denies Involvement in Tron Nasdaq Deal Despite Board Role",
+    "summary_zh": "艾瑞克·特朗普（Eric Trump）否認他在Tron與納斯達克（Nasdaq）之間的交易中有任何參與，儘管他在Tron的董事會中擔任角色。Tron是一個基於區塊鏈（Blockchain）的去中心化平台，專注於分佈式存儲技術和數字內容的創造。納斯達克則是美國著名證券交易所，涉及金融科技（FinTech）的多項業務。此事件可能影響區塊鏈和加密貨幣（Crypto）的投資者信心。",
+    "source": "Decrypt",
+    "read_time": "1 min read",
+    "url": "https://decrypt.co/325516/eric-trump-denies-involvement-tron-nasdaq-deal",
+    "tags": []
+  },
+  {
+    "region": "Global",
+    "category": "Global – Blockchain & Crypto",
+    "title": "Solana-Based Pump.fun Among List of Crypto Trading Platforms Suspended from X",
+    "summary_zh": "根據報導，基於Solana的加密貨幣交易平台Pump.fun被X禁止使用。此舉使Pump.fun成為一系列被暫停的加密貨幣交易平台之一。這些平台涉及到區塊鏈技術（Blockchain Technology）以及加密貨幣（Crypto）的交易操作。此次禁令反映了市場對加密交易平台的監管力度加強趨勢。",
+    "source": "Decrypt",
+    "read_time": "1 min read",
+    "url": "https://decrypt.co/325512/solana-pump-fun-crypto-trading-platforms-suspended-x",
+    "tags": []
+  },
+  {
+    "region": "Global",
+    "category": "Global – Blockchain & Crypto",
+    "title": "Polymarket Odds on US Strike Against Iran Spike, Then Fall",
+    "summary_zh": "這篇文章討論了Polymarket上的賭注如何預測美國可能對伊朗進行打擊的機會發生變化。Polymarket是利用區塊鏈( Blockchain)技術的預測市場平台，允許用戶就未來事件的結果進行投資和押注。這些賭注的賠率先是急劇上升，隨後又回落，展示了市場對此類地緣政治事件的不確定性和波動性。這反映了金融科技( FinTech)及其他新興技術在預測市場中的應用與影響。",
+    "source": "Decrypt",
+    "read_time": "1 min read",
+    "url": "https://decrypt.co/325506/polymarket-bets-on-us-strike-against-iran-spike-then-fall",
+    "tags": []
+  },
+  {
+    "region": "Global",
+    "category": "Global – Applied AI & FinTech",
+    "title": "The cracks in the OpenAI-Microsoft relationship are reportedly widening",
+    "summary_zh": "根據《華爾街日報》的一份報導，OpenAI 與微軟的合作關係可能正處於重要轉折點。OpenAI 的高層被指考慮公開指控微軟在合作關係中存在反競爭行為，並正在評估是否要求聯邦監管審查其與微軟的合約。OpenAI 試圖減少對微軟提供的計算資源的依賴，但因其非營利轉為營利機構的過程仍需微軟批准，因此雙方關係變得緊張。此外，OpenAI 與微軟在 30 億美元收購 AI 編碼初創公司 Windsurf 上處於僵局，OpenAI 不希望微軟獲得 Windsurf 的知識產權，因這可能增強微軟的 GitHub Copilot 工具。",
+    "source": "TechCrunch",
+    "read_time": "1 min read",
+    "url": "https://techcrunch.com/2025/06/16/the-cracks-in-the-openai-microsoft-relationship-are-reportedly-widening/",
+    "tags": []
+  },
+  {
+    "region": "Global",
+    "category": "Global – General Tech & Startups",
+    "title": "トランプ氏、G7サミット途中帰国へ 「今夜帰る」大統領報道官",
+    "summary_zh": "特朗普美國總統因中東局勢緊張，提前從在加拿大舉行的G7峰會返回華盛頓。此次峰會原定於16日晚間開始全面討論，並且加拿大希望彙整包括人工智能（AI, Artificial Intelligence）在內的主題成果文件。特朗普在接受採訪時表示，由於需要處理緊急國家安全事務，因此必須儘早返回美國。此外，他也與加拿大及其他國家的領袖進行會談，而韓國和印度也計劃與特朗普會面談及關稅問題。",
+    "source": "Nikkei Asia",
+    "read_time": "1 min read",
+    "url": "https://www.nikkei.com/article/DGXZQOGN170OY017062025000000/",
+    "tags": []
+  },
+  {
+    "region": "Global",
+    "category": "Global – General Tech & Startups",
+    "title": "日米首脳会談、石破首相「認識の不一致残る」 関税協議を継続へ",
+    "summary_zh": "日美兩國的首腦會談中，石破茂首相與特朗普總統討論了美國對日本的關稅議題，但雙方在一些認識上仍然未達成一致。會談後，石破表示雙方將繼續進行關稅的協商，尤其是汽車關稅的問題尚未解決。石破強調日美雙方必須努力達成一個讓雙方都受益的協議，並指出日本是美國最大的投資國，對美國經濟做出了貢獻。此次會談與G7首腦會議同步進行，旨在推進兩國之間的貿易談判。",
+    "source": "Nikkei Asia",
+    "read_time": "1 min read",
+    "url": "https://www.nikkei.com/article/DGXZQOUA16AQH016062025000000/",
+    "tags": []
+  },
+  {
+    "region": "East Asia",
+    "category": "East Asia – General Tech & Startups",
+    "title": "4、5 月 iPhone 全球銷量年增雙位數，美、中市場為主要成長動能",
+    "summary_zh": "根據 Counterpoint Research 的報告，iPhone 在 2025 年第二季的全球銷量達到新的高點，特別是美國和中國市場所帶動的增長顯著。在中國市場，蘋果重奪市占第一位；而在日本市場，iPhone 的新機型如 iPhone 16e 也廣受歡迎。儘管近期 AI（Agentic AI）熱潮對於換機潮的影響有限，但 Counterpoint Research 認為蘋果正準備為未來的 Siri 升級和創新使用體驗作準備。報告還指出，蘋果在印度市場的成長前景廣闊，尤其在配件與服務領域能持續推動成長。",
+    "source": "TechNews (台灣)",
+    "read_time": "1 min read",
+    "url": "https://technews.tw/2025/06/17/iphone-sale-in-2q25-global/",
+    "tags": []
+  },
+  {
+    "region": "East Asia",
+    "category": "East Asia – General Tech & Startups",
+    "title": "CATL to build 10 battery swap stations in Hong Kong by 2027",
+    "summary_zh": "寧德時代 (CATL) 計劃在2026年底前在香港建立10個電動汽車的電池更換站，預計將大幅減少充電時間並提高當地出租車司機的工作效率。該公司將與中國國有汽車製造商一汽 (FAW) 和香港上市能源基礎設施提供商龍升新能源控股有限公司合作推動此技術在香港的應用。部分一汽的紅旗（Hongqi）電動轎車將使用寧德時代的可更換電池在香港銷售。早前寧德時代宣布計劃在2025年在中國建立1000個電池更換站。此次聯合項目中，滴滴（Didi）的能源單位橙電將提供電池更換的在線平台的開發和運營支持。",
+    "source": "TechNode (動點科技)",
+    "read_time": "1 min read",
+    "url": "https://technode.com/2025/06/16/catl-to-build-10-battery-swap-stations-in-hong-kong-by-2027/",
+    "tags": []
+  },
+  {
+    "region": "East Asia",
+    "category": "East Asia – General Tech & Startups",
+    "title": "Chinese phone maker Transsion rapidly expanding electric scooter business in Africa",
+    "summary_zh": "中國手機製造商傳音（Transsion）最近成立了一個移動部門，探索電動雙輪車及相關領域的機會。該公司約佔非洲手機銷售市場的一半，並正在迅速擴大其在非洲及其他大陸開發中國家的電動雙輪車業務。為了支持這一擴展，傳音正在招聘幾個關鍵角色，包括移動業務國家負責人及海外大客戶經理。根據中國招聘平台BOSS直聘（Boss Zhipin）顯示，位於科特迪瓦的移動業務國家負責人將領導該國的電動雙輪車業務，並專注於與當地企業建立合作關係及組建支持客戶需求的團隊。位於尼日利亞的海外大客戶經理則專注於尼日利亞市場的客戶開發和客戶關係管理。",
+    "source": "TechNode (動點科技)",
+    "read_time": "1 min read",
+    "url": "https://technode.com/2025/06/16/chinese-phone-maker-transsion-rapidly-expanding-electric-scooter-business-in-africa/",
+    "tags": []
+  },
+  {
+    "region": "Global",
+    "category": "Global – General Tech & Startups",
+    "title": "伊朗難以撼動油價＋川普「TACO」  美股股民超冷靜",
+    "summary_zh": "近期，由於伊朗戰爭及美國總統川普的關稅政策，市場擔憂情緒增加，但股市仍接近歷史高位。分析認為伊朗的軍事能力不足以影響全球原油市場，而川普常在關鍵時刻退縮（Trump Always Chickens Out，簡稱 TACO）。美國已成為原油淨出口國，伊朗不再是原油出口大國，因此情勢與1970年代的石油危機不同。雖然關稅可能影響全球經濟，但目前市場對川普的關稅策略持懷疑態度，TACO一詞因此開始流行。",
+    "source": "TechNews (台灣)",
+    "read_time": "1 min read",
+    "url": "https://finance.technews.tw/2025/06/17/why-markets-are-ignoring-scary-headlines-about-iran-trade-wars-and-u-s-debt/",
+    "tags": []
+  },
+  {
+    "region": "East Asia",
+    "category": "East Asia – General Tech & Startups",
+    "title": "限旗艦機種，蘋果 A20 將採台積電 2 奈米製程與全新 WMCM 封裝",
+    "summary_zh": "台積電已接收2奈米(nanometer)晶圓的訂單，然而預計到2026年底才能面世。蘋果(A20)將成為首批使用此先進製程的晶片，並且將首次採用緒於iPhone18 Pro、iPhone18 Pro Max及摺疊機系列的全新WMCM（晶圓級多晶片模組）封裝技術。此技術能提升晶片的可整合性，增加每瓦效能表現，然而記憶體容量依舊維持12GB且未多作提升。台積電的新生產線位於嘉義，至2026年底將達到每月5萬片的產能。",
+    "source": "TechNews (台灣)",
+    "read_time": "1 min read",
+    "url": "https://technews.tw/2025/06/17/apple-a20-tsmc-wmcm/",
+    "tags": []
+  },
+  {
+    "region": "East Asia",
+    "category": "East Asia – General Tech & Startups",
+    "title": "WeChat’s HarmonyOS version surpasses six million installs",
+    "summary_zh": "根據華為應用市場的數據，微信（WeChat）的鴻蒙系統（HarmonyOS）版本已經超過六百萬次安裝，每日平均下載量約為十萬次。自一月推出以來，該應用程序不斷增添功能，如今支持核心功能，包括訊息傳遞、微信支付（WeChat Pay）、小程序以及視頻頻道等。最新的更新引入了轉發已儲存內容和長按翻譯文本信息的功能。隨著越來越多的華為設備預裝鴻蒙系統，預計用戶群將持續增長，這一趨勢強調了鴻蒙生態系統在社交應用行業中不斷擴大的角色。",
+    "source": "TechNode (動點科技)",
+    "read_time": "1 min read",
+    "url": "https://technode.com/2025/06/16/wechats-harmonyos-version-surpasses-six-million-installs/",
     "tags": []
   }
 ]
