@@ -7,9 +7,9 @@
       "name": "TechCrunch"
     },
     "publishedAt": "2025-06-17T07:01:00Z",
-    "is_relevant": false,
-    "category": "",
-    "score": 0.0
+    "is_relevant": true,
+    "category": "finance_ai",
+    "score": 9.0
   },
   {
     "title": "The cracks in the OpenAI-Microsoft relationship are reportedly widening",
@@ -19,9 +19,9 @@
       "name": "TechCrunch"
     },
     "publishedAt": "2025-06-16T22:40:51Z",
-    "is_relevant": false,
-    "category": "",
-    "score": 0.0
+    "is_relevant": true,
+    "category": "startup_ai",
+    "score": 7.5
   },
   {
     "title": "Instagram users complain of mass bans, pointing finger at AI",
@@ -32,7 +32,7 @@
     },
     "publishedAt": "2025-06-16T18:44:04Z",
     "is_relevant": false,
-    "category": "",
+    "category": null,
     "score": 0.0
   },
   {
@@ -43,9 +43,9 @@
       "name": "TechCrunch"
     },
     "publishedAt": "2025-06-16T13:00:00Z",
-    "is_relevant": false,
-    "category": "",
-    "score": 0.0
+    "is_relevant": true,
+    "category": "startup_ai",
+    "score": 9.0
   },
   {
     "title": "全球新聞獲取習慣改變，AI 工具與網路名人取代傳統媒體",
@@ -56,7 +56,7 @@
     },
     "publishedAt": "2025-06-17T06:30:17Z",
     "is_relevant": false,
-    "category": "",
+    "category": null,
     "score": 0.0
   },
   {
@@ -67,9 +67,9 @@
       "name": "TechNews (台灣)"
     },
     "publishedAt": "2025-06-17T06:15:06Z",
-    "is_relevant": false,
-    "category": "",
-    "score": 0.0
+    "is_relevant": true,
+    "category": "startup_ai",
+    "score": 9.0
   },
   {
     "title": "AI 教父 Geoffrey Hinton：白領工作恐遭 AI 取代，藍領反而較安全",
@@ -104,7 +104,7 @@
     },
     "publishedAt": "2025-06-17T03:11:45Z",
     "is_relevant": false,
-    "category": "",
+    "category": null,
     "score": 0.0
   },
   {
@@ -116,7 +116,7 @@
     },
     "publishedAt": "2025-06-17T00:40:14Z",
     "is_relevant": false,
-    "category": "",
+    "category": null,
     "score": 0.0
   },
   {
@@ -128,7 +128,7 @@
     },
     "publishedAt": "2025-06-16T21:22:36Z",
     "is_relevant": false,
-    "category": "",
+    "category": null,
     "score": 0.0
   },
   {
@@ -140,7 +140,7 @@
     },
     "publishedAt": "2025-06-16T20:00:50Z",
     "is_relevant": false,
-    "category": "",
+    "category": null,
     "score": 0.0
   },
   {
@@ -151,9 +151,9 @@
       "name": "Nikkei Asia"
     },
     "publishedAt": "2025-06-17T08:00:32.909194Z",
-    "is_relevant": false,
-    "category": "",
-    "score": 0.0
+    "is_relevant": true,
+    "category": "startup_ai",
+    "score": 9.0
   },
   {
     "title": "Mirai School of Technology Is Changing Engineering in India - Here's How Students Are Learning AI from Day One",
@@ -163,8 +163,8 @@
       "name": "Sri Lanka Source"
     },
     "publishedAt": "2025-06-16",
-    "is_relevant": false,
-    "category": "",
-    "score": 0.0
+    "is_relevant": true,
+    "category": "startup_ai",
+    "score": 7.5
   }
 ]
