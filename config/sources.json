@@ -103,6 +103,46 @@
       "region": "Asia",
       "topics": ["Finance", "Banking"],
       "full_text": true
+    },
+    {
+      "name": "Fintech Times",
+      "rss_url": "https://thefintechtimes.com/feed",
+      "source_type": "rss",
+      "region": "Global",
+      "topics": ["FinTech", "Finance"],
+      "full_text": true
+    },
+    {
+      "name": "Finance Magnates – FinTech",
+      "rss_url": "https://www.financemagnates.com/fintech/feed/",
+      "source_type": "rss",
+      "region": "Global",
+      "topics": ["FinTech", "Finance"],
+      "full_text": true
+    },
+    {
+      "name": "Cointelegraph",
+      "rss_url": "https://cointelegraph.com/rss",
+      "source_type": "rss",
+      "region": "Global",
+      "topics": ["Blockchain", "Crypto"],
+      "full_text": true
+    },
+    {
+      "name": "Crypto Breaking News",
+      "rss_url": "https://cryptobreaking.com/rss",
+      "source_type": "rss",
+      "region": "Global",
+      "topics": ["Blockchain", "Crypto"],
+      "full_text": true
+    },
+    {
+      "name": "FinanceAsia",
+      "rss_url": "https://www.financeasia.com/rss/latest",
+      "source_type": "rss",
+      "region": "Asia",
+      "topics": ["Finance", "FinTech"],
+      "full_text": true
     }
   ],
   "rsshub_sources": [
