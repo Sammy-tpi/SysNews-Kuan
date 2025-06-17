@@ -14,7 +14,7 @@ CONFIG_FILE = "config/sources.json"
 OUTPUT_FILE = "data/rss_articles.json"
 
 # Limit how many articles to fetch from each RSS feed to avoid long runtimes
-MAX_ARTICLES_PER_SOURCE = 3
+MAX_ARTICLES_PER_SOURCE = 30
 
 
 def load_sources() -> List[Dict]:
