@@ -8,7 +8,7 @@ import aiohttp
 
 import feedparser
 from bs4 import BeautifulSoup
-from utils import load_keywords, keyword_score, source_weight
+from utils import load_keywords, keyword_score
 
 CONFIG_FILE = "config/sources.json"
 OUTPUT_FILE = "data/rss_articles.json"
@@ -124,13 +124,8 @@ async def fetch_rss_articles_async() -> List[Dict]:
     for batch in results:
         for art in batch:
             text = f"{art.get('title', '')} {art.get('content', '')}"
-            art["score"] = (
-                0.5 * len(art.get("content", ""))
-                + 5 * keyword_score(text, all_keywords)
-                + source_weight(art.get("source", {}).get("name", ""))
-            )
-            articles.append(art)
-    articles = sorted(articles, key=lambda x: x["score"], reverse=True)[:20]
+            if keyword_score(text, all_keywords) > 0:
+                articles.append(art)
     return articles
 
 
