@@ -4,6 +4,7 @@ from typing import List, Dict
 
 import requests
 from dotenv import load_dotenv
+from utils import load_keywords, keyword_score, source_weight
 
 load_dotenv()
 NEWSAPI_AI_KEY = os.getenv("NEWSAPI_AI_KEY")
@@ -49,8 +50,19 @@ def fetch_newsapi_ai_articles() -> List[Dict]:
 
 
 def fetch_and_store() -> List[Dict]:
-    """Fetch raw articles and return them without any summarization."""
-    return fetch_newsapi_ai_articles()
+    """Fetch raw articles, score them and return the top results."""
+    articles = fetch_newsapi_ai_articles()
+    keywords_cfg = load_keywords()
+    all_keywords = [kw for group in keywords_cfg.values() for kw in group]
+    for art in articles:
+        text = f"{art.get('title', '')} {art.get('content', '')}"
+        art["score"] = (
+            0.5 * len(art.get("content", ""))
+            + 5 * keyword_score(text, all_keywords)
+            + source_weight(art.get("source", {}).get("name", ""))
+        )
+    articles = sorted(articles, key=lambda x: x["score"], reverse=True)[:20]
+    return articles
 
 
 def main() -> None:
