@@ -1,5 +1,6 @@
 import json
 import os
+import re
 from typing import Dict, List
 
 import openai
@@ -35,7 +36,7 @@ Please use the following criteria to evaluate **relevance and value**:
 - Is the story recent, non-generic, and likely to inspire product or business ideas?
 - Is it specific (not just abstract tech talk), from a credible source, and related to East Asia or global markets?
 
-Your response must be a valid JSON object like this:
+Your response must be a valid JSON object like this. Return **only** the JSON object with no additional text:
 {{"is_relevant": true, "category": "finance_ai", "score": 8.2}}
 """
 
@@ -48,20 +49,37 @@ def load_articles(path: str) -> List[Dict]:
         except json.JSONDecodeError:
             raise RuntimeError(f"Invalid JSON in {path}")
 
+def _parse_response(text: str) -> Dict:
+    """Parse the JSON object from the model response."""
+    try:
+        return json.loads(text)
+    except json.JSONDecodeError:
+        match = re.search(r"\{.*\}", text, re.DOTALL)
+        if match:
+            try:
+                return json.loads(match.group(0))
+            except json.JSONDecodeError:
+                pass
+    print("\u274c Failed to parse GPT response as JSON")
+    return {"is_relevant": False, "category": "", "score": 0.0}
+
+
 def classify_article(title: str, content: str) -> Dict:
     prompt = f"{PROMPT_TEMPLATE}\n\nTitle: {title}\n\nArticle Content:\n{content}"
     messages = [{"role": "system", "content": prompt}]
     try:
-        resp = openai.chat.completions.create(model=MODEL_NAME, messages=messages)
+        resp = openai.chat.completions.create(
+            model=MODEL_NAME,
+            messages=messages,
+            response_format={"type": "json_object"},
+            temperature=0,
+        )
     except Exception as exc:
         print(f"\u274c OpenAI API error: {exc}")
         return {"is_relevant": False, "category": "", "score": 0.0}
+
     text = resp.choices[0].message.content.strip()
-    try:
-        return json.loads(text)
-    except json.JSONDecodeError:
-        print("\u274c Failed to parse GPT response as JSON")
-        return {"is_relevant": False, "category": "", "score": 0.0}
+    return _parse_response(text)
 
 def main() -> None:
     articles = load_articles(INPUT_FILE)
