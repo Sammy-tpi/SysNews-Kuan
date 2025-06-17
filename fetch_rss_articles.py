@@ -12,17 +12,22 @@ OUTPUT_FILE = "data/rss_articles.json"
 
 
 def load_sources() -> List[Dict]:
-    """Return list of RSS sources from configuration."""
+    """Return list of all RSS sources from configuration."""
     try:
         with open(CONFIG_FILE, "r", encoding="utf-8") as f:
             data = json.load(f)
     except FileNotFoundError:
-        print(f"\u274c Missing {CONFIG_FILE}")
+        print(f"❌ Missing {CONFIG_FILE}")
         return []
     except json.JSONDecodeError:
-        print(f"\u274c Invalid JSON in {CONFIG_FILE}")
+        print(f"❌ Invalid JSON in {CONFIG_FILE}")
         return []
-    return [s for s in data.get("sources", []) if s.get("type") == "rss"]
+    
+    # ✅ 改成讀 "rss_sources"
+    rss_sources = data.get("rss_sources", [])
+
+    # ✅ 過濾條件也改成 source_type
+    return [s for s in rss_sources if s.get("source_type") == "rss"]
 
 
 def parse_timestamp(entry: dict) -> str:
