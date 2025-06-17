@@ -5,8 +5,7 @@ from typing import Dict, List, Tuple
 import openai
 from dotenv import load_dotenv
 
-NEWSAPI_INPUT_FILE = "data/newsapi_ai_articles.json"
-RSS_INPUT_FILE = "data/rss_articles.json"
+INPUT_FILE = "data/recent_articles.json"
 OUTPUT_FILE = "data/news_data.json"
 
 load_dotenv()
