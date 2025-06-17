@@ -16,7 +16,6 @@ MODEL_NAME = os.getenv("OPENAI_MODEL", "gpt-4o")
 if not openai.api_key:
     raise RuntimeError("Missing OPENAI_API_KEY in environment")
 
-
 PROMPT_TEMPLATE = """You are an AI news filter.You are an AI-powered news analyst working for TPIsoftware, a Taiwan-based software company specializing in enterprise solutions, AI development, and financial technologies.
 
 Your job is to help our internal AI team and product managers stay updated on the most relevant global trends by selecting and scoring news articles in three focus areas:
@@ -40,7 +39,6 @@ Your response must be a valid JSON object like this:
 {{"is_relevant": true, "category": "finance_ai", "score": 8.2}}
 """
 
-
 def load_articles(path: str) -> List[Dict]:
     if not os.path.exists(path):
         return []
@@ -50,22 +48,20 @@ def load_articles(path: str) -> List[Dict]:
         except json.JSONDecodeError:
             raise RuntimeError(f"Invalid JSON in {path}")
 
-
 def classify_article(title: str, content: str) -> Dict:
     prompt = f"{PROMPT_TEMPLATE}\n\nTitle: {title}\n\nArticle Content:\n{content}"
     messages = [{"role": "system", "content": prompt}]
     try:
         resp = openai.chat.completions.create(model=MODEL_NAME, messages=messages)
     except Exception as exc:
-        print(f"❌ OpenAI API error: {exc}")
+        print(f"\u274c OpenAI API error: {exc}")
         return {"is_relevant": False, "category": "", "score": 0.0}
     text = resp.choices[0].message.content.strip()
     try:
         return json.loads(text)
     except json.JSONDecodeError:
-        print("❌ Failed to parse GPT response as JSON")
+        print("\u274c Failed to parse GPT response as JSON")
         return {"is_relevant": False, "category": "", "score": 0.0}
-
 
 def main() -> None:
     articles = load_articles(INPUT_FILE)
@@ -94,7 +90,6 @@ def main() -> None:
         with open(path, "w", encoding="utf-8") as f:
             json.dump(items, f, ensure_ascii=False, indent=2)
     print(f"Wrote {len(results)} articles with classifications to {OUTPUT_ALL_FILE}")
-
 
 if __name__ == "__main__":
     main()
