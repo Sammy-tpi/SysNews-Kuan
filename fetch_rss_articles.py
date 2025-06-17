@@ -10,6 +10,9 @@ from bs4 import BeautifulSoup
 CONFIG_FILE = "config/sources.json"
 OUTPUT_FILE = "data/rss_articles.json"
 
+# Limit how many articles to fetch from each RSS feed to avoid long runtimes
+MAX_ARTICLES_PER_FEED = 5
+
 
 def load_sources() -> List[Dict]:
     """Return list of all RSS sources from configuration."""
@@ -74,7 +77,7 @@ def fetch_rss_articles() -> List[Dict]:
         except Exception:
             print(f"\u26a0\ufe0f Failed to parse feed {url}")
             continue
-        for entry in feed.entries:
+        for entry in feed.entries[:MAX_ARTICLES_PER_FEED]:
             title = entry.get("title")
             link = entry.get("link")
             if not title or not link:
