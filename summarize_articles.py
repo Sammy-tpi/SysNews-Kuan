@@ -2,9 +2,12 @@ import json
 import os
 import math
 from typing import Dict, List, Tuple
+import logging
 
 import openai
 from dotenv import load_dotenv
+
+logging.basicConfig(level=logging.ERROR)
 
 # Read the top-scoring articles selected for summarization
 INPUT_FILE = "data/selected_articles.json"
@@ -61,8 +64,12 @@ Category: [Best-fit category from the list above]
     messages = [
         {"role": "system", "content": prompt}
     ]
-    response = openai.chat.completions.create(
-        model="gpt-4o", messages=messages)
+    try:
+        response = openai.chat.completions.create(
+            model="gpt-4o", messages=messages)
+    except Exception as exc:  # noqa: BLE001
+        logging.error("OpenAI API call failed: %s", exc)
+        return "", ""
     output = response.choices[0].message.content.strip()
 
     summary = ""
@@ -92,6 +99,8 @@ def main() -> None:
             continue
 
         summary_zh, gpt_category = gpt_summarize(title, body)
+        if not summary_zh or not gpt_category:
+            continue
         region = art.get('region') or parse_region(gpt_category)
         category = art.get('category') or gpt_category
 
