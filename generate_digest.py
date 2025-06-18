@@ -32,11 +32,16 @@ def generate_html(articles):
     }
 
     for article in global_articles + east_asian_articles:
+        # Log the raw category for debugging
+        print("Category:", article.get("category"))
+
         article["published_at"] = article.get("published_at") or article.get("read_time", "1 min read")
         article["url"] = article.get("url") or "#"
         article["source"] = article.get("source") or "Unknown"
         article["tags"] = article.get("tags") or ["General"]
-        article["category_display"] = CATEGORY_DISPLAY_NAME.get(article.get("category", ""), "Unknown Category")
+
+        cat = article.get("category", "unknown")
+        article["category_display"] = CATEGORY_DISPLAY_NAME.get(cat, cat)
 
     with open(TEMPLATE_FILE, "r", encoding="utf-8") as f:
         template = Template(f.read())
