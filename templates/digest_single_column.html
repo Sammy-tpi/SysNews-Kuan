@@ -18,7 +18,7 @@
     <!-- 🌍 Global Section -->
     <div style="background-color:#f9f9f6; padding:16px; border-radius:8px; margin-bottom:20px;">
     <h2 style="font-family:'Playfair Display', Georgia, 'Times New Roman', serif; font-weight:600; font-size:24px; margin:0 0 10px 0;">🌍 Global</h2>
-    {% for category, articles in global_articles|groupby('category') %}
+    {% for category, articles in global_articles|groupby('category_display') %}
       <h2 style="font-size: 18px; font-weight: 600; margin-top: 40px; font-family:'Playfair Display', Georgia, 'Times New Roman', serif;">
         {{ icons.get(category, '') }} {{ category }}
       </h2>
@@ -44,7 +44,7 @@
     <!-- 🌏 East Asia Section -->
     <div style="background-color:#f4f4f9; padding:16px; border-radius:8px; margin-bottom:20px;">
     <h2 style="font-family:'Playfair Display', Georgia, 'Times New Roman', serif; font-weight:600; font-size:24px; margin:0 0 10px 0;">🌏 East Asia</h2>
-    {% for category, articles in east_asian_articles|groupby('category') %}
+    {% for category, articles in east_asian_articles|groupby('category_display') %}
       <h2 style="font-size: 18px; font-weight: 600; margin-top: 40px; font-family:'Playfair Display', Georgia, 'Times New Roman', serif;">
         {{ icons.get(category, '') }} {{ category }}
       </h2>

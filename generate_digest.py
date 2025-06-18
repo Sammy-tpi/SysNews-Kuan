@@ -25,9 +25,18 @@ def generate_html(articles):
     global_articles = grouped.get("Global", [])
     east_asian_articles = grouped.get("East Asia", [])
 
+    CATEGORY_DISPLAY_NAME = {
+        "finance_ai": "Applied AI & Fintech",
+        "startup_ai": "General Tech & Startups",
+        "blockchain_ai": "Blockchain & Crypto",
+    }
+
     for article in global_articles + east_asian_articles:
-        if "published_at" not in article:
-            article["published_at"] = article.get("read_time", "")
+        article["published_at"] = article.get("published_at") or article.get("read_time", "1 min read")
+        article["url"] = article.get("url") or "#"
+        article["source"] = article.get("source") or "Unknown"
+        article["tags"] = article.get("tags") or ["General"]
+        article["category_display"] = CATEGORY_DISPLAY_NAME.get(article.get("category", ""), "Unknown Category")
 
     with open(TEMPLATE_FILE, "r", encoding="utf-8") as f:
         template = Template(f.read())
