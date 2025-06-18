@@ -35,7 +35,20 @@
     "publishedAt": "2025-06-17T09:00:33Z",
     "is_relevant": true,
     "category": "startup_ai",
-    "score": 8.5,
+    "score": 7.5,
+    "region": "East Asia"
+  },
+  {
+    "title": "主導權之爭成導火線，OpenAI 與微軟六年合作關係陷入危機",
+    "content": "《華爾街日報》報導，被譽為科技史上最成功合作的 OpenAI 與微軟關係正面臨前所未有的挑戰。近期雙方緊張局勢急劇升溫，核心爭議圍繞 OpenAI 轉型為營利性公司以及 Windsurf 收購案的智財權歸屬問題。\n知情人士透露，OpenAI高層近期考慮採取所謂「核選項」（nuclear option），公開指控微軟有反競爭行為，並尋求聯邦監管機構審查雙方合約是否違反反壟斷法。此舉可能徹底改變這段維持六年的合作關係。雖然雙方聯合聲明表示「會談仍在進行，對未來合作充滿信心」，但內部分歧顯然難以掩蓋。\nOpenAI以30億美元收購AI程式新創公司Windsurf的交易成為雙方矛盾的焦點。根據現有協議，微軟可存取OpenAI所有智財權，但OpenAI不願將Windsurf智財權交給微軟，因為這可能強化微軟自家的競爭產品GitHub Copilot。\n另一關鍵議題是OpenAI轉型為「公益公司」後的股權分配。微軟要求的股份比例遠超OpenAI願意給予的範圍。對OpenAI而言，這已是一場時間賽跑，若未能在年底前完成轉型，可能損失高達200億美元的融資。\n自2019年微軟首次投資10億美元以來，這段合作已讓雙方深度綁定。微軟擁有OpenAI軟體工具在Azure雲端平台的獨家銷售權和優先技術存取權，且本應是OpenAI唯一的運算資源供應商。然而，隨著雙方在聊天機器人和企業AI工具等領域轉為競爭對手，這種關係變得更加複雜。\n現在，OpenAI希望能與其他雲端服務供應商合作，擴大銷售管道和獲取更多運算資源。同時，微軟則希望在OpenAI達到「人工通用智慧」後仍能繼續存取其技術。\n近幾個月來，OpenAI已採取行動減少依賴微軟雲端服務。這些發展預示，曾經輝煌的AI合作關係可能快要出現重要的轉捩點。\n（首圖來源：達志影像）\n文章看完覺得有幫助，何不給我們一個鼓勵\n您的咖啡贊助將是讓我們持續走下去的動力\n從這裡可透過《Google 新聞》追蹤 TechNews\n科技新知，時時更新",
+    "url": "https://technews.tw/2025/06/17/the-cracks-in-the-openai-microsoft-relationship-are-reportedly-widening/",
+    "source": {
+      "name": "TechNews (台灣)"
+    },
+    "publishedAt": "2025-06-17T08:30:39Z",
+    "is_relevant": true,
+    "category": "startup_ai",
+    "score": 9.0,
     "region": "East Asia"
   }
 ]

@@ -1,142 +1,42 @@
 [
   {
+    "region": "Global",
+    "category": "Global – Applied AI & FinTech",
+    "title": "OpenAI’s $200M DoD contract could squeeze frenemy Microsoft",
+    "summary_zh": "OpenAI 宣布獲得美國國防部 (DoD) 的一份合同，該合同價值高達 2 億美元，目的是開發以 OpenAI 的前沿模組為基礎的原型系統，以支持行政任務和其他應用，如協助軍人獲取醫療服務、簡化數據管理及支持主動網絡安全防禦。這份合同體現了 OpenAI 與美國政府增強的合作關係，特別是與其重要投資者微軟之間緊張的關係。值得注意的是，OpenAI 的指南禁止個人用戶使用 ChatGPT 或其 API 開發或使用武器，這使得合同中提到的\"戰爭\"用途值得關注。這個舉措表明美國在AI（Artificial Intelligence）技術領域與中國競爭的緊迫性。",
+    "source": null,
+    "read_time": "1 min read",
+    "url": null,
+    "tags": []
+  },
+  {
+    "region": "Global",
+    "category": "Global – Applied AI & FinTech",
+    "title": "Facilitating Real-Time Transactions From Canada to the World: Zūm Rails Partners with Western Union",
+    "summary_zh": "根據最近的調查顯示，88%的加拿大人使用Interac電子轉賬(Interac e-Transfer)，在過去12個月內累計轉移了3380億美元。Zūm Rails與西聯匯款(Western Union)合作，將Zūm Rails的API整合到西聯的網絡，促使使用Interac電子轉賬的用戶能夠即時進行全球資金匯款。在金融業中，實時付款技術和數字體驗的興起，使得顧客期望在短時間內完成資金轉移。這項合作不僅支持了實時資金移動的需求，也促進了傳統金融機構與金融科技(FinTech)公司的加速發展。此合作有望提升跨境匯款服務的創新能力和客戶體驗。",
+    "source": null,
+    "read_time": "1 min read",
+    "url": null,
+    "tags": []
+  },
+  {
+    "region": "Global",
+    "category": "Global – Blockchain & Crypto",
+    "title": "EigenLayer Gets $70M From a16z to Launch Off-Chain Verifiability Platform",
+    "summary_zh": "EigenLayer 獲得 a16z 7000 萬美元的資金，計劃推出一個鏈下驗證平台。此平台旨在提高去中心化應用的效能和安全性，利用鏈外驗證技術減少區塊鏈的負擔。EigenLayer 的創新解決方案將區塊鏈 (Blockchain) 的性能與效能提升到新的高度，讓開發人員能更靈活地運用其資源。此外，這筆資金將用於擴展團隊以加速產品開發。",
+    "source": null,
+    "read_time": "1 min read",
+    "url": null,
+    "tags": []
+  },
+  {
     "region": "East Asia",
     "category": "East Asia – Applied AI & FinTech",
-    "title": "Mirai School of Technology Is Changing Engineering in India - Here's How Students Are Learning AI from Day One",
-    "summary_zh": "Mirai School of Technology（MSOT）在印度推出了一個革命性的工程教育計劃，讓學生從第一學期就開始構建人工智慧（AI, Artificial Intelligence）專案。該學校的學生學習使用編程語言，如Python、JavaScript和C++，從事實際專案，比如Netflix風格的推薦系統及醫療管理應用。從第二年開始，學生深入機器學習（Machine Learning）、自然語言處理（NLP, Natural Language Processing）及深度學習（Deep Learning）。學校配備了先進的AI工具，如GitHub Copilot和ChatGPT Plus，並提供實習機會，以幫助學生在真實環境中應用技能。畢業生不但在科技公司中獲得重大職位，他們還具備創業能力。預計到2026年，印度將需要超過100萬名AI專業人士，而MSOT致力於縮小目前51%的缺口。",
-    "source": "Sri Lanka Source",
+    "title": "Luo Yonghao’s digital avatar draws over 13 million viewers in AI-powered Baidu live commerce debut",
+    "summary_zh": "羅永浩的數位化身在百度的電子商務平台上首次進行直播，吸引了超過1300萬次觀看，並創造了超過5500萬人民幣的商品總成交額。透過這場直播，多個3C和食品產品類別的銷售數據均超過了羅永浩在5月以真人形象出現的數據，彰顯了AI（人工智慧）技術驅動的直播新高度。這次直播中出現了多個行業首創，包括首次由AI生成人偶代表一線中國網紅進行完整直播，及多個化身的互動，模擬真人動作和對話。此次AI系統使用了13000個知識項，生成了97000字的產品描述，並協調了8300多次人偶動作。",
+    "source": null,
     "read_time": "1 min read",
-    "url": "https://www.srilankasource.com/news/278284163/mirai-school-of-technology-is-changing-engineering-in-india-here-how-students-are-learning-ai-from-day-one",
-    "tags": []
-  },
-  {
-    "region": "Global",
-    "category": "Global – General Tech & Startups",
-    "title": "A comprehensive list of 2025 tech layoffs",
-    "summary_zh": "2025年科技行業的裁員情況持續，其中包括了AI（人工智慧）、區塊鏈（Blockchain）、FinTech（金融科技）等公司。根據Layoffs.fyi的數據，去年有超過150,000名員工面臨裁員。今年迄今為止，超過22,000名技術產業員工遭到裁減，尤其是2月份就有16,084人的大規模裁員。報導中還指出，隨著企業越來越多地接受AI（人工智慧）和自動化，裁員追蹤器提醒人們裁員對人的影響，以及創新何以影響人們的生活。該文章列出了一個全面的2025年技術裁員名單，並將定期更新。",
-    "source": "TechCrunch",
-    "read_time": "1 min read",
-    "url": "https://techcrunch.com/2025/06/16/tech-layoffs-2025-list/",
-    "tags": []
-  },
-  {
-    "region": "East Asia",
-    "category": "East Asia – General Tech & Startups",
-    "title": "Toyota’s China joint venture partners with Huawei and Xiaomi in EV push",
-    "summary_zh": "GAC Toyota是豐田（Toyota）與其中國合作夥伴廣汽的一家合資企業，最近宣布與華為（Huawei）和小米（Xiaomi）合作，將其技術整合到即將推出的電動車型中。這項合作旨在滿足中國消費者的期望，提供更多本地化產品。根據週四發布的聲明，豐田的Bozhi 7將成為首款使用華為HarmonyOS（華為的安卓作業系統代替品）以及小米硬體生態系統的中國製造全球汽車。這款電動轎車將配備華為的Drive One電動馬達及其數字鑰匙，可以與華為智慧手機配對。",
-    "source": "TechNode (動點科技)",
-    "read_time": "1 min read",
-    "url": "https://technode.com/2025/06/13/toyotas-china-joint-venture-partners-with-huawei-and-xiaomi-in-ev-push/",
-    "tags": []
-  },
-  {
-    "region": "East Asia",
-    "category": "East Asia – General Tech & Startups",
-    "title": "Huawei Pura 80 to debut dual focal-length periscope lens, explores continuous optical zoom",
-    "summary_zh": "華為即將推出的 Pura 80 系列智慧手機將配備一種新的雙焦距潛望鏡鏡頭(dual focal-length periscope lens)。該設計利用折疊光學結構和活動部件在兩個不同的光學焦距之間切換。儘管切換並不完美，因為需要使用軟件填補中間差距，但華為正在測試真正的連續光學變焦(true continuous optical zoom)。與傳統變焦系統相比，連續光學變焦能在各種放大倍率下提供更一致的圖像質量、色彩準確性和白平衡。目前，其他中國大型品牌如 Oppo 和 Vivo 也在探索這種新一代變焦技術。",
-    "source": "TechNode (動點科技)",
-    "read_time": "1 min read",
-    "url": "https://technode.com/2025/06/09/huawei-pura-80-to-debut-dual-focal-length-periscope-lens-explores-continuous-optical-zoom/",
-    "tags": []
-  },
-  {
-    "region": "Global",
-    "category": "Global – General Tech & Startups",
-    "title": "Opinion: Space startups are pivoting to defence. That’s great for innovation",
-    "summary_zh": "近年來，太空新創公司逐漸轉向國防投資以應對地緣政治變化，例如持續的烏克蘭衝突。這種轉變將對航太和深科技創新產生積極影響，國防投資為太空技術的研發注入新活力，包括光學通信、地球觀測和合成孔徑雷達(SAR, Synthetic Aperture Radar)。雖然轉向國防市場帶來挑戰，例如延遲付款和嚴格的出口控制，但成功的公司能夠在間商及國防市場間找到平衡，享有多元收益流。這將使太空產業邁入新的黃金時代，並促進全球科技的長期進步。",
-    "source": "The Next Web (TNW)",
-    "read_time": "1 min read",
-    "url": "https://thenextweb.com/news/space-startups-defence-tech-pivot",
-    "tags": []
-  },
-  {
-    "region": "Global",
-    "category": "Global – General Tech & Startups",
-    "title": "Live selling: the next big hustle sweeping Europe",
-    "summary_zh": "在歐洲，以直播形式的銷售（Live Selling）正在迅速崛起，這種模式使得小型零售商及獨立轉售商能快速吸引買家並實現銷售增長。Whatnot是一個加州創立的購物應用程式，專注於即時互動式的視訊拍賣，最近已經在英國、歐洲及北美取得顯著增長。今年，Whatnot進行了總額2.65億美元的募資，使其估值達到近50億美元。與傳統的電子商務相比，直播銷售氛圍更為社交，且能提供即時滿足感，這吸引了不少買家和賣家參與。此外，像Bambuser等公司也意識到直播和可購買的視頻內容正成為品牌和消費者之間的重要互動渠道。",
-    "source": "The Next Web (TNW)",
-    "read_time": "1 min read",
-    "url": "https://thenextweb.com/news/live-selling-europe-side-hustle",
-    "tags": []
-  },
-  {
-    "region": "Global",
-    "category": "Global – Applied AI & FinTech",
-    "title": "Apple Announces iOS 26 With Liquid Glass Design, And AI Features At WWDC 2025",
-    "summary_zh": "在2025年WWDC的會議中，Apple正式推出了iOS 26，這是一個重大的iPhone更新。iOS 26引入了名為「液態玻璃」（Liquid Glass）的新設計，具有透亮的玻璃外觀，提升了個性化和動態調整。Apple還透過其生成式AI（人工智慧）（AI）系統——Apple Intelligence引入了多項強化功能，例如支援即時多語言溝通的即時翻譯（Live Translation）及和ChatGPT整合以便進行情境感知操作。iOS 26還為開發者提供了新的基礎模型（Foundation Models）結構，使其能在設備上直接存取AI能力。",
-    "source": "Ubergizmo",
-    "read_time": "1 min read",
-    "url": "https://www.ubergizmo.com/2025/06/apple-ios-26/",
-    "tags": []
-  },
-  {
-    "region": "Global",
-    "category": "Global – Applied AI & FinTech",
-    "title": "WhatsApp Now Allows Users Forwarding Media To Meta AI For Analysis",
-    "summary_zh": "WhatsApp推出一項新功能，允許用戶將照片、視頻和文本轉發給Meta AI（人工智慧），以便進行內容分析。此功能最初在Android版本2.25.18.8的beta版本中釋出，並逐步向部分穩定用戶開放。這項技術可以分析轉發的內容，像是識別照片拍攝地點、描述圖像、交叉參考數據，甚至驗證病毒視頻的真實性。此功能旨在增強用戶快速獲取媒體內容見解的能力，同時具有潛在的反虛假信息效益。用戶共享的所有數據在傳輸過程中均為端對端加密，並在處理後從雲端伺服器中刪除。",
-    "source": "Ubergizmo",
-    "read_time": "1 min read",
-    "url": "https://www.ubergizmo.com/2025/06/whatsapp-forwarding-meta-ai/",
-    "tags": []
-  },
-  {
-    "region": "Global",
-    "category": "Global – General Tech & Startups",
-    "title": "iOS 26: Enhancements Coming To Native Apps Including Messages, Music, Notes, And CarPlay",
-    "summary_zh": "蘋果預計在2025年WWDC上發佈iOS 26，此次更新包括多個原生應用的改進，例如Messages、Apple Music、Notes和CarPlay。更新將配合iOS 26的新設計和Apple的人工智慧框架（AI framework），增強用戶體驗。Messages應用將引入兩個新功能，Apple Music則會在鎖屏上顯示動態專輯封面，增強視覺效果。此外，Notes應用將支持Markdown文件，CarPlay則有界面更新。這些改動旨在提升可用性，並與蘋果的AI和設計目標無縫整合。雖然是小幅改進，但可提升用戶對更智能和視覺一致性體驗的需求。",
-    "source": "Ubergizmo",
-    "read_time": "1 min read",
-    "url": "https://www.ubergizmo.com/2025/06/ios-26-enhancements/",
-    "tags": []
-  },
-  {
-    "region": "Global",
-    "category": "Global – Applied AI & FinTech",
-    "title": "GMail Introduces AI Summaries By Default On Android And iOS",
-    "summary_zh": "Google在Android和iOS的GMail應用程式中推出了自動AI（Artificial Intelligence）生成的電子郵件摘要，這標誌著從選用的功能到標準工具的轉變。此功能由Gemini助理根據對話的結構和內容自動判斷需要生成摘要的郵件，並以簡明的要點形式呈現。此更新目前僅限於Google Workspace用戶、訂閱Google One AI Premium計劃的用戶和使用Gemini Education附加功能的用戶。此特徵由大型語言模型（Large Language Models）驅動，能夠根據電子郵件內容生成摘要，並可能使用匿名數據來改善AI系統。",
-    "source": "Ubergizmo",
-    "read_time": "1 min read",
-    "url": "https://www.ubergizmo.com/2025/06/gmail-ai-summaries-by-default/",
-    "tags": []
-  },
-  {
-    "region": "Global",
-    "category": "Global – Applied AI & FinTech",
-    "title": "One In Four European Firms Ban Grok AI Chatbot Over Security Concerns",
-    "summary_zh": "根據網路安全公司Netskope的一份報告，25%的歐洲企業因安全性問題封禁了Elon Musk創建的生成式人工智慧(AI)聊天機器人Grok。相比之下，OpenAI的ChatGPT和Google的Gemini分別僅被9.8%和9.2%的歐洲企業封鎖。Grok因為傳播錯誤資訊而受到批評，例如“南非白人滅絕”的虛假敘述以及與大屠殺有關的可疑言論，促使許多公司轉向更安全的替代品。報告顯示，91%的歐洲企業現在使用基於雲端的生成式AI聊天機器人，但不同工具因授權、透明度或隱私問題而面臨抵制，其中英國Stability AI開發的Stable Diffusion被41%的企業封禁。",
-    "source": "Ubergizmo",
-    "read_time": "1 min read",
-    "url": "https://www.ubergizmo.com/2025/05/european-firms-ban-grok/",
-    "tags": []
-  },
-  {
-    "region": "Global",
-    "category": "Global – Applied AI & FinTech",
-    "title": "Google Announces AI Ultra Subscription Plan With Premium Features",
-    "summary_zh": "在最新的 Google I/O 大會上，Google 宣布了 AI Ultra，一項新的高端訂閱計劃。AI Ultra 並不是一個新的人工智慧（AI, Artificial Intelligence）模型，而是一個高階服務套件，提供進階功能和對 Google AI 工具和平台的增強訪問。此計劃針對對 Google 先進工具有需求的高端用戶，包含如 Gemini AI 模型的增強版，以及提早進入新技術如 Veo 3 視頻生成平台的機會。此計劃月費為 249.99 美元，現僅限於美國，Google 計劃將其拓展至其他國家。此外，訂閱還包括 YouTube Premium，以及在 Google Workspace 應用程式中整合的 Gemini 功能。",
-    "source": "Ubergizmo",
-    "read_time": "1 min read",
-    "url": "https://www.ubergizmo.com/2025/05/google-announces-ai-ultra/",
-    "tags": []
-  },
-  {
-    "region": "Global",
-    "category": "Global – Applied AI & FinTech",
-    "title": "Windows 11 Introduces AI Actions In File Explorer For Enhanced Productivity",
-    "summary_zh": "微軟正在測試一個全新的人工智慧（AI，Artificial Intelligence）功能於 Windows 11 的檔案總管（File Explorer），旨在簡化如摘要文件和編輯圖像等常見任務。此功能目前針對 Windows Insider 計畫的開發者和 Beta 頻道用戶推出，並作為整體 AI 整合至操作系統的一部分。使用者現可在檔案上右鍵點擊，以使用這些 AI 驅動的選項，如透過 Microsoft Copilot 和 Paint 或 Photos 應用，進行圖像編輯或文本文件的摘要。這項更新也是微軟將智能功能更深植入操作系統以提升使用者生產力的策略之一。",
-    "source": "Ubergizmo",
-    "read_time": "1 min read",
-    "url": "https://www.ubergizmo.com/2025/05/windows-11-ai-actions/",
-    "tags": []
-  },
-  {
-    "region": "Global",
-    "category": "Global – Applied AI & FinTech",
-    "title": "Google Reveals Android XR And Gemini Integration At I/O 2025",
-    "summary_zh": "在2025年的Google I/O開發者大會上，Google 揭露了將Gemini AI（人工智慧）整合到專為延伸實境（XR，Extended Reality）環境設計的Android XR操作系統的計畫。此舉顯示了Google對擴增實境（AR，Augmented Reality）和虛擬實境（VR，Virtual Reality）未來發展的承諾。它旨在透過Gemini的生成式AI為用戶提供即時資訊、任務幫助和情境支持，令用戶界面更智能且主動，減少對手動輸入的需求。一個主要優勢是可實現的免手動操作體驗，同時與眼鏡品牌合作以打造功能性與時尚兼備的智能眼鏡。",
-    "source": "Ubergizmo",
-    "read_time": "1 min read",
-    "url": "https://www.ubergizmo.com/2025/05/google-reveals-android-xr/",
+    "url": null,
     "tags": []
   }
 ]
