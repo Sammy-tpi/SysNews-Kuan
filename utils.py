@@ -1,4 +1,5 @@
 import json
+import re
 from typing import List
 
 
@@ -9,9 +10,19 @@ def load_keywords():
 
 
 def keyword_score(article_text: str, keywords: List[str]) -> int:
-    """Return how many keywords appear in the given text (case-insensitive)."""
+    """Return the total number of keyword hits in ``article_text``."""
+
     lowered = article_text.lower()
-    return sum(1 for kw in keywords if kw.lower() in lowered)
+    score = 0
+    for kw in keywords:
+        kw_lower = kw.lower()
+        # English keywords use word boundaries but allow hyphenated forms
+        if re.search(r"[a-zA-Z0-9]", kw_lower):
+            pattern = rf"\b{re.escape(kw_lower)}(?!\w)"
+        else:
+            pattern = re.escape(kw_lower)
+        score += len(re.findall(pattern, lowered))
+    return score
 
 
 def source_weight(source_name: str) -> int:
