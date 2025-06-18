@@ -5,7 +5,8 @@ from typing import Dict, List, Tuple
 import openai
 from dotenv import load_dotenv
 
-INPUT_FILE = "data/recent_articles.json"
+# Read the top-scoring articles selected for summarization
+INPUT_FILE = "data/selected_articles.json"
 OUTPUT_FILE = "data/news_data.json"
 
 load_dotenv()
@@ -16,17 +17,14 @@ if not openai.api_key:
 
 
 def load_articles() -> List[Dict]:
-    """Load raw articles from NewsAPI.ai and RSS sources."""
-    articles: List[Dict] = []
-    for path in (NEWSAPI_INPUT_FILE, RSS_INPUT_FILE):
-        if not os.path.exists(path):
-            continue
-        with open(path, "r", encoding="utf-8") as f:
-            try:
-                articles.extend(json.load(f))
-            except json.JSONDecodeError:
-                raise RuntimeError(f"Invalid JSON in {path}")
-    return articles
+    """Load the pre-selected top articles."""
+    if not os.path.exists(INPUT_FILE):
+        return []
+    with open(INPUT_FILE, "r", encoding="utf-8") as f:
+        try:
+            return json.load(f)
+        except json.JSONDecodeError:
+            raise RuntimeError(f"Invalid JSON in {INPUT_FILE}")
 
 
 def gpt_summarize(title: str, body: str) -> Tuple[str, str]:
