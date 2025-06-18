@@ -1,3 +1,24 @@
-.venv/
-__pycache__/
+# 忽略不必要的檔案和目錄
+# 🗂️ Python 檔案
+# 🧪 自動產出的資料檔案
+data/classified_articles.json
+data/news_data.json
+data/newsapi_ai_articles.json
+data/recent_articles.json
+data/rss_articles.json
+data/selected_articles.json
+data/source_data.json
+
+# 🗂 每日分類輸出（若不追蹤每日變動）
+data/categorized/*.json
+
+# 📬 Email digest HTML
+digest.html
+
+# 🔐 本機機密
 .env
+
+# 🐍 Python 快取
+__pycache__/
+*.pyc
+
