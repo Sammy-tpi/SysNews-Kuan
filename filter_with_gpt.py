@@ -29,6 +29,9 @@ Each day, we receive many news articles. You are given the **title and full cont
 1. Decide if the article is relevant to any of the three categories (startup_ai / finance_ai / blockchain_ai)
 2. Assign the correct category
 3. Give the article a score from 1.0 to 10.0 based on how valuable it is for business insights
+4. Classify the article's region:
+   - "East Asia" if it focuses on Taiwan, China, Japan, Korea, or Hong Kong
+   - "Global" for all other regions
 
 Please use the following criteria to evaluate **relevance and value**:
 - Does the article report a new product, feature, or strategic move involving AI in one of the three domains?
@@ -37,7 +40,7 @@ Please use the following criteria to evaluate **relevance and value**:
 - Is it specific (not just abstract tech talk), from a credible source, and related to East Asia or global markets?
 
 Your response must be a valid JSON object like this. Return **only** the JSON object with no additional text:
-{{"is_relevant": true, "category": "finance_ai", "score": 8.2}}
+{{"is_relevant": true, "category": "finance_ai", "score": 8.2, "region": "East Asia"}}
 """
 
 def load_articles(path: str) -> List[Dict]:
@@ -61,7 +64,7 @@ def _parse_response(text: str) -> Dict:
             except json.JSONDecodeError:
                 pass
     print("\u274c Failed to parse GPT response as JSON")
-    return {"is_relevant": False, "category": "", "score": 0.0}
+    return {"is_relevant": False, "category": "", "score": 0.0, "region": "Global"}
 
 
 def classify_article(title: str, content: str) -> Dict:
@@ -76,7 +79,7 @@ def classify_article(title: str, content: str) -> Dict:
         )
     except Exception as exc:
         print(f"\u274c OpenAI API error: {exc}")
-        return {"is_relevant": False, "category": "", "score": 0.0}
+        return {"is_relevant": False, "category": "", "score": 0.0, "region": "Global"}
 
     text = resp.choices[0].message.content.strip()
     return _parse_response(text)
@@ -85,7 +88,10 @@ def main() -> None:
     articles = load_articles(INPUT_FILE)
     os.makedirs(CATEGORY_DIR, exist_ok=True)
 
-    categorized = {"startup_ai": [], "finance_ai": [], "blockchain_ai": []}
+    grouped = {
+        "Global": {"startup_ai": [], "finance_ai": [], "blockchain_ai": []},
+        "East Asia": {"startup_ai": [], "finance_ai": [], "blockchain_ai": []},
+    }
     results: List[Dict] = []
 
     for art in articles:
@@ -98,15 +104,18 @@ def main() -> None:
         results.append(art)
         if result.get("is_relevant"):
             cat = result.get("category")
-            if cat in categorized:
-                categorized[cat].append(art)
+            region = result.get("region", "Global")
+            if region in grouped and cat in grouped[region]:
+                grouped[region][cat].append(art)
 
     with open(OUTPUT_ALL_FILE, "w", encoding="utf-8") as f:
         json.dump(results, f, ensure_ascii=False, indent=2)
-    for cat, items in categorized.items():
-        path = os.path.join(CATEGORY_DIR, f"{cat}.json")
-        with open(path, "w", encoding="utf-8") as f:
-            json.dump(items, f, ensure_ascii=False, indent=2)
+    for region, cats in grouped.items():
+        for cat, items in cats.items():
+            filename = f"{region.lower()}_{cat}.json"
+            path = os.path.join(CATEGORY_DIR, filename)
+            with open(path, "w", encoding="utf-8") as f:
+                json.dump(items, f, ensure_ascii=False, indent=2)
     print(f"Wrote {len(results)} articles with classifications to {OUTPUT_ALL_FILE}")
 
 if __name__ == "__main__":
