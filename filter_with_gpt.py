@@ -17,16 +17,19 @@ MODEL_NAME = os.getenv("OPENAI_MODEL", "gpt-4o")
 if not openai.api_key:
     raise RuntimeError("Missing OPENAI_API_KEY in environment")
 
-PROMPT_TEMPLATE = """You are an AI news filter.You are an AI-powered news analyst working for TPIsoftware, a Taiwan-based software company specializing in enterprise solutions, AI development, and financial technologies.
+PROMPT_TEMPLATE = """You are an AI news filter.You are an AI-powered news analyst working for TPIsoftware, a Taiwan-based software company specializing in enterprise solutions, AI development, and financial technologies.Each day, we receive dozens of news articles in any languages. You are given the **title** and **full content** of each article.
 
-Your job is to help our internal AI team and product managers stay updated on the most relevant global trends by selecting and scoring news articles in three focus areas:
-- startup_ai: startups that use or build AI-based products and services
-- finance_ai: the use of AI in banking, insurance, fintech, or digital finance transformation
-- blockchain_ai: the use of blockchain, DeFi, Web3, or crypto projects that relate to AI or intelligent automation
+1. Determine if the article is relevant to any of the following 3 categories:
 
-Each day, we receive many news articles. You are given the **title and full content** of each article. Your task is to:
+- 🔹 startup_ai: News about startups using or building AI-driven products or services (e.g. product launches, fundraising, acquisitions, accelerator programs).  
+  Keywords: generative AI, AI SaaS, AI-powered tools, VC-backed startups, AI apps, AI marketplace.
 
-1. Decide if the article is relevant to any of the three categories (startup_ai / finance_ai / blockchain_ai)
+- 🔹 finance_ai: Applications of AI in banking, insurance, payment, risk control, fraud detection, personal finance, robo-advisors, digital transformation.  
+  Keywords: FinTech, KYC/AML AI, fraud detection, RPA, AI in credit scoring, algorithmic trading.
+
+- 🔹 blockchain_ai: Blockchain/Web3/Crypto projects that relate to AI, automation, or intelligent agents.  
+  Keywords: AI+DeFi, smart contracts, on-chain analytics, AI DAOs, NFT + AI, decentralized AI protocols.
+
 2. Assign the correct category
 3. Give the article a score from 1.0 to 10.0 based on how valuable it is for business insights
 4. Classify the article's region:

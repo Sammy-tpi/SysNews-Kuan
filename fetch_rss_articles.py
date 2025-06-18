@@ -31,8 +31,8 @@ def load_sources() -> List[Dict]:
     
     # ✅ 改成讀 "rss_sources"
     rss_sources = [s for s in data.get("rss_sources", []) if s.get("source_type") == "rss"]
-    rsshub_sources = [s for s in data.get("rsshub_sources", []) if s.get("source_type") == "rsshub"]
-    return rss_sources + rsshub_sources
+    # rsshub_sources = [s for s in data.get("rsshub_sources", []) if s.get("source_type") == "rsshub"]
+    return rss_sources #+ rsshub_sources
 
 
 
@@ -97,7 +97,7 @@ async def process_feed_async(
             continue
         # Skip articles whose title doesn't match any keywords
         if keyword_score(title, keywords) == 0:
-            continue
+           continue
         entries.append(entry)
         tasks.append(fetch_full_text_async(link, session))
     if not tasks:
@@ -133,7 +133,7 @@ async def fetch_rss_articles_async() -> List[Dict]:
         for art in batch:
             text = f"{art.get('title', '')} {art.get('content', '')}"
             if keyword_score(text, all_keywords) > 0:
-                articles.append(art)
+               articles.append(art)
     return articles
 
 

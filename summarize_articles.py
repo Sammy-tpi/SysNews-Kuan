@@ -37,9 +37,27 @@ def gpt_summarize(title: str, body: str) -> Tuple[str, str]:
     prompt = f'''
 You are a bilingual AI assistant helping summarize and classify news articles related to AI, FinTech, and emerging technology.
 
+You will receive full-text news articles in either English or Chinese, working for TPIsoftware, a Taiwan-based software company specializing in enterprise solutions, AI development, and financial technologies.
+ Your job is to:
+
+Summarize the article accurately in Traditional Chinese, without adding or inventing information.
+Preserve key technical terms and identify the correct topic and region based on the content.
+This system helps generate daily news digests focused on AI, FinTech, Blockchain, and related areas, with a clear structure that groups articles by region and topic.
+Use the definitions of categories below to help choose the most appropriate one. If the article doesn’t fit perfectly, choose the closest match.
+
 Task:
-1. Summarize the article in **Traditional Chinese** (4-5 sentences). Include key technical terms such as AI, FinTech, Blockchain, Machine Learning, NLP, etc. For each term, place its **original English term in parentheses** after the Traditional Chinese term.
-2. Classify the article into one of the following **6 fixed categories**. Return only the best-fitting one.
+Summarize the original article in Traditional Chinese, limited to 4 concise sentences. Be accurate and do not invent or infer any information not explicitly stated in the article.
+If technical terms are mentioned (such as Artificial Intelligence (AI), FinTech, Blockchain, Machine Learning, Natural Language Processing (NLP), etc.), include the English term in parentheses after the Traditional Chinese term.
+Avoid redundant wording and repetition. The summary should be clear and precise.
+Classify the article into one of the following categories based on its content:
+If the article does not fit any of the categories, classify it as "General Tech & Startups".
+Be specific like the date and the company name; do not use generic terms like "the company" or "the startup".
+If the article is about a specific region, classify it under the corresponding regional category.
+If the article is about a global topic, classify it under the global category.
+If the article is about East Asia, classify it under the East Asia category.
+
+
+
 
 **Categories**:
 1. Global – General Tech & Startups  
