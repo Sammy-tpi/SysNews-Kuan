@@ -1,5 +1,6 @@
 import json
 import os
+import math
 from typing import Dict, List, Tuple
 
 import openai
@@ -101,13 +102,21 @@ def main() -> None:
         print("🈶 Summary:", summary_zh)
         print("-----")
 
+        src = art.get('source')
+        if isinstance(src, dict):
+            src = src.get('name')
+        source_name = src or 'Unknown Source'
+
+        word_count = len(body.split())
+        read_time_min = max(1, math.ceil(word_count / 200))
+
         summarized.append({
             'region': region,
             'category': category,
             'title': title,
             'summary_zh': summary_zh,
-            'source': art.get('source', {}).get('name'),
-            'read_time': '1 min read',
+            'source': source_name,
+            'read_time': f"{read_time_min} min read",
             'url': art.get('url'),
             'tags': []
         })

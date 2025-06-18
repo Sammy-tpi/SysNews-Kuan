@@ -1,4 +1,5 @@
 import json
+import math
 from datetime import datetime
 from jinja2 import Template
 
@@ -56,10 +57,19 @@ def generate_html(articles):
         # Log the raw category for debugging
         print("Category:", article.get("category"))
 
+        src = article.get("source")
+        if isinstance(src, dict):
+            src = src.get("name")
+        article["source"] = src or "Unknown Source"
+
+        if not article.get("read_time"):
+            content = article.get("content", "")
+            word_count = len(content.split())
+            article["read_time"] = f"{max(1, math.ceil(word_count / 200))} min read"
+
         article["published_at"] = article.get(
             "published_at") or article.get("read_time", "1 min read")
         article["url"] = article.get("url") or "#"
-        article["source"] = article.get("source") or "Unknown"
         article["tags"] = article.get("tags") or ["General"]
 
         cat_key = normalize(article.get("category", ""))
