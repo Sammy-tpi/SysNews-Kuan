@@ -57,9 +57,8 @@ def fetch_newsapi_ai_articles(keywords: List[str]) -> List[Dict]:
 
 def fetch_and_store() -> List[Dict]:
     """Fetch articles that match keywords and store them."""
-    keywords_cfg = load_keywords()
-    all_keywords = [kw for group in keywords_cfg.values() for kw in group]
-    return fetch_newsapi_ai_articles(all_keywords)
+    keywords = load_keywords()
+    return fetch_newsapi_ai_articles(keywords)
 
 
 def main() -> None:

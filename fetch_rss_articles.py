@@ -95,9 +95,6 @@ async def process_feed_async(
         link = entry.get("link")
         if not title or not link:
             continue
-        # Skip articles whose title doesn't match any keywords
-        if keyword_score(title, keywords) == 0:
-           continue
         entries.append(entry)
         tasks.append(fetch_full_text_async(link, session))
     if not tasks:
@@ -122,18 +119,17 @@ async def process_feed_async(
 
 async def fetch_rss_articles_async() -> List[Dict]:
     sources = load_sources()
-    keywords_cfg = load_keywords()
-    all_keywords = [kw for group in keywords_cfg.values() for kw in group]
+    keywords = load_keywords()
     async with aiohttp.ClientSession() as session:
         results = await asyncio.gather(
-            *(process_feed_async(src, session, all_keywords) for src in sources)
+            *(process_feed_async(src, session, keywords) for src in sources)
         )
     articles: List[Dict] = []
     for batch in results:
         for art in batch:
             text = f"{art.get('title', '')} {art.get('content', '')}"
-            if keyword_score(text, all_keywords) > 0:
-               articles.append(art)
+            if keyword_score(text, keywords) > 0:
+                articles.append(art)
     return articles
 
 

@@ -1,5 +1,5 @@
-[
-    
+{
+  "keywords": [
     "AI in banking", "金融 AI", "AI-powered trading", "AI 交易", "Algorithmic trading", "演算法交易",
     "Robo-advisor", "機器人理財", "Fraud detection", "詐欺偵測", "Risk assessment", "風險評估",
     "Credit scoring", "信用評分", "Automated underwriting", "自動核保", "Financial forecasting", "財務預測",
@@ -8,17 +8,16 @@
     "AI-driven asset management", "AI 資產管理", "AI-based compliance", "AI 合規管理", "AI risk models", "AI 風險模型",
     "AI-powered customer service", "AI 客服",
 
-    
     "AI startup", "AI 新創", "AI-driven innovation", "AI 創新", "AI-powered platform", "AI 平台",
     "AI accelerator", "AI 加速器", "Generative AI company", "生成式 AI 公司", "LLM startup", "大型語言模型新創",
     "AI entrepreneurship", "AI 創業", "AI funding", "AI 融資", "AI venture capital", "AI 創投",
     "AI product launch", "AI 產品發表", "AI ecosystem", "AI 生態系", "AI SaaS", "AI 軟體即服務",
     "AI-powered SaaS", "AI 雲端服務", "AI talent", "AI 人才", "AI disruption", "AI 顛覆",
 
-    
     "Blockchain AI", "區塊鏈 AI", "Crypto AI", "加密貨幣 AI", "AI-powered crypto trading", "AI 加密貨幣交易",
     "DeFi AI", "去中心化金融 AI", "AI in DeFi", "AI 應用於 DeFi", "Smart contract AI", "智能合約 AI",
     "AI blockchain integration", "AI 區塊鏈整合", "AI-driven NFT", "AI NFT", "AI for crypto compliance", "AI 加密合規",
     "Crypto fraud detection", "加密詐欺偵測", "AI in digital assets", "AI 數位資產", "AI-powered mining", "AI 礦業",
     "AI tokenization", "AI 代幣化", "CBDC AI", "數位貨幣 AI", "AI crypto analytics", "AI 加密分析"
-]
+  ]
+}

@@ -1,13 +1,11 @@
 import json
-from typing import Dict, List
-
-KEYWORDS_FILE = "config/keywords.json"
+from typing import List
 
 
-def load_keywords(path: str = KEYWORDS_FILE) -> Dict[str, List[str]]:
-    """Load keyword categories from a JSON file."""
-    with open(path, "r", encoding="utf-8") as f:
-        return json.load(f)
+def load_keywords():
+    """Return the flat keyword list."""
+    with open("config/keywords.json", "r", encoding="utf-8") as f:
+        return json.load(f)["keywords"]
 
 
 def keyword_score(article_text: str, keywords: List[str]) -> int:
