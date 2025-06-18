@@ -47,6 +47,9 @@ def main() -> None:
                 "category": top.get("category"),
                 "region": top.get("region"),
                 "score": top.get("score"),
+                "source": top.get("source"),
+                "url": top.get("url"),
+                "publishedAt": top.get("publishedAt"),
             }
         )
 

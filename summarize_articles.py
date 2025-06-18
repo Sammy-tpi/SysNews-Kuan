@@ -107,6 +107,8 @@ def main() -> None:
             src = src.get('name')
         source_name = src or 'Unknown Source'
 
+        published = art.get('publishedAt') or art.get('published_at')
+
         word_count = len(body.split())
         read_time_min = max(1, math.ceil(word_count / 200))
 
@@ -118,6 +120,7 @@ def main() -> None:
             'source': source_name,
             'read_time': f"{read_time_min} min read",
             'url': art.get('url'),
+            'published_at': published,
             'tags': []
         })
 
