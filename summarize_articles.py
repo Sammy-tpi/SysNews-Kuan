@@ -60,7 +60,8 @@ Category: [Best-fit category from the list above]
     messages = [
         {"role": "system", "content": prompt}
     ]
-    response = openai.chat.completions.create(model="gpt-4o", messages=messages)
+    response = openai.chat.completions.create(
+        model="gpt-4o", messages=messages)
     output = response.choices[0].message.content.strip()
 
     summary = ""
@@ -89,11 +90,14 @@ def main() -> None:
         if not title or not body:
             continue
 
-        summary_zh, category = gpt_summarize(title, body)
-        region = parse_region(category)
+        summary_zh, gpt_category = gpt_summarize(title, body)
+        region = art.get('region') or parse_region(gpt_category)
+        category = art.get('category') or gpt_category
 
         print("✅ Title:", title)
         print("📝 Category:", category)
+        if category != gpt_category:
+            print("🛈 GPT Suggested:", gpt_category)
         print("🈶 Summary:", summary_zh)
         print("-----")
 
