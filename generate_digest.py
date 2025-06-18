@@ -10,8 +10,18 @@ REGIONS = ["East Asia", "Global"]
 
 
 def load_articles(path: str):
-    with open(path, 'r', encoding='utf-8') as f:
-        return json.load(f)
+    """Load the news articles from ``path``.
+
+    Returns an empty list if the file does not exist. Raises ``RuntimeError`` if
+    the JSON is malformed.
+    """
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return []
+    except json.JSONDecodeError as e:
+        raise RuntimeError(f"Invalid JSON in {path}") from e
 
 
 def group_articles_by_region(articles):
