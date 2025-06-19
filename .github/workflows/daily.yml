@@ -1,0 +1,39 @@
+name: Daily Digest
+
+on:
+  schedule:
+    - cron: '0 1 * * *'
+  workflow_dispatch:
+
+jobs:
+  run-digest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run digest
+        env:
+          DIGEST_SENDER: ${{ secrets.DIGEST_SENDER }}
+          DIGEST_PASSWORD: ${{ secrets.DIGEST_PASSWORD }}
+          DIGEST_RECIPIENT: ${{ secrets.DIGEST_RECIPIENT }}
+          NEWSAPI_AI_KEY: ${{ secrets.NEWSAPI_AI_KEY }}
+          GNEWS_KEY: ${{ secrets.GNEWS_KEY }}
+        run: python main.py
+
+      - name: Commit changes
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add -A
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: update daily digest"
+            git push origin HEAD:main
+          fi
