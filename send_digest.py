@@ -5,47 +5,46 @@ from datetime import datetime
 from dotenv import load_dotenv
 from generate_digest import load_articles, generate_html
 
-# Load email credentials from environment variables
+# --- Load environment variables ---
 load_dotenv()
 SENDER = os.getenv("DIGEST_SENDER")
 PASSWORD = os.getenv("DIGEST_PASSWORD")
-RECIPIENT = os.getenv("DIGEST_RECIPIENT")
+RECIPIENTS_RAW = os.getenv("DIGEST_RECIPIENT", "")
+RECIPIENTS = [email.strip() for email in RECIPIENTS_RAW.split(",") if email.strip()]
 
-if not all([SENDER, PASSWORD, RECIPIENT]):
-    raise RuntimeError(
-        "Missing DIGEST_SENDER, DIGEST_PASSWORD or DIGEST_RECIPIENT in environment"
-    )
+if not all([SENDER, PASSWORD]) or not RECIPIENTS:
+    raise RuntimeError("❌ Missing sender, password, or recipient(s) in .env")
 
-# ✅ 正確的 JSON 檔案位置
+# --- JSON path ---
 JSON_PATH = "data/news_data.json"
 
 def main():
-    """Generate the digest HTML and email it."""
     articles = load_articles(JSON_PATH)
     html_content = generate_html(articles)
-
     date_str = datetime.now().strftime("%Y-%m-%d")
-    subject = f"📬 Polaris Daily Digest – {date_str}"
 
+    # --- Compose email ---
     msg = EmailMessage()
-    msg['Subject'] = subject
-    msg['From'] = SENDER
-    msg['To'] = RECIPIENT
-    msg.set_content('This email requires an HTML capable client.')
-    msg.add_alternative(html_content, subtype='html')
+    msg["Subject"] = f"📬 Polaris Daily Digest – {date_str}"
+    msg["From"] = SENDER
+    msg["To"] = ", ".join(RECIPIENTS)  # visible To: header
+    msg.set_content("This email requires an HTML-capable client.")
+    msg.add_alternative(html_content, subtype="html")
 
+    # --- Send email ---
     try:
         with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
             smtp.login(SENDER, PASSWORD)
-            smtp.send_message(msg)
-    except smtplib.SMTPAuthenticationError as exc:
-        raise RuntimeError(
-            "❌ Authentication failed. Double-check Gmail & app password."
-        ) from exc
+            # ✅ true recipient list here
+            smtp.sendmail(SENDER, RECIPIENTS, msg.as_string())
+
+    except smtplib.SMTPAuthenticationError:
+        raise RuntimeError("❌ Gmail authentication failed — check app password.")
     except Exception as exc:
         raise RuntimeError(f"❌ Failed to send email: {exc}") from exc
 
-    print("✅ Email sent.")
+    print("✅ Email sent to:", ", ".join(RECIPIENTS))
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()
