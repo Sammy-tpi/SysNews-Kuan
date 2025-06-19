@@ -12,12 +12,22 @@
   <style>
     .region-title {
       background-color: #F5F5F5;
-      padding: 10px 16px;
+      padding: 12px 20px;
       border-left: 6px solid #800020;
+      font-size: 24px;
+      font-weight: 800;
+      color: #2B2B2B;
+      font-family: 'Playfair Display', serif;
+      margin-top: 48px;
+    }
+
+    .section-subtitle {
       font-size: 20px;
-      font-weight: bold;
-      color: #333333;
-      margin-top: 40px;
+      font-weight: 700;
+      margin-top: 24px;
+      margin-bottom: 8px;
+      color: #3B2F2F;
+      font-family: 'Playfair Display', serif;
     }
     .article-title {
       font-family: 'Playfair Display', serif;
@@ -38,7 +48,7 @@
     <div style="background-color:#f9f9f6; padding:16px; border-radius:8px; margin-bottom:20px;">
     <h2 class="region-title">🌍 Global</h2>
     {% for category, articles in global_articles|groupby('category_display') %}
-      <h2 style="font-size: 18px; font-weight: 600; margin-top: 40px; font-family:'Playfair Display', Georgia, 'Times New Roman', serif;">
+      <h2 class="section-subtitle">
         {{ icons.get(category, '') }} {{ category }}
       </h2>
       {% for article in articles %}
@@ -58,7 +68,7 @@
     <div style="background-color:#f4f4f9; padding:16px; border-radius:8px; margin-bottom:20px;">
     <h2 class="region-title">🌏 East Asia</h2>
     {% for category, articles in east_asian_articles|groupby('category_display') %}
-      <h2 style="font-size: 18px; font-weight: 600; margin-top: 40px; font-family:'Playfair Display', Georgia, 'Times New Roman', serif;">
+      <h2 class="section-subtitle">
         {{ icons.get(category, '') }} {{ category }}
       </h2>
       {% for article in articles %}
