@@ -3,7 +3,7 @@ import sys
 import subprocess
 from datetime import datetime
 
-
+# Define all steps and expected output files
 STEPS = [
     ("fetch_newsapi_ai.py", "data/newsapi_ai_articles.json"),
     ("fetch_rss_articles.py", "data/rss_articles.json"),
@@ -27,16 +27,18 @@ def check_output_file(path: str) -> None:
 def run_step(index: int, script: str, output: str | None) -> None:
     print(f"🔧 [Step {index}] Running {script}...")
     try:
-        result = subprocess.run([sys.executable, script], check=True)
+        result = subprocess.run(
+            [sys.executable, script],
+            check=True,
+            env=os.environ.copy()  # ✅ pass all current environment variables
+        )
         if result.returncode == 0:
             print(f"✅ [Step {index}] {script} completed")
         else:
-            print(
-                f"❌ [Step {index}] {script} exited with code {result.returncode}"
-            )
+            print(f"❌ [Step {index}] {script} exited with code {result.returncode}")
     except subprocess.CalledProcessError as exc:
         print(f"❌ [Step {index}] {script} failed: {exc}")
-    except Exception as exc:  # noqa: BLE001
+    except Exception as exc:
         print(f"❌ [Step {index}] {script} error: {exc}")
     finally:
         check_output_file(output)
