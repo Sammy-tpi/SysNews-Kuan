@@ -36,7 +36,7 @@ def truncate_by_tokens(text: str, max_tokens: int = MAX_CONTENT_TOKENS) -> str:
 PROMPT_TEMPLATE = """You are an AI news filter.You are an AI-powered news analyst working for TPIsoftware, a Taiwan-based software company specializing in enterprise solutions, AI development, and financial technologies.Each day, we receive dozens of news articles in any languages. You are given the **title** and **full content** of each article.
 
 Only read as much content as you need to confidently classify the article.
-You do not need to read the full body.
+You do not need to read the full body in order to save tokens.
 
 1. Determine if the article is relevant to any of the following 3 categories:
 

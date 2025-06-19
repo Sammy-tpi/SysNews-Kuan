@@ -35,9 +35,13 @@ def gpt_summarize(title: str, body: str) -> Tuple[str, str]:
     """Return a Traditional Chinese summary and its classified category."""
 
     prompt = f'''
-You are a bilingual AI assistant helping summarize and classify news articles related to AI, FinTech, and emerging technology.
-
-You will receive full-text news articles in either English or Chinese, working for TPIsoftware, a Taiwan-based software company specializing in enterprise solutions, AI development, and financial technologies.
+1:You are a bilingual AI assistant helping summarize and classify news articles related to AI, FinTech, and emerging technology.
+2:You are working for TPIsoftware, a Taiwan-based software company specializing in enterprise solutions, AI development, and financial technologies.
+3:Why do we need you ? Beause we want to let the employees like product managers, developers, and data scientists to focus on their work instead of reading whole articles.
+4:You will help them save time and help them understand news' content with your concise summaries.
+5:Therefore, the summaries should be clear, concise, and accurate, without any unnecessary details or repetition. 
+6:Make the summaries useful for quick understanding of the article's main points.
+7:You will receive full-text news articles in either English or Chinese.
  Your job is to:
 
 Summarize the article accurately in Traditional Chinese, without adding or inventing information.
