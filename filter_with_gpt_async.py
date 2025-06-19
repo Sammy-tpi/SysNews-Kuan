@@ -6,6 +6,7 @@ from typing import Dict, List, Any
 
 import openai
 from dotenv import load_dotenv
+import tiktoken
 
 INPUT_FILE = "data/recent_articles.json"
 OUTPUT_ALL_FILE = "data/classified_articles.json"
@@ -19,6 +20,18 @@ async_client = openai.AsyncOpenAI(api_key=openai.api_key)
 
 if not openai.api_key:
     raise RuntimeError("Missing OPENAI_API_KEY in environment")
+
+# Limit the request size to avoid exceeding the model's context window
+MAX_CONTENT_TOKENS = 800
+
+
+def truncate_by_tokens(text: str, max_tokens: int = MAX_CONTENT_TOKENS) -> str:
+    """Return text truncated to the given token length."""
+    enc = tiktoken.encoding_for_model(MODEL_NAME)
+    tokens = enc.encode(text)
+    if len(tokens) <= max_tokens:
+        return text
+    return enc.decode(tokens[:max_tokens])
 
 PROMPT_TEMPLATE = """You are an AI news filter.You are an AI-powered news analyst working for TPIsoftware, a Taiwan-based software company specializing in enterprise solutions, AI development, and financial technologies.Each day, we receive dozens of news articles in any languages. You are given the **title** and **full content** of each article.
 
@@ -97,7 +110,7 @@ async def classify_article_async(article: Dict[str, Any]) -> Dict[str, Any] | No
     content = article.get("content") or article.get("description", "")
     if not title or not content:
         return None
-    short_content = content[:1200]
+    short_content = truncate_by_tokens(content)
     prompt = f"{PROMPT_TEMPLATE}\n\nTitle: {title}\n\nArticle Content:\n{short_content}"
     messages = [{"role": "system", "content": prompt}]
     params = {
@@ -105,6 +118,7 @@ async def classify_article_async(article: Dict[str, Any]) -> Dict[str, Any] | No
         "messages": messages,
         "response_format": {"type": "json_object"},
         "temperature": 0,
+        "max_tokens": 100,
     }
     async with semaphore:
         resp = await call_with_retry(async_client, **params)

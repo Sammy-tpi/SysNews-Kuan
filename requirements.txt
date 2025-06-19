@@ -6,3 +6,4 @@ openai
 feedparser
 beautifulsoup4
 aiohttp
+tiktoken
