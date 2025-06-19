@@ -1,6 +1,7 @@
 import json
 import os
 import re
+import asyncio
 from typing import Dict, List
 
 import openai
@@ -13,6 +14,7 @@ CATEGORY_DIR = "data/categorized"
 load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
 MODEL_NAME = os.getenv("OPENAI_MODEL", "gpt-4o")
+async_client = openai.AsyncOpenAI(api_key=openai.api_key)
 
 if not openai.api_key:
     raise RuntimeError("Missing OPENAI_API_KEY in environment")
@@ -70,11 +72,11 @@ def _parse_response(text: str) -> Dict:
     return {"is_relevant": False, "category": "", "score": 0.0, "region": "Global"}
 
 
-def classify_article(title: str, content: str) -> Dict:
+async def classify_article_async(title: str, content: str) -> Dict:
     prompt = f"{PROMPT_TEMPLATE}\n\nTitle: {title}\n\nArticle Content:\n{content}"
     messages = [{"role": "system", "content": prompt}]
     try:
-        resp = openai.chat.completions.create(
+        resp = await async_client.chat.completions.create(
             model=MODEL_NAME,
             messages=messages,
             response_format={"type": "json_object"},
@@ -87,7 +89,7 @@ def classify_article(title: str, content: str) -> Dict:
     text = resp.choices[0].message.content.strip()
     return _parse_response(text)
 
-def main() -> None:
+async def main_async() -> None:
     articles = load_articles(INPUT_FILE)
     os.makedirs(CATEGORY_DIR, exist_ok=True)
 
@@ -97,19 +99,26 @@ def main() -> None:
     }
     results: List[Dict] = []
 
+    tasks = []
+    valid_articles: List[Dict] = []
     for art in articles:
         title = art.get("title", "")
         content = art.get("content") or art.get("description", "")
         if not title or not content:
             continue
-        result = classify_article(title, content)
-        art.update(result)
-        results.append(art)
-        if result.get("is_relevant"):
-            cat = result.get("category")
-            region = result.get("region", "Global")
-            if region in grouped and cat in grouped[region]:
-                grouped[region][cat].append(art)
+        valid_articles.append(art)
+        tasks.append(classify_article_async(title, content))
+
+    if tasks:
+        responses = await asyncio.gather(*tasks)
+        for art, result in zip(valid_articles, responses):
+            art.update(result)
+            results.append(art)
+            if result.get("is_relevant"):
+                cat = result.get("category")
+                region = result.get("region", "Global")
+                if region in grouped and cat in grouped[region]:
+                    grouped[region][cat].append(art)
 
     with open(OUTPUT_ALL_FILE, "w", encoding="utf-8") as f:
         json.dump(results, f, ensure_ascii=False, indent=2)
@@ -119,7 +128,9 @@ def main() -> None:
             path = os.path.join(CATEGORY_DIR, filename)
             with open(path, "w", encoding="utf-8") as f:
                 json.dump(items, f, ensure_ascii=False, indent=2)
-    print(f"Wrote {len(results)} articles with classifications to {OUTPUT_ALL_FILE}")
+    print(
+        f"Wrote {len(results)} articles with classifications to {OUTPUT_ALL_FILE}"
+    )
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main_async())
