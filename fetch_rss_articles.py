@@ -29,7 +29,7 @@ def load_sources() -> List[Dict]:
         print(f"❌ Invalid JSON in {CONFIG_FILE}")
         return []
     
-    # ✅ 改成讀 "rss_sources"
+    # 改成讀 "rss_sources"
     rss_sources = [s for s in data.get("rss_sources", []) if s.get("source_type") == "rss"]
     # rsshub_sources = [s for s in data.get("rsshub_sources", []) if s.get("source_type") == "rsshub"]
     return rss_sources #+ rsshub_sources
