@@ -36,8 +36,7 @@ async_client = openai.AsyncOpenAI(api_key=openai.api_key)
 if not openai.api_key:
     raise RuntimeError("Missing OPENAI_API_KEY in environment")
 
-# Limit the request size to avoid exceeding the model's context window
-MAX_CONTENT_TOKENS = 800
+MAX_CONTENT_TOKENS = 800  # Limit for model context
 
 
 def truncate_by_tokens(text: str, max_tokens: int = MAX_CONTENT_TOKENS) -> str:
@@ -48,26 +47,37 @@ def truncate_by_tokens(text: str, max_tokens: int = MAX_CONTENT_TOKENS) -> str:
         return text
     return enc.decode(tokens[:max_tokens])
 
+
 PROMPT_TEMPLATE = """
-You are an AI-powered news classifier working for TPIsoftware, a Taiwan-based software company specializing in AI and financial technologies.
+You are a news classification AI assistant working for the AI Innovation Department at TPIsoftware, a Taiwan-based software company specializing in artificial intelligence, financial technology, and enterprise software solutions.
 
-Your goal is to analyze each article and output a JSON object describing its topic and geographic focus. Use **only** the exact labels provided below.
+Our team is building an internal news intelligence system to help product managers, researchers, and engineers stay updated on real-world applications of AI and emerging technologies across global and East Asian markets.
 
-Categories (choose the best fit):
+Your task is to analyze each article and assign:
+1. One category — the article’s primary topic
+2. One region — where the article is geographically focused
+
+Why this matters:
+Your classifications help us:
+- Identify real-world use cases of AI and FinTech
+- Track innovation across Asia and the world
+- Surface relevant news for internal strategy, product planning, and technical research
+
+Categories (choose one only):
 - General Tech & Startups
 - Applied AI & FinTech
 - Blockchain & Crypto
 
-Region options:
-- East Asia – Taiwan, China, Japan, Korea, Hong Kong
-- Global – all other regions
+Regions (choose one only):
+- East Asia — Taiwan, China, Japan, South Korea, or Hong Kong
+- Global — All other countries, or international/multinational coverage
 
-Return a JSON object like:
+Output format:
+Return a JSON object only, with no code block or explanation:
 {"category": "Applied AI & FinTech", "region": "East Asia"}
 
-Return only the JSON object with no additional commentary. Be consistent with the labels.
+Be strict. Use only the exact labels. Return nothing but the JSON.
 """
-
 
 
 def load_articles(path: str) -> List[Dict[str, Any]]:
@@ -81,7 +91,6 @@ def load_articles(path: str) -> List[Dict[str, Any]]:
 
 
 def _parse_response(text: str) -> Dict[str, Any]:
-    """Parse the JSON returned by GPT and normalize keys."""
     try:
         data = json.loads(text)
     except json.JSONDecodeError:
@@ -112,7 +121,7 @@ async def call_with_retry(client: openai.AsyncOpenAI, **kwargs: Any) -> Any:
             wait = 2 ** attempt
             print(f"Rate limit hit. Retry in {wait} sec...")
             await asyncio.sleep(wait)
-        except Exception as e:  # noqa: BLE001
+        except Exception as e:
             print("Other GPT error:", e)
             return None
     return None
@@ -132,7 +141,7 @@ async def classify_article_async(article: Dict[str, Any]) -> Dict[str, Any] | No
     params = {
         "model": MODEL_NAME,
         "messages": messages,
-        "response_format": {"type": "json_object"},
+        "response_format": "json",  # ✅ fixed
         "temperature": 0,
         "max_tokens": 100,
     }
@@ -176,15 +185,15 @@ async def main_async() -> None:
 
     with open(OUTPUT_ALL_FILE, "w", encoding="utf-8") as f:
         json.dump(results, f, ensure_ascii=False, indent=2)
+
     for region, cats in grouped.items():
         for cat, items in cats.items():
-            filename = f"{region.lower()}_{cat}.json"
+            filename = f"{region.lower()}_{cat.lower().replace(' ', '_').replace('&', 'and')}.json"
             path = os.path.join(CATEGORY_DIR, filename)
             with open(path, "w", encoding="utf-8") as f:
                 json.dump(items, f, ensure_ascii=False, indent=2)
-    print(
-        f"Wrote {len(results)} articles with classifications to {OUTPUT_ALL_FILE}"
-    )
+
+    print(f"Wrote {len(results)} articles with classifications to {OUTPUT_ALL_FILE}")
 
 
 if __name__ == "__main__":
