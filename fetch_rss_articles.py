@@ -33,18 +33,15 @@ def has_allowed_category(entry) -> bool:
 
 
 def should_keep_entry(entry, keywords) -> bool:
-    content = entry.get("title", "") + " " + entry.get("summary", "")
+    # 🚧 [Polaris Dev] Disabled keyword/category filtering for GPT/ML classification
+    return True
 
-    if entry.get("tags"):
-        return has_allowed_category(entry)
-
-    return keyword_score(content, keywords) > 0
 
 CONFIG_FILE = "config/sources.json"
 OUTPUT_FILE = "data/rss_articles.json"
 
 # Limit how many articles to fetch from each RSS feed to avoid long runtimes
-MAX_ARTICLES_PER_SOURCE =100
+MAX_ARTICLES_PER_SOURCE = 100
 
 
 def load_sources() -> List[Dict]:
@@ -58,12 +55,9 @@ def load_sources() -> List[Dict]:
     except json.JSONDecodeError:
         print(f"❌ Invalid JSON in {CONFIG_FILE}")
         return []
-    
-    # 改成讀 "rss_sources"
-    rss_sources = [s for s in data.get("rss_sources", []) if s.get("source_type") == "rss"]
-    # rsshub_sources = [s for s in data.get("rsshub_sources", []) if s.get("source_type") == "rsshub"]
-    return rss_sources #+ rsshub_sources
 
+    rss_sources = [s for s in data.get("rss_sources", []) if s.get("source_type") == "rss"]
+    return rss_sources
 
 
 def parse_timestamp(entry: dict) -> str:
@@ -118,14 +112,8 @@ async def process_feed_async(
         print(f"\u26a0\ufe0f Failed to fetch feed {url}")
         return []
     feed = feedparser.parse(feed_data)
-    filtered_entries: List[dict] = []
-    for entry in feed.entries[:MAX_ARTICLES_PER_SOURCE]:
-        title = entry.get("title")
-        link = entry.get("link")
-        if not title or not link:
-            continue
-        if should_keep_entry(entry, keywords):
-            filtered_entries.append(entry)
+    # 🚧 [Polaris Dev] Disabled keyword/category filtering for GPT/ML classification
+    filtered_entries: List[dict] = feed.entries[:MAX_ARTICLES_PER_SOURCE]
 
     tasks = [fetch_full_text_async(e.get("link"), session) for e in filtered_entries]
     if not tasks:
@@ -142,9 +130,8 @@ async def process_feed_async(
             "source": {"name": name},
             "publishedAt": parse_timestamp(entry),
         }
-        text = f"{article['title']} {article['content']}"
-        if keyword_score(text, keywords) > 0:
-            articles.append(article)
+        # 🚧 [Polaris Dev] Skip keyword_score filtering
+        articles.append(article)
     return articles
 
 
@@ -158,9 +145,8 @@ async def fetch_rss_articles_async() -> List[Dict]:
     articles: List[Dict] = []
     for batch in results:
         for art in batch:
-            text = f"{art.get('title', '')} {art.get('content', '')}"
-            if keyword_score(text, keywords) > 0:
-                articles.append(art)
+            # 🚧 [Polaris Dev] Skip keyword_score filtering
+            articles.append(art)
     return articles
 
 
