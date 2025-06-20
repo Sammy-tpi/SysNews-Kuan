@@ -10,6 +10,36 @@ import feedparser
 from bs4 import BeautifulSoup
 from utils import load_keywords, keyword_score
 
+ALLOWED_CATEGORIES = {
+    "tech",
+    "technology",
+    "ai",
+    "artificial intelligence",
+    "fintech",
+    "finance",
+    "startup",
+    "crypto",
+    "blockchain",
+    "business",
+}
+
+
+def has_allowed_category(entry) -> bool:
+    tags = entry.get("tags", [])
+    return any(
+        any(allowed in tag.get("term", "").lower() for allowed in ALLOWED_CATEGORIES)
+        for tag in tags
+    )
+
+
+def should_keep_entry(entry, keywords) -> bool:
+    content = entry.get("title", "") + " " + entry.get("summary", "")
+
+    if entry.get("tags"):
+        return has_allowed_category(entry)
+
+    return keyword_score(content, keywords) > 0
+
 CONFIG_FILE = "config/sources.json"
 OUTPUT_FILE = "data/rss_articles.json"
 
@@ -88,20 +118,21 @@ async def process_feed_async(
         print(f"\u26a0\ufe0f Failed to fetch feed {url}")
         return []
     feed = feedparser.parse(feed_data)
-    tasks = []
-    entries: List[dict] = []
+    filtered_entries: List[dict] = []
     for entry in feed.entries[:MAX_ARTICLES_PER_SOURCE]:
         title = entry.get("title")
         link = entry.get("link")
         if not title or not link:
             continue
-        entries.append(entry)
-        tasks.append(fetch_full_text_async(link, session))
+        if should_keep_entry(entry, keywords):
+            filtered_entries.append(entry)
+
+    tasks = [fetch_full_text_async(e.get("link"), session) for e in filtered_entries]
     if not tasks:
         return []
     contents = await asyncio.gather(*tasks)
     articles: List[Dict] = []
-    for entry, content in zip(entries, contents):
+    for entry, content in zip(filtered_entries, contents):
         if not content:
             continue
         article = {
