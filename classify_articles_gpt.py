@@ -36,7 +36,8 @@ async_client = openai.AsyncOpenAI(api_key=openai.api_key)
 if not openai.api_key:
     raise RuntimeError("Missing OPENAI_API_KEY in environment")
 
-MAX_CONTENT_TOKENS = 800  # Limit for model context
+# Limit the request size to avoid exceeding the model's context window
+MAX_CONTENT_TOKENS = 800
 
 
 def truncate_by_tokens(text: str, max_tokens: int = MAX_CONTENT_TOKENS) -> str:
@@ -47,36 +48,56 @@ def truncate_by_tokens(text: str, max_tokens: int = MAX_CONTENT_TOKENS) -> str:
         return text
     return enc.decode(tokens[:max_tokens])
 
-
 PROMPT_TEMPLATE = """
 You are a news classification AI assistant working for the AI Innovation Department at TPIsoftware, a Taiwan-based software company specializing in artificial intelligence, financial technology, and enterprise software solutions.
 
 Our team is building an internal news intelligence system to help product managers, researchers, and engineers stay updated on real-world applications of AI and emerging technologies across global and East Asian markets.
 
 Your task is to analyze each article and assign:
-1. One category — the article’s primary topic
-2. One region — where the article is geographically focused
+1. One **category** — the article’s primary topic
+2. One **region** — where the article is geographically focused
 
-Why this matters:
+---
+
+🎯 Why this matters:
 Your classifications help us:
 - Identify real-world use cases of AI and FinTech
 - Track innovation across Asia and the world
 - Surface relevant news for internal strategy, product planning, and technical research
 
-Categories (choose one only):
-- General Tech & Startups
-- Applied AI & FinTech
-- Blockchain & Crypto
+---
 
-Regions (choose one only):
-- East Asia — Taiwan, China, Japan, South Korea, or Hong Kong
-- Global — All other countries, or international/multinational coverage
+🧠 **Categories (choose one only):**
 
-Output format:
-Return a JSON object only, with no code block or explanation:
+- **General Tech & Startups**  
+  For news about general technology trends, enterprise tools, consumer apps, or startup activity not directly focused on AI, finance, or crypto.  
+  *Example: A startup launches a productivity tool or a SaaS company raises funding.*
+
+- **Applied AI & FinTech**  
+  For articles about practical uses of artificial intelligence or financial technology. Includes LLM applications, algorithmic trading, AI customer service, robo-advisors, fraud detection, etc.  
+  *Example: A bank uses a large language model to automate customer service.*
+
+- **Blockchain & Crypto**  
+  For content about crypto exchanges, smart contracts, Web3 infrastructure, blockchain applications in finance, or CBDCs.  
+  *Example: A government announces a pilot program for a digital currency.*
+
+---
+
+🌍 **Regions (choose one only):**
+
+- **East Asia**  
+  For news focused on Taiwan, China, Japan, South Korea, or Hong Kong.  
+  *This region is our strategic priority and we track its trends closely.*
+
+- **Global**  
+  For all other regions (e.g. U.S., Europe, India), or if the article discusses global tech trends, multinational initiatives, or broad international applications.
+
+---
+
+📤 **Output Format:**
+
+Return only a JSON object on a single line, with no formatting or explanation:
 {"category": "Applied AI & FinTech", "region": "East Asia"}
-
-Be strict. Use only the exact labels. Return nothing but the JSON.
 """
 
 
@@ -91,6 +112,7 @@ def load_articles(path: str) -> List[Dict[str, Any]]:
 
 
 def _parse_response(text: str) -> Dict[str, Any]:
+    """Parse the JSON returned by GPT and normalize keys."""
     try:
         data = json.loads(text)
     except json.JSONDecodeError:
@@ -121,7 +143,7 @@ async def call_with_retry(client: openai.AsyncOpenAI, **kwargs: Any) -> Any:
             wait = 2 ** attempt
             print(f"Rate limit hit. Retry in {wait} sec...")
             await asyncio.sleep(wait)
-        except Exception as e:
+        except Exception as e:  # noqa: BLE001
             print("Other GPT error:", e)
             return None
     return None
@@ -141,7 +163,7 @@ async def classify_article_async(article: Dict[str, Any]) -> Dict[str, Any] | No
     params = {
         "model": MODEL_NAME,
         "messages": messages,
-        "response_format": "json",  # ✅ fixed
+        "response_format": "json",  # ✅ FIXED
         "temperature": 0,
         "max_tokens": 100,
     }
@@ -185,15 +207,16 @@ async def main_async() -> None:
 
     with open(OUTPUT_ALL_FILE, "w", encoding="utf-8") as f:
         json.dump(results, f, ensure_ascii=False, indent=2)
-
     for region, cats in grouped.items():
         for cat, items in cats.items():
-            filename = f"{region.lower()}_{cat.lower().replace(' ', '_').replace('&', 'and')}.json"
+            safe_cat = cat.lower().replace(" ", "_").replace("&", "and")
+            filename = f"{region.lower()}_{safe_cat}.json"  # ✅ FIXED
             path = os.path.join(CATEGORY_DIR, filename)
             with open(path, "w", encoding="utf-8") as f:
                 json.dump(items, f, ensure_ascii=False, indent=2)
-
-    print(f"Wrote {len(results)} articles with classifications to {OUTPUT_ALL_FILE}")
+    print(
+        f"Wrote {len(results)} articles with classifications to {OUTPUT_ALL_FILE}"
+    )
 
 
 if __name__ == "__main__":
