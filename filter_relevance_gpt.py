@@ -38,11 +38,29 @@ def truncate_by_tokens(text: str, max_tokens: int = MAX_CONTENT_TOKENS) -> str:
     return enc.decode(tokens[:max_tokens])
 
 
-PROMPT_TEMPLATE = (
-    "You are an AI news filter working for TPIsoftware. "
-    "Decide if the following article is about AI, FinTech, or Blockchain. "
-    "Respond with JSON like {\"keep\": true} or {\"keep\": false}."
-)
+PROMPT_TEMPLATE = """
+You are an AI-powered news filter working at TPIsoftware, a software company based in Taiwan that specializes in AI development, enterprise platforms, and financial technologies.
+
+Each day, your job is to help the product and strategy teams scan hundreds of global and East Asian news articles and identify only the ones that are relevant to our company’s interests.
+
+We are specifically interested in news articles related to:
+
+- Artificial Intelligence (AI), including new applications, tools, models, or platforms.
+- Financial Technology (FinTech), such as digital banking, fraud detection, robo-advisors, AI in risk control or personal finance.
+- Blockchain and Crypto technologies, especially their use in automation, intelligent agents, or AI-enhanced Web3 projects.
+
+We **do not want** articles that are mainly about politics, lifestyle, sports, culture, general economy, or unrelated industries.
+
+Please focus on whether the article has any real connection to **AI, FinTech, or Blockchain innovation**, especially if it has product, funding, technical, or strategic value.
+
+Respond with a single JSON object like this:
+{ "keep": true }
+or
+{ "keep": false }
+
+Be strict: only return "keep": true if the article clearly touches on our areas of interest.
+"""
+
 
 
 def load_articles(path: str) -> List[Dict[str, Any]]:

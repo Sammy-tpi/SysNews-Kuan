@@ -40,35 +40,43 @@ def truncate_by_tokens(text: str, max_tokens: int = MAX_CONTENT_TOKENS) -> str:
         return text
     return enc.decode(tokens[:max_tokens])
 
-PROMPT_TEMPLATE = """You are an AI news filter.You are an AI-powered news analyst working for TPIsoftware, a Taiwan-based software company specializing in enterprise solutions, AI development, and financial technologies.Each day, we receive dozens of news articles in any languages. You are given the **title** and **full content** of each article.
+PROMPT_TEMPLATE = """
+You are an AI-powered news classifier working for TPIsoftware, a Taiwan-based software company specializing in AI development and financial technologies.
 
-Only read as much content as you need to confidently classify the article.
-You do not need to read the full body in order to save tokens.
+Your task is to analyze news articles and classify them for internal use by our AI and product teams.
 
-1. Determine if the article is relevant to any of the following 3 categories:
+For each article, perform the following steps:
 
-- 🔹 startup_ai: News about startups using or building AI-driven products or services (e.g. product launches, fundraising, acquisitions, accelerator programs).
-  Keywords: generative AI, AI SaaS, AI-powered tools, VC-backed startups, AI apps, AI marketplace.
-- 🔹 finance_ai: Applications of AI in banking, insurance, payment, risk control, fraud detection, personal finance, robo-advisors, digital transformation.
-  Keywords: FinTech, KYC/AML AI, fraud detection, RPA, AI in credit scoring, algorithmic trading.
-- 🔹 blockchain_ai: Blockchain/Web3/Crypto projects that relate to AI, automation, or intelligent agents.
-  Keywords: AI+DeFi, smart contracts, on-chain analytics, AI DAOs, NFT + AI, decentralized AI protocols.
+1. Determine if it belongs to one of these categories:
+   - startup_ai
+   - finance_ai
+   - blockchain_ai
 
-2. Assign the correct category
-3. Give the article a score from 1.0 to 10.0 based on how valuable it is for business insights
-4. Classify the article's region:
-   - "East Asia" if it focuses on Taiwan, China, Japan, Korea, or Hong Kong
-   - "Global" for all other regions
+2. Assign the appropriate category (if relevant)
+3. Score the article from 1.0 to 10.0 for business insight
+4. Label the region:
+   - East Asia: Taiwan, China, Japan, Korea, Hong Kong
+   - Global: all others
 
-Please use the following criteria to evaluate **relevance and value**:
-- Does the article report a new product, feature, or strategic move involving AI in one of the three domains?
-- Is there real business impact, like partnerships, launches, funding rounds, or policy changes?
-- Is the story recent, non-generic, and likely to inspire product or business ideas?
-- Is it specific (not just abstract tech talk), from a credible source, and related to East Asia or global markets?
+Only articles with real-world impact — product launches, strategies, investments, or regulatory moves — should be marked as relevant.
 
-Your response must be a valid JSON object like this. Return **only** the JSON object with no additional text:
+Here is a more detailed explanation of each category:
+
+startup_ai: News about startups that use or build AI as a core offering — including new product launches, venture capital funding, accelerator participation, or acquisitions. These startups are often building generative AI tools, SaaS platforms, or AI-powered apps. 
+We care about them because they could become future competitors, collaborators, or sources of inspiration for our product teams.
+
+finance_ai: News about how AI is applied to financial services — such as banking, insurance, personal finance, fraud detection, robo-advisors, or risk control. This includes applications like credit scoring, KYC/AML, underwriting, or financial document automation.
+We care because these use cases align closely with our clients’ needs and can help us identify valuable trends in AI adoption across FinTech.
+
+blockchain_ai: News that connects AI with blockchain, crypto, or Web3 applications. This includes smart contract optimization using AI, decentralized AI protocols, NFT analytics, and AI agents in DeFi.
+We care because AI + Web3 is an emerging space that could define future infrastructures for finance, identity, and automation.
+
+Respond with a JSON object like:
 {"is_relevant": true, "category": "finance_ai", "score": 8.2, "region": "East Asia"}
+
+Return only the JSON object with no additional explanation.
 """
+
 
 
 def load_articles(path: str) -> List[Dict[str, Any]]:
