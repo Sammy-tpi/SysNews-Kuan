@@ -29,7 +29,8 @@ NewsRender/
 ├── fetch_rss_articles.py      # Async RSS fetcher
 ├── fetch_newsapi_ai.py        # EventRegistry API fetcher
 ├── filter_articles_by_date.py # Keeps articles from the past 2 days
-├── filter_with_gpt.py         # Relevance + region/topic classification
+├── filter_relevance_gpt.py    # GPT-based topic relevance filter
+├── classify_articles_gpt.py   # Categorize, score, and label region
 ├── select_top_articles.py     # Pick top article for each region/category
 ├── summarize_articles.py      # Generate Traditional Chinese summaries
 ├── generate_digest.py         # Render HTML digest with Jinja2
@@ -73,12 +74,13 @@ This executes the following steps:
 1. `fetch_newsapi_ai.py` — Query EventRegistry for AI/FinTech articles.
 2. `fetch_rss_articles.py` — Async fetch from RSS/RSSHub sources using `config/sources.json`.
 3. `filter_articles_by_date.py` — Keep articles published in the last two days.
-4. `filter_with_gpt.py` — Classify topic, region, and score with OpenAI.
-5. `select_top_articles.py` — Pick top article per category and region.
-6. `summarize_articles.py` — Generate Traditional Chinese summaries.
-7. `validate_news_data.py` — Validate format and remove duplicates.
-8. `generate_digest.py` — Render `digest.html` using a clean Jinja2 template.
-9. `send_digest.py` — Email the digest via Gmail SMTP.
+4. `filter_relevance_gpt.py` — Remove articles unrelated to AI, FinTech, or Blockchain.
+5. `classify_articles_gpt.py` — Categorize, score, and tag the region.
+6. `select_top_articles.py` — Pick top article per category and region.
+7. `summarize_articles.py` — Generate Traditional Chinese summaries.
+8. `validate_news_data.py` — Validate format and remove duplicates.
+9. `generate_digest.py` — Render `digest.html` using a clean Jinja2 template.
+10. `send_digest.py` — Email the digest via Gmail SMTP.
 
 Intermediate results are stored in the `data/` folder.
 
