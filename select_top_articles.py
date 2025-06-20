@@ -6,12 +6,12 @@ CATEGORY_DIR = "data/categorized"
 OUTPUT_FILE = "data/selected_articles.json"
 
 FILES = [
-    "global_startup_ai.json",
-    "global_finance_ai.json",
-    "global_blockchain_ai.json",
-    "east asia_startup_ai.json",
-    "east asia_finance_ai.json",
-    "east asia_blockchain_ai.json",
+    "global_General Tech & Startups.json",
+    "global_Applied AI & FinTech.json",
+    "global_Blockchain & Crypto.json",
+    "east asia_General Tech & Startups.json",
+    "east asia_Applied AI & FinTech.json",
+    "east asia_Blockchain & Crypto.json",
 ]
 
 def load_json(path: str) -> List[Dict]:

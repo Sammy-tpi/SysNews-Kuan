@@ -1,8 +1,8 @@
 """Second-layer GPT classifier.
 
-This module runs after ``filter_relevance_gpt.py``. It categorizes
-the previously filtered articles, assigns a score, and labels the
-region. The results are stored for later summarization.
+This module runs after ``filter_relevance_gpt.py``. It assigns a
+human-readable category and region label to each article. The results
+are stored for later summarization.
 """
 
 import json
@@ -23,6 +23,14 @@ load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
 MODEL_NAME = os.getenv("OPENAI_MODEL", "gpt-4o")
 
+CATEGORIES = [
+    "General Tech & Startups",
+    "Applied AI & FinTech",
+    "Blockchain & Crypto",
+]
+
+REGIONS = ["Global", "East Asia"]
+
 async_client = openai.AsyncOpenAI(api_key=openai.api_key)
 
 if not openai.api_key:
@@ -41,40 +49,23 @@ def truncate_by_tokens(text: str, max_tokens: int = MAX_CONTENT_TOKENS) -> str:
     return enc.decode(tokens[:max_tokens])
 
 PROMPT_TEMPLATE = """
-You are an AI-powered news classifier working for TPIsoftware, a Taiwan-based software company specializing in AI development and financial technologies.
+You are an AI-powered news classifier working for TPIsoftware, a Taiwan-based software company specializing in AI and financial technologies.
 
-Your task is to analyze news articles and classify them for internal use by our AI and product teams.
+Your goal is to analyze each article and output a JSON object describing its topic and geographic focus. Use **only** the exact labels provided below.
 
-For each article, perform the following steps:
+Categories (choose the best fit):
+- General Tech & Startups
+- Applied AI & FinTech
+- Blockchain & Crypto
 
-1. Determine if it belongs to one of these categories:
-   - startup_ai
-   - finance_ai
-   - blockchain_ai
+Region options:
+- East Asia – Taiwan, China, Japan, Korea, Hong Kong
+- Global – all other regions
 
-2. Assign the appropriate category (if relevant)
-3. Score the article from 1.0 to 10.0 for business insight
-4. Label the region:
-   - East Asia: Taiwan, China, Japan, Korea, Hong Kong
-   - Global: all others
+Return a JSON object like:
+{"category": "Applied AI & FinTech", "region": "East Asia"}
 
-Only articles with real-world impact — product launches, strategies, investments, or regulatory moves — should be marked as relevant.
-
-Here is a more detailed explanation of each category:
-
-startup_ai: News about startups that use or build AI as a core offering — including new product launches, venture capital funding, accelerator participation, or acquisitions. These startups are often building generative AI tools, SaaS platforms, or AI-powered apps. 
-We care about them because they could become future competitors, collaborators, or sources of inspiration for our product teams.
-
-finance_ai: News about how AI is applied to financial services — such as banking, insurance, personal finance, fraud detection, robo-advisors, or risk control. This includes applications like credit scoring, KYC/AML, underwriting, or financial document automation.
-We care because these use cases align closely with our clients’ needs and can help us identify valuable trends in AI adoption across FinTech.
-
-blockchain_ai: News that connects AI with blockchain, crypto, or Web3 applications. This includes smart contract optimization using AI, decentralized AI protocols, NFT analytics, and AI agents in DeFi.
-We care because AI + Web3 is an emerging space that could define future infrastructures for finance, identity, and automation.
-
-Respond with a JSON object like:
-{"is_relevant": true, "category": "finance_ai", "score": 8.2, "region": "East Asia"}
-
-Return only the JSON object with no additional explanation.
+Return only the JSON object with no additional commentary. Be consistent with the labels.
 """
 
 
@@ -90,17 +81,27 @@ def load_articles(path: str) -> List[Dict[str, Any]]:
 
 
 def _parse_response(text: str) -> Dict[str, Any]:
+    """Parse the JSON returned by GPT and normalize keys."""
     try:
-        return json.loads(text)
+        data = json.loads(text)
     except json.JSONDecodeError:
         match = re.search(r"\{.*\}", text, re.DOTALL)
         if match:
             try:
-                return json.loads(match.group(0))
+                data = json.loads(match.group(0))
             except json.JSONDecodeError:
-                pass
+                data = None
+        else:
+            data = None
+
+    if isinstance(data, dict):
+        return {
+            "category": data.get("category", ""),
+            "region": data.get("region", "Global"),
+        }
+
     print("❌ Failed to parse GPT response as JSON")
-    return {"is_relevant": False, "category": "", "score": 0.0, "region": "Global"}
+    return {"category": "", "region": "Global"}
 
 
 async def call_with_retry(client: openai.AsyncOpenAI, **kwargs: Any) -> Any:
@@ -138,7 +139,7 @@ async def classify_article_async(article: Dict[str, Any]) -> Dict[str, Any] | No
     async with semaphore:
         resp = await call_with_retry(async_client, **params)
     if not resp:
-        return {"is_relevant": False, "category": "", "score": 0.0, "region": "Global"}
+        return {"category": "", "region": "Global"}
     text = resp.choices[0].message.content.strip()
     return _parse_response(text)
 
@@ -147,10 +148,7 @@ async def main_async() -> None:
     articles = load_articles(INPUT_FILE)
     os.makedirs(CATEGORY_DIR, exist_ok=True)
 
-    grouped = {
-        "Global": {"startup_ai": [], "finance_ai": [], "blockchain_ai": []},
-        "East Asia": {"startup_ai": [], "finance_ai": [], "blockchain_ai": []},
-    }
+    grouped = {region: {cat: [] for cat in CATEGORIES} for region in REGIONS}
     results: List[Dict[str, Any]] = []
 
     tasks = []
@@ -168,13 +166,13 @@ async def main_async() -> None:
         for art, result in zip(valid_articles, responses):
             if not result:
                 continue
-            art.update(result)
+            art["category"] = result.get("category", "")
+            art["region"] = result.get("region", "Global")
             results.append(art)
-            if result.get("is_relevant"):
-                cat = result.get("category")
-                region = result.get("region", "Global")
-                if region in grouped and cat in grouped[region]:
-                    grouped[region][cat].append(art)
+            cat = art["category"]
+            region = art["region"]
+            if region in grouped and cat in grouped[region]:
+                grouped[region][cat].append(art)
 
     with open(OUTPUT_ALL_FILE, "w", encoding="utf-8") as f:
         json.dump(results, f, ensure_ascii=False, indent=2)
