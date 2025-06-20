@@ -1,3 +1,10 @@
+"""Second-layer GPT classifier.
+
+This module runs after ``filter_relevance_gpt.py``. It categorizes
+the previously filtered articles, assigns a score, and labels the
+region. The results are stored for later summarization.
+"""
+
 import json
 import os
 import re
@@ -8,8 +15,8 @@ import openai
 from dotenv import load_dotenv
 import tiktoken
 
-INPUT_FILE = "data/recent_articles.json"
-OUTPUT_ALL_FILE = "data/classified_articles.json"
+INPUT_FILE = "data/classified_articles.json"
+OUTPUT_ALL_FILE = "data/news_data.json"
 CATEGORY_DIR = "data/categorized"
 
 load_dotenv()
