@@ -1,7 +1,7 @@
 import json
 import os
 import math
-from typing import Dict, List, Tuple
+from typing import Dict, List
 import logging
 
 import openai
@@ -9,7 +9,6 @@ from dotenv import load_dotenv
 
 logging.basicConfig(level=logging.ERROR)
 
-# Read the top-scoring articles selected for summarization
 INPUT_FILE = "data/selected_articles.json"
 OUTPUT_FILE = "data/news_data.json"
 
@@ -21,7 +20,6 @@ if not openai.api_key:
 
 
 def load_articles() -> List[Dict]:
-    """Load the pre-selected top articles."""
     if not os.path.exists(INPUT_FILE):
         return []
     with open(INPUT_FILE, "r", encoding="utf-8") as f:
@@ -31,8 +29,8 @@ def load_articles() -> List[Dict]:
             raise RuntimeError(f"Invalid JSON in {INPUT_FILE}")
 
 
-def gpt_summarize(title: str, body: str) -> Tuple[str, str]:
-    """Return a Traditional Chinese summary and its classified category."""
+def gpt_summarize(title: str, body: str) -> str:
+    """Return a Traditional Chinese summary of the article."""
     
     prompt = f'''
 You are a bilingual AI assistant working for TPIsoftware, a Taiwan-based company specializing in enterprise platforms, AI development, and financial technologies.
@@ -46,21 +44,6 @@ You will be given full-text news articles in either English or Chinese.
 2. Be accurate — do **not invent** or infer information not in the original article.
 3. Keep important **technical terms**, and include the **English term in parentheses** if needed.
 4. Avoid generic phrases like "the company" or "the startup" — use specific names and dates when available.
-5. Classify the article into the most appropriate category listed below.
-
-## Categories:
-1. Global – General Tech & Startups  
-2. Global – Applied AI & FinTech  
-3. Global – Blockchain & Crypto  
-4. East Asia – General Tech & Startups  
-5. East Asia – Applied AI & FinTech  
-6. East Asia – Blockchain & Crypto
-
-## Classification Rules:
-- If the article discusses **startup activities**, new tech products, or funding rounds, use "General Tech & Startups".
-- If the article focuses on AI in **finance, banking, insurance, or enterprise automation**, use "Applied AI & FinTech".
-- If it focuses on **crypto, DeFi, NFTs, or blockchain technology**, use "Blockchain & Crypto".
-- Use "East Asia" if the article is about Taiwan, China, Japan, Korea, or Hong Kong; otherwise, use "Global".
 
 ## Input
 **Title**:  
@@ -71,37 +54,28 @@ You will be given full-text news articles in either English or Chinese.
 
 ## Output (in the following format):
 ---
-Summary: [Your Traditional Chinese summary here]  
-Category: [Best-fit category from the list above]
+Summary: [Your Traditional Chinese summary here]
 '''
-    return prompt
 
-
-    messages = [
-        {"role": "system", "content": prompt}
-    ]
+    messages = [{"role": "system", "content": prompt}]
     try:
         response = openai.chat.completions.create(
-            model="gpt-4o", messages=messages)
-    except Exception as exc:  # noqa: BLE001
+            model="gpt-4o",
+            messages=messages
+        )
+    except Exception as exc:
         logging.error("OpenAI API call failed: %s", exc)
-        return "", ""
+        return ""
+
     output = response.choices[0].message.content.strip()
 
     summary = ""
-    category = ""
     for line in output.splitlines():
         if line.startswith("Summary:"):
             summary = line.replace("Summary:", "").strip()
-        elif line.startswith("Category:"):
-            category = line.replace("Category:", "").strip()
+            break
 
-    return summary, category
-
-
-def parse_region(category: str) -> str:
-    """Infer region from the category."""
-    return "East Asia" if category.startswith("East Asia") else "Global"
+    return summary
 
 
 def main() -> None:
@@ -114,16 +88,15 @@ def main() -> None:
         if not title or not body:
             continue
 
-        summary_zh, gpt_category = gpt_summarize(title, body)
-        if not summary_zh or not gpt_category:
+        summary_zh = gpt_summarize(title, body)
+        if not summary_zh:
             continue
-        region = art.get('region') or parse_region(gpt_category)
-        category = art.get('category') or gpt_category
+
+        region = art.get('region') or "Global"
+        category = art.get('category') or "General Tech & Startups"
 
         print("✅ Title:", title)
         print("📝 Category:", category)
-        if category != gpt_category:
-            print("🛈 GPT Suggested:", gpt_category)
         print("🈶 Summary:", summary_zh)
         print("-----")
 
