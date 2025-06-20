@@ -97,19 +97,20 @@ async def call_with_retry(client: openai.AsyncOpenAI, **kwargs: Any) -> Any:
             print(f"Rate limit hit. Retry in {wait} sec...")
             await asyncio.sleep(wait)
         except Exception as exc:  # noqa: BLE001
-            print("Other GPT error:", exc)
-            return None
+            print(f"GPT error on attempt {attempt + 1}: {exc}")
+            await asyncio.sleep(2)
+    print("❌ Final failure after retries. Skipping article.")
     return None
 
 
 semaphore = asyncio.Semaphore(3)
 
 
-async def check_relevance_async(article: Dict[str, Any]) -> bool:
+async def check_relevance_async(article: Dict[str, Any]) -> bool | None:
     title = article.get("title", "")
     content = article.get("content") or article.get("description", "")
     if not title or not content:
-        return False
+        return None
     short_content = truncate_by_tokens(content)
     prompt = f"{PROMPT_TEMPLATE}\n\nTitle: {title}\n\nArticle Content:\n{short_content}"
     messages = [{"role": "system", "content": prompt}]
@@ -123,7 +124,7 @@ async def check_relevance_async(article: Dict[str, Any]) -> bool:
     async with semaphore:
         resp = await call_with_retry(async_client, **params)
     if not resp:
-        return False
+        return None
     text = resp.choices[0].message.content.strip()
     return _parse_response(text)
 
@@ -145,8 +146,10 @@ async def main_async() -> None:
     if tasks:
         responses = await asyncio.gather(*tasks)
         for art, keep in zip(valid_articles, responses):
-            if keep:
+            if keep is True:
                 results.append(art)
+            elif keep is None:
+                print(f"⚠️ Skipped article due to GPT error: {art['title']}")
 
     os.makedirs("data", exist_ok=True)
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
