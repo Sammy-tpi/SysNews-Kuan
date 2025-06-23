@@ -1,41 +1,13 @@
-"""First-layer GPT relevance filter.
-
-Stage: This script runs after ``filter_articles_by_date.py`` and before
-``classify_articles_gpt.py``. It checks whether each article is related to
-AI, FinTech, or Blockchain and keeps only relevant ones.
-"""
-
-import asyncio
 import json
 import os
+import aiohttp
+import asyncio
 from typing import Any, Dict, List
-
-import openai
-from dotenv import load_dotenv
-import tiktoken
 
 INPUT_FILE = "data/recent_articles.json"
 OUTPUT_FILE = "data/classified_articles.json"
-
-load_dotenv()
-openai.api_key = os.getenv("OPENAI_API_KEY")
-MODEL_NAME = os.getenv("OPENAI_MODEL", "gpt-4o")
-
-async_client = openai.AsyncOpenAI(api_key=openai.api_key)
-
-if not openai.api_key:
-    raise RuntimeError("Missing OPENAI_API_KEY in environment")
-
-MAX_CONTENT_TOKENS = 800
-
-
-def truncate_by_tokens(text: str, max_tokens: int = MAX_CONTENT_TOKENS) -> str:
-    """Return text truncated to ``max_tokens`` tokens."""
-    enc = tiktoken.encoding_for_model(MODEL_NAME)
-    tokens = enc.encode(text)
-    if len(tokens) <= max_tokens:
-        return text
-    return enc.decode(tokens[:max_tokens])
+MODEL_ENDPOINT = "http://192.168.32.1:8001/api/v0/llm/rag"
+MAX_CONTENT_TOKENS = 1000  # Adjust based on your model's token limit
 
 
 PROMPT_TEMPLATE = """
@@ -51,17 +23,19 @@ We are specifically interested in news articles related to:
 
 We **do not want** articles that are mainly about politics, lifestyle, sports, culture, general economy, or unrelated industries.
 
-Please focus on whether the article has any real connection to **AI, FinTech, or Blockchain innovation**, especially if it has product, funding, technical, or strategic value.
+Please focus on whether the article has any real or potential connection to **AI, FinTech, or Blockchain innovation**, especially if it has product, funding, technical, or strategic value.
 
 Respond with a single JSON object like this:
 { "keep": true }
 or
 { "keep": false }
-
-Be strict: only return "keep": true if the article clearly touches on our areas of interest.
 """
 
+semaphore = asyncio.Semaphore(3)
 
+def truncate_text(text: str, max_tokens: int = MAX_CONTENT_TOKENS) -> str:
+    words = text.split()
+    return " ".join(words[:max_tokens])
 
 def load_articles(path: str) -> List[Dict[str, Any]]:
     if not os.path.exists(path):
@@ -72,90 +46,84 @@ def load_articles(path: str) -> List[Dict[str, Any]]:
         except json.JSONDecodeError:
             raise RuntimeError(f"Invalid JSON in {path}")
 
-
-def _parse_response(text: str) -> bool:
+def _parse_response(full_response: str) -> bool:
     try:
-        data = json.loads(text)
-        if isinstance(data, dict):
-            if data.get("keep") is not None:
-                return bool(data["keep"])
-            if data.get("decision"):
-                return data["decision"].lower() == "keep"
-            if data.get("is_relevant") is not None:
-                return bool(data["is_relevant"])
-    except json.JSONDecodeError:
-        pass
-    return False
+        obj = json.loads(full_response)
+        raw_text = obj.get("results", {}).get("text", "")
+        if not raw_text:
+            return False
 
+        # 🧹 Step 1: Remove markdown block with regex
+        import re
+        match = re.search(r"\{[^{}]*\}", raw_text, re.DOTALL)
+        if match:
+            raw_text = match.group(0)
+        else:
+            # fallback: try to remove backticks manually
+            raw_text = raw_text.replace("```json", "").replace("```", "").strip()
 
-async def call_with_retry(client: openai.AsyncOpenAI, **kwargs: Any) -> Any:
-    for attempt in range(5):
-        try:
-            return await client.chat.completions.create(**kwargs)
-        except openai.RateLimitError:
-            wait = 2 ** attempt
-            print(f"Rate limit hit. Retry in {wait} sec...")
-            await asyncio.sleep(wait)
-        except Exception as exc:  # noqa: BLE001
-            print(f"GPT error on attempt {attempt + 1}: {exc}")
-            await asyncio.sleep(2)
-    print("❌ Final failure after retries. Skipping article.")
-    return None
+        # 🧹 Step 2: Load JSON
+        result_obj = json.loads(raw_text)
+        return result_obj.get("keep", False)
 
+    except Exception as e:
+        print("⚠️ Failed to parse model response:", e)
+        print("🧪 Raw inner text was:", repr(raw_text))
+        return False
 
-semaphore = asyncio.Semaphore(3)
-
-
-async def check_relevance_async(article: Dict[str, Any]) -> bool | None:
+async def check_relevance(session: aiohttp.ClientSession, article: Dict[str, Any]) -> bool | None:
     title = article.get("title", "")
     content = article.get("content") or article.get("description", "")
     if not title or not content:
         return None
-    short_content = truncate_by_tokens(content)
-    prompt = f"{PROMPT_TEMPLATE}\n\nTitle: {title}\n\nArticle Content:\n{short_content}"
-    messages = [{"role": "system", "content": prompt}]
-    params = {
-        "model": MODEL_NAME,
-        "messages": messages,
-        "response_format": {"type": "json_object"},
-        "temperature": 0,
-        "max_tokens": 20,
-    }
-    async with semaphore:
-        resp = await call_with_retry(async_client, **params)
-    if not resp:
-        return None
-    text = resp.choices[0].message.content.strip()
-    return _parse_response(text)
+    short_content = truncate_text(content)
+    prompt = f"{PROMPT_TEMPLATE.strip()}\n\nTitle: {title}\n\nArticle Content:\n{short_content}"
 
+    payload = {
+        "query": prompt,
+        "sys_prompt": "You are a JSON-only API that determines if an article is relevant to AI, FinTech, or Blockchain.",
+        "model_name": "Gemma-3-27B",
+        "temperature": 0.1,
+        "top_p": 0.1,
+        "top_k": 5,
+        "max_tokens": 4096,
+        "repetition_penalty": 1,
+        "parser": "text"
+    }
+
+    async with semaphore:
+        try:
+            async with session.post(MODEL_ENDPOINT, json=payload, timeout=60) as resp:
+                text = await resp.text()
+                print("📩 Model raw response:", text)
+                return _parse_response(text)
+        except Exception as e:
+            print(f"❌ Exception during request: {e}")
+            return None
 
 async def main_async() -> None:
     articles = load_articles(INPUT_FILE)
-    results: List[Dict[str, Any]] = []
+    valid_articles = []
+    results = []
 
-    tasks = []
-    valid_articles: List[Dict[str, Any]] = []
     for art in articles:
-        title = art.get("title", "")
-        content = art.get("content") or art.get("description", "")
-        if not title or not content:
-            continue
-        valid_articles.append(art)
-        tasks.append(check_relevance_async(art))
+        if art.get("title") and (art.get("content") or art.get("description")):
+            valid_articles.append(art)
 
-    if tasks:
+    async with aiohttp.ClientSession() as session:
+        tasks = [check_relevance(session, art) for art in valid_articles]
         responses = await asyncio.gather(*tasks)
+
         for art, keep in zip(valid_articles, responses):
-            if keep is True:
+            if keep:
                 results.append(art)
             elif keep is None:
-                print(f"⚠️ Skipped article due to GPT error: {art['title']}")
+                print(f"⚠️ Skipped article due to LLM error: {art['title']}")
 
     os.makedirs("data", exist_ok=True)
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         json.dump(results, f, ensure_ascii=False, indent=2)
-    print(f"Wrote {len(results)} relevant articles to {OUTPUT_FILE}")
-
+    print(f"✅ Wrote {len(results)} relevant articles to {OUTPUT_FILE}")
 
 if __name__ == "__main__":
     asyncio.run(main_async())
