@@ -47,7 +47,6 @@ Create a `.env` file in the project root with the following variables:
 DIGEST_SENDER=your_email@gmail.com
 DIGEST_PASSWORD=your_gmail_app_password
 DIGEST_RECIPIENT=recipient1@example.com,recipient2@example.com
-OPENAI_API_KEY=your_openai_api_key
 NEWSAPI_AI_KEY=your_eventregistry_api_key
 ```
 
