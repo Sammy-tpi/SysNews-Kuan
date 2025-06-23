@@ -93,7 +93,7 @@ async def check_relevance(session: aiohttp.ClientSession, article: Dict[str, Any
 
     async with semaphore:
         try:
-            async with session.post(MODEL_ENDPOINT, json=payload, timeout=120) as resp:
+            async with session.post(MODEL_ENDPOINT, json=payload, timeout=120, ssl=False) as resp:
                 text = await resp.text()
                 print("📩 Model raw response:", text)
                 return _parse_response(text)
