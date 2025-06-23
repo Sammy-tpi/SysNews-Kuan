@@ -141,6 +141,7 @@ async def main_async() -> None:
         json.dump(summarized, f, ensure_ascii=False, indent=2)
 
     print(f"✅ Wrote summaries to {OUTPUT_FILE}")
+    print(f"\U0001F4DD \u6210\u529F\u6458\u8981\u7684\u6587\u7AE0\u7E3D\u6578: {len(summarized)}")
 
 
 if __name__ == '__main__':

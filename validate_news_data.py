@@ -86,6 +86,8 @@ def main() -> None:
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         json.dump(articles, f, ensure_ascii=False, indent=2)
     print(f"Validated {len(articles)} articles and wrote to {OUTPUT_FILE}")
+    validated = articles
+    print(f"\u2705 \u9a57\u8b49\u5f8c\u4fdd\u7559\u7684\u6709\u6548\u65b0\u805e\u6578\u91CF: {len(validated)}")
 
 
 if __name__ == "__main__":

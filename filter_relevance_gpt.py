@@ -124,6 +124,8 @@ async def main_async() -> None:
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         json.dump(results, f, ensure_ascii=False, indent=2)
     print(f"✅ Wrote {len(results)} relevant articles to {OUTPUT_FILE}")
+    relevant_articles = results
+    print(f"\U0001F9E0 GPT \u5224\u5B9A\u70BA\u76F8\u95DC\u7684\u6587\u7AE0\u6578\u91CF: {len(relevant_articles)}")
 
 if __name__ == "__main__":
     asyncio.run(main_async())
