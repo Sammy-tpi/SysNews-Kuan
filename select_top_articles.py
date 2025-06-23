@@ -57,6 +57,7 @@ def main() -> None:
         json.dump(selected, f, ensure_ascii=False, indent=2)
 
     print(f"Wrote {len(selected)} articles to {OUTPUT_FILE}")
+    print(f"\u2b50 \u6bcf\u985e\u7cbe\u9078\u6587\u7ae0\u7e3d\u6578: {len(selected)}")
 
 
 if __name__ == "__main__":

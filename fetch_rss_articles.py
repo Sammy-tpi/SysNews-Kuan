@@ -156,6 +156,7 @@ async def main_async() -> None:
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         json.dump(articles, f, ensure_ascii=False, indent=2)
     print(f"Wrote {len(articles)} articles to {OUTPUT_FILE}")
+    print(f"\U0001F4E5 RSS \u6587\u7AE0\u6578\u91CF: {len(articles)}")
 
 
 if __name__ == "__main__":

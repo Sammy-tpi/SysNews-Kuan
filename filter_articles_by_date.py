@@ -57,6 +57,8 @@ def main() -> None:
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         json.dump(recent, f, ensure_ascii=False, indent=2)
     print(f"Wrote {len(recent)} articles to {OUTPUT_FILE}")
+    filtered = recent
+    print(f"\U0001F4C5 \u4FDD\u7559\u7684\u6700\u65B0\u6587\u7AE0\u6578\u91CF: {len(filtered)}")
 
 
 if __name__ == "__main__":

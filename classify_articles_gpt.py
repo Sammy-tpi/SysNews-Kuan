@@ -197,6 +197,7 @@ async def main_async() -> None:
     print(
         f"Wrote {len(results)} articles with classifications to {OUTPUT_ALL_FILE}"
     )
+    print(f"\U0001F3F7\FE0F \u6210\u529F\u5206\u985E\u7684\u6587\u7AE0\u6578\u91CF: {len(results)}")
 
 
 if __name__ == "__main__":
