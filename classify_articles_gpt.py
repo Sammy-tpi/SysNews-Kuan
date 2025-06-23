@@ -9,19 +9,14 @@ import json
 import os
 import re
 import asyncio
+import aiohttp
 from typing import Dict, List, Any
-
-import openai
-from dotenv import load_dotenv
-import tiktoken
 
 INPUT_FILE = "data/classified_articles.json"
 OUTPUT_ALL_FILE = "data/news_data.json"
 CATEGORY_DIR = "data/categorized"
 
-load_dotenv()
-openai.api_key = os.getenv("OPENAI_API_KEY")
-MODEL_NAME = os.getenv("OPENAI_MODEL", "gpt-4o")
+MODEL_ENDPOINT = "http://192.168.32.1:8001/api/v0/llm/rag"
 
 CATEGORIES = [
     "General Tech & Startups",
@@ -31,22 +26,13 @@ CATEGORIES = [
 
 REGIONS = ["Global", "East Asia"]
 
-async_client = openai.AsyncOpenAI(api_key=openai.api_key)
-
-if not openai.api_key:
-    raise RuntimeError("Missing OPENAI_API_KEY in environment")
-
 # Limit the request size to avoid exceeding the model's context window
-MAX_CONTENT_TOKENS = 800
+MAX_CONTENT_TOKENS = 1000  # Adjust based on your model's token limit
 
 
-def truncate_by_tokens(text: str, max_tokens: int = MAX_CONTENT_TOKENS) -> str:
-    """Return text truncated to the given token length."""
-    enc = tiktoken.encoding_for_model(MODEL_NAME)
-    tokens = enc.encode(text)
-    if len(tokens) <= max_tokens:
-        return text
-    return enc.decode(tokens[:max_tokens])
+def truncate_text(text: str, max_tokens: int = MAX_CONTENT_TOKENS) -> str:
+    words = text.split()
+    return " ".join(words[:max_tokens])
 
 PROMPT_TEMPLATE = """
 You are a news classification AI assistant working for the AI Innovation Department at TPIsoftware, a Taiwan-based software company specializing in artificial intelligence, financial technology, and enterprise software solutions.
@@ -111,68 +97,63 @@ def load_articles(path: str) -> List[Dict[str, Any]]:
             raise RuntimeError(f"Invalid JSON in {path}")
 
 
-def _parse_response(text: str) -> Dict[str, Any]:
-    """Parse the JSON returned by GPT and normalize keys."""
-    try:
-        data = json.loads(text)
-    except json.JSONDecodeError:
-        match = re.search(r"\{.*\}", text, re.DOTALL)
-        if match:
-            try:
-                data = json.loads(match.group(0))
-            except json.JSONDecodeError:
-                data = None
-        else:
-            data = None
+semaphore = asyncio.Semaphore(3)
 
-    if isinstance(data, dict):
+
+def _parse_response(full_response: str) -> Dict[str, Any]:
+    raw_text = ""
+    try:
+        obj = json.loads(full_response)
+        raw_text = obj.get("results", {}).get("text", "")
+        if not raw_text:
+            return {"category": "", "region": "Global"}
+
+        match = re.search(r"\{[^{}]*\}", raw_text, re.DOTALL)
+        if match:
+            raw_text = match.group(0)
+        else:
+            raw_text = raw_text.replace("```json", "").replace("```", "").strip()
+
+        data = json.loads(raw_text)
         return {
             "category": data.get("category", ""),
             "region": data.get("region", "Global"),
         }
-
-    print("❌ Failed to parse GPT response as JSON")
-    return {"category": "", "region": "Global"}
-
-
-async def call_with_retry(client: openai.AsyncOpenAI, **kwargs: Any) -> Any:
-    for attempt in range(5):
-        try:
-            return await client.chat.completions.create(**kwargs)
-        except openai.RateLimitError:
-            wait = 2 ** attempt
-            print(f"Rate limit hit. Retry in {wait} sec...")
-            await asyncio.sleep(wait)
-        except Exception as e:  # noqa: BLE001
-            print("Other GPT error:", e)
-            return None
-    return None
+    except Exception as e:
+        print("⚠️ Failed to parse model response:", e)
+        print("🧪 Raw inner text was:", repr(raw_text))
+        return {"category": "", "region": "Global"}
 
 
-semaphore = asyncio.Semaphore(3)
-
-
-async def classify_article_async(article: Dict[str, Any]) -> Dict[str, Any] | None:
+async def classify_article(session: aiohttp.ClientSession, article: Dict[str, Any]) -> Dict[str, Any] | None:
     title = article.get("title", "")
     content = article.get("content") or article.get("description", "")
     if not title or not content:
         return None
-    short_content = truncate_by_tokens(content)
-    prompt = f"{PROMPT_TEMPLATE}\n\nTitle: {title}\n\nArticle Content:\n{short_content}"
-    messages = [{"role": "system", "content": prompt}]
-    params = {
-        "model": MODEL_NAME,
-        "messages": messages,
-        "response_format": "json",  # ✅ FIXED
-        "temperature": 0,
-        "max_tokens": 100,
+    short_content = truncate_text(content)
+    prompt = f"{PROMPT_TEMPLATE.strip()}\n\nTitle: {title}\n\nArticle Content:\n{short_content}"
+
+    payload = {
+        "query": prompt,
+        "sys_prompt": "You are a JSON-only API that assigns a category and region to the article.",
+        "model_name": "Gemma-3-27B",
+        "temperature": 0.1,
+        "top_p": 0.1,
+        "top_k": 5,
+        "max_tokens": 4096,
+        "repetition_penalty": 1,
+        "parser": "text",
     }
+
     async with semaphore:
-        resp = await call_with_retry(async_client, **params)
-    if not resp:
-        return {"category": "", "region": "Global"}
-    text = resp.choices[0].message.content.strip()
-    return _parse_response(text)
+        try:
+            async with session.post(MODEL_ENDPOINT, json=payload, timeout=60) as resp:
+                text = await resp.text()
+                print("📩 Model raw response:", text)
+                return _parse_response(text)
+        except Exception as e:
+            print(f"❌ Exception during request: {e}")
+            return None
 
 
 async def main_async() -> None:
@@ -182,7 +163,6 @@ async def main_async() -> None:
     grouped = {region: {cat: [] for cat in CATEGORIES} for region in REGIONS}
     results: List[Dict[str, Any]] = []
 
-    tasks = []
     valid_articles: List[Dict[str, Any]] = []
     for art in articles:
         title = art.get("title", "")
@@ -190,9 +170,9 @@ async def main_async() -> None:
         if not title or not content:
             continue
         valid_articles.append(art)
-        tasks.append(classify_article_async(art))
 
-    if tasks:
+    async with aiohttp.ClientSession() as session:
+        tasks = [classify_article(session, art) for art in valid_articles]
         responses = await asyncio.gather(*tasks)
         for art, result in zip(valid_articles, responses):
             if not result:
