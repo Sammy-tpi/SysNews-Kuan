@@ -39,6 +39,7 @@ def should_keep_entry(entry, keywords) -> bool:
 
 CONFIG_FILE = "config/sources.json"
 OUTPUT_FILE = "data/rss_articles.json"
+FETCH_COUNTS_FILE = "logs/fetch_counts.json"
 
 # Limit how many articles to fetch from each RSS feed to avoid long runtimes
 MAX_ARTICLES_PER_SOURCE = 250
@@ -103,13 +104,14 @@ async def process_feed_async(
     name = src.get("name", "")
     url = src.get("rss_url")
     if not url:
+        print(f"\u26a0\ufe0f {name} is missing rss_url")
         return []
     try:
         async with session.get(url, timeout=10) as resp:
             resp.raise_for_status()
             feed_data = await resp.text()
-    except (aiohttp.ClientError, asyncio.TimeoutError):
-        print(f"\u26a0\ufe0f Failed to fetch feed {url}")
+    except (aiohttp.ClientError, asyncio.TimeoutError) as exc:
+        print(f"\u26a0\ufe0f Failed to fetch feed for {name}: {exc}")
         return []
     feed = feedparser.parse(feed_data)
     # 🚧 [Polaris Dev] Disabled keyword/category filtering for GPT/ML classification
@@ -143,10 +145,18 @@ async def fetch_rss_articles_async() -> List[Dict]:
             *(process_feed_async(src, session, keywords) for src in sources)
         )
     articles: List[Dict] = []
-    for batch in results:
+    fetch_counts: Dict[str, int] = {}
+    for src, batch in zip(sources, results):
+        name = src.get("name", "")
+        count = len(batch)
+        fetch_counts[name] = count
+        print(f"\u2705 Fetched {count} articles from {name}")
         for art in batch:
             # 🚧 [Polaris Dev] Skip keyword_score filtering
             articles.append(art)
+    os.makedirs("logs", exist_ok=True)
+    with open(FETCH_COUNTS_FILE, "w", encoding="utf-8") as f:
+        json.dump(fetch_counts, f, ensure_ascii=False, indent=2)
     return articles
 
 
