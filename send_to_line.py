@@ -73,7 +73,11 @@ def build_bubble(article: dict) -> FlexBubble:
                 },
                 {
                     "type": "text",
-                    "text": article.get("summary") or article.get("summary_zh", ""),
+                    "text": (
+                        article.get("summary")
+                        or article.get("summary_zh")
+                        or "No summary available."
+                    ),
                     "size": "sm",
                     "color": "#666666",
                     "wrap": True,
