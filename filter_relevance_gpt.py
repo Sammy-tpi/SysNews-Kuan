@@ -4,6 +4,8 @@ import aiohttp
 import asyncio
 from typing import Any, Dict, List
 
+from utils import load_keywords, keyword_score, source_weight
+
 INPUT_FILE = "data/recent_articles.json"
 OUTPUT_FILE = "data/classified_articles.json"
 MODEL_ENDPOINT = "http://192.168.32.1:8001/api/v0/llm/rag"
@@ -103,6 +105,7 @@ async def check_relevance(session: aiohttp.ClientSession, article: Dict[str, Any
 
 async def main_async() -> None:
     articles = load_articles(INPUT_FILE)
+    keywords = load_keywords()
     valid_articles = []
     results = []
 
@@ -116,6 +119,11 @@ async def main_async() -> None:
 
         for art, keep in zip(valid_articles, responses):
             if keep:
+                text = f"{art.get('title', '')} {art.get('content') or art.get('description', '')}"
+                score = keyword_score(text, keywords)
+                source_name = art.get("source", {}).get("name", "")
+                score *= source_weight(source_name)
+                art["score"] = score
                 results.append(art)
             elif keep is None:
                 print(f"⚠️ Skipped article due to LLM error: {art['title']}")
