@@ -10,7 +10,6 @@ from linebot.v3.messaging.models import (
     FlexCarousel,
     FlexMessage,
     PushMessageRequest,
-    TextComponent,
 )
 
 # Load environment variables
