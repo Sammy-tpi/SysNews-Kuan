@@ -16,8 +16,8 @@ from linebot.v3.messaging.models import (
 load_dotenv()
 
 ACCESS_TOKEN = os.getenv("LINE_CHANNEL_ACCESS_TOKEN")
-USER_ID = "U52d3d8f05063b1c6d2ace4f1acff20d2"
-JSON_PATH = "data/selected_articles.json"
+USER_ID = os.getenv("LINE_USER_ID", "U52d3d8f05063b1c6d2ace4f1acff20d2")
+JSON_PATH = "data/news_data.json"
 
 if not ACCESS_TOKEN:
     raise RuntimeError("LINE_CHANNEL_ACCESS_TOKEN not set in environment")
@@ -76,20 +76,31 @@ def build_bubble(article: dict) -> FlexBubble:
                     "text": (
                         article.get("summary")
                         or article.get("summary_zh")
-                        or "No summary available."
+                        or "\uff08\u7121\u6458\u8981\uff09"
                     ),
                     "size": "sm",
                     "color": "#666666",
                     "wrap": True,
                 },
-                {
-                    "type": "text",
-                    "text": f"\ud83d\udd17 {article.get('url', '')}",
-                    "size": "sm",
-                    "color": "#007AFF",
-                    "wrap": True,
-                },
             ],
+        },
+        "footer": {
+            "type": "box",
+            "layout": "vertical",
+            "spacing": "sm",
+            "contents": [
+                {
+                    "type": "button",
+                    "style": "link",
+                    "height": "sm",
+                    "action": {
+                        "type": "uri",
+                        "label": "\u95b1\u8b80\u5168\u6587",
+                        "uri": article.get("url", "#"),
+                    },
+                }
+            ],
+            "flex": 0,
         },
     }
     return FlexBubble.from_dict(bubble_dict)
