@@ -95,6 +95,54 @@
       "region": "Asia",
       "topics": ["Finance", "FinTech"],
       "full_text": true
+    },
+    {
+      "name": "FinTech News Asia",
+      "rss_url": "https://fintechnews.hk/feed/",
+      "source_type": "rss",
+      "region": "Hong Kong",
+      "topics": ["FinTech", "AI", "Sustainability"],
+      "full_text": true
+    },
+    {
+      "name": "FinTech News Singapore",
+      "rss_url": "https://fintechnews.sg/feed/",
+      "source_type": "rss",
+      "region": "Southeast Asia",
+      "topics": ["FinTech", "AI", "Blockchain"],
+      "full_text": true
+    },
+    {
+      "name": "ACN Newswire",
+      "rss_url": "https://www.acnnewswire.com/rss/",
+      "source_type": "rss",
+      "region": "Asia-Pacific",
+      "topics": ["Tech", "Business", "AI", "FinTech"],
+      "full_text": true
+    },
+    {
+      "name": "CCN (Crypto News Network)",
+      "rss_url": "https://www.ccn.com/feed/",
+      "source_type": "rss",
+      "region": "Global",
+      "topics": ["Blockchain", "Crypto"],
+      "full_text": true
+    },
+    {
+      "name": "Finextra – AI in FinTech",
+      "rss_url": "https://www.finextra.com/rss/rss.aspx?category=Artificial%20Intelligence",
+      "source_type": "rss",
+      "region": "Global",
+      "topics": ["AI", "FinTech"],
+      "full_text": true
+    },
+    {
+      "name": "Forbes – Tom Groenfeldt",
+      "rss_url": "https://forbes.com/sites/tomgroenfeldt/rss",
+      "source_type": "rss",
+      "region": "Global",
+      "topics": ["FinTech", "Digital Finance"],
+      "full_text": true
     }
   ],
   "rsshub_sources": [
