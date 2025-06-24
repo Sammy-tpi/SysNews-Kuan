@@ -51,24 +51,30 @@ def build_bubble(article: dict) -> FlexBubble:
 
     bubble_dict = {
         "type": "bubble",
+        "size": "mega",
         "body": {
             "type": "box",
             "layout": "vertical",
-            "spacing": "sm",
+            "spacing": "lg",
+            "backgroundColor": "#FCF9F6",
+            "cornerRadius": "20px",
             "contents": [
                 {
                     "type": "text",
                     "text": header,
                     "weight": "bold",
                     "size": "sm",
-                    "color": "#AAAAAA",
+                    "color": "#A85751",
+                    "margin": "md",
                     "wrap": True,
                 },
                 {
                     "type": "text",
                     "text": article.get("title", ""),
                     "weight": "bold",
-                    "size": "md",
+                    "size": "xl",
+                    "color": "#222222",
+                    "margin": "md",
                     "wrap": True,
                 },
                 {
@@ -79,8 +85,9 @@ def build_bubble(article: dict) -> FlexBubble:
                         or "\uff08\u7121\u6458\u8981\uff09"
                     ),
                     "size": "sm",
-                    "color": "#666666",
+                    "color": "#444444",
                     "wrap": True,
+                    "margin": "md",
                 },
             ],
         },
@@ -91,17 +98,26 @@ def build_bubble(article: dict) -> FlexBubble:
             "contents": [
                 {
                     "type": "button",
-                    "style": "link",
-                    "height": "sm",
                     "action": {
                         "type": "uri",
-                        "label": "\u95b1\u8b80\u5168\u6587",
-                        "uri": article.get("url", "#"),
+                        "label": "\ud83d\udd17 \u95b1\u8b80\u5168\u6587",
+                        "uri": article.get("url", ""),
                     },
+                    "style": "primary",
+                    "color": "#3A405A",
+                    "height": "sm",
+                    "margin": "md",
                 }
             ],
-            "flex": 0,
+            "backgroundColor": "#FFFFFF00",
         },
+        "styles": {
+            "body": {
+                "backgroundColor": "#FCF9F6",
+                "separator": True,
+                "separatorColor": "#F1EDE6"
+            }
+        }
     }
     return FlexBubble.from_dict(bubble_dict)
 
