@@ -29,8 +29,8 @@ NewsRender/
 ├── fetch_rss_articles.py      # Async RSS fetcher
 ├── fetch_newsapi_ai.py        # EventRegistry API fetcher
 ├── filter_articles_by_date.py # Keeps articles from the past 2 days
-├── filter_relevance_gpt.py    # GPT-based topic relevance filter
-├── classify_articles_gpt.py   # Categorize, score, and label region
+├── filter_relevance_gpt.py    # GPT-based topic relevance filter & scoring
+├── classify_articles_gpt.py   # Categorize and label region
 ├── select_top_articles.py     # Pick top article for each region/category
 ├── summarize_articles.py      # Generate Traditional Chinese summaries
 ├── generate_digest.py         # Render HTML digest with Jinja2
@@ -73,8 +73,8 @@ This executes the following steps:
 1. `fetch_newsapi_ai.py` — Query EventRegistry for AI/FinTech articles.
 2. `fetch_rss_articles.py` — Async fetch from RSS/RSSHub sources using `config/sources.json`.
 3. `filter_articles_by_date.py` — Keep articles published in the last two days.
-4. `filter_relevance_gpt.py` — Remove articles unrelated to AI, FinTech, or Blockchain.
-5. `classify_articles_gpt.py` — Categorize, score, and tag the region.
+4. `filter_relevance_gpt.py` — Remove unrelated articles and assign a relevance score.
+5. `classify_articles_gpt.py` — Categorize and tag the region.
 6. `select_top_articles.py` — Pick top article per category and region.
 7. `summarize_articles.py` — Generate Traditional Chinese summaries.
 8. `validate_news_data.py` — Validate format and remove duplicates.

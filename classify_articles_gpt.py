@@ -189,8 +189,7 @@ async def main_async() -> None:
         json.dump(results, f, ensure_ascii=False, indent=2)
     for region, cats in grouped.items():
         for cat, items in cats.items():
-            safe_cat = cat.lower().replace(" ", "_").replace("&", "and")
-            filename = f"{region.lower()}_{safe_cat}.json"  # ✅ FIXED
+            filename = f"{region}_{cat}.json"
             path = os.path.join(CATEGORY_DIR, filename)
             with open(path, "w", encoding="utf-8") as f:
                 json.dump(items, f, ensure_ascii=False, indent=2)
