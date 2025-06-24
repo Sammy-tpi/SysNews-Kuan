@@ -27,10 +27,17 @@ We **do not want** articles that are mainly about politics, lifestyle, sports, c
 
 Please focus on whether the article has any real or potential connection to **AI, FinTech, or Blockchain innovation**, especially if it has product, funding, technical, or strategic value.
 
-Respond with a single JSON object like this:
-{ "keep": true }
-or
-{ "keep": false }
+### Scoring Criteria
+- **score = 10:** Article is entirely about a real-world application, product launch, or strategic development in AI, FinTech, or Blockchain, in a technical/business context directly relevant to us.
+- **score = 7–9:** Main topic is AI, FinTech, or Blockchain, with substantial detail or industry impact.
+- **score = 4–6:** Relevant topics are mentioned, but as a secondary focus or in a general/indirect way.
+- **score = 1–3:** Only minor or marginal mention of our focus areas.
+- **score = 0:** Completely unrelated.
+
+### Instructions
+1. Carefully read the article’s title and content.
+2. Think step by step: (1) Identify the topic; (2) Judge relevance; (3) Decide if it should be kept; (4) Assign a score.
+3. Output a single line of JSON with **both** keys, e.g. `{"keep": true, "score": 8}`
 """
 
 semaphore = asyncio.Semaphore(3)
@@ -48,12 +55,12 @@ def load_articles(path: str) -> List[Dict[str, Any]]:
         except json.JSONDecodeError:
             raise RuntimeError(f"Invalid JSON in {path}")
 
-def _parse_response(full_response: str) -> bool:
+def _parse_response(full_response: str) -> Dict[str, int]:
     try:
         obj = json.loads(full_response)
         raw_text = obj.get("results", {}).get("text", "")
         if not raw_text:
-            return False
+            return {"keep": False, "score": 0}
 
         # 🧹 Step 1: Remove markdown block with regex
         import re
@@ -66,14 +73,19 @@ def _parse_response(full_response: str) -> bool:
 
         # 🧹 Step 2: Load JSON
         result_obj = json.loads(raw_text)
-        return result_obj.get("keep", False)
+        keep = bool(result_obj.get("keep", False))
+        try:
+            score = int(result_obj.get("score", 0))
+        except (TypeError, ValueError):
+            score = 0
+        return {"keep": keep, "score": score}
 
     except Exception as e:
         print("⚠️ Failed to parse model response:", e)
         print("🧪 Raw inner text was:", repr(raw_text))
-        return False
+        return {"keep": False, "score": 0}
 
-async def check_relevance(session: aiohttp.ClientSession, article: Dict[str, Any]) -> bool | None:
+async def check_relevance(session: aiohttp.ClientSession, article: Dict[str, Any]) -> Dict[str, int] | None:
     title = article.get("title", "")
     content = article.get("content") or article.get("description", "")
     if not title or not content:
@@ -117,15 +129,16 @@ async def main_async() -> None:
         tasks = [check_relevance(session, art) for art in valid_articles]
         responses = await asyncio.gather(*tasks)
 
-        for art, keep in zip(valid_articles, responses):
-            if keep:
+        for art, resp in zip(valid_articles, responses):
+            if resp and resp.get("keep"):
                 text = f"{art.get('title', '')} {art.get('content') or art.get('description', '')}"
-                score = keyword_score(text, keywords)
+                kw_score = keyword_score(text, keywords)
                 source_name = art.get("source", {}).get("name", "")
-                score *= source_weight(source_name)
-                art["score"] = score
+                kw_score *= source_weight(source_name)
+                gpt_score = resp.get("score", 0)
+                art["score"] = gpt_score + kw_score
                 results.append(art)
-            elif keep is None:
+            elif resp is None:
                 print(f"⚠️ Skipped article due to LLM error: {art['title']}")
 
     os.makedirs("data", exist_ok=True)
