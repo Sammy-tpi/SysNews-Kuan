@@ -16,7 +16,7 @@ from linebot.v3.messaging.models import (
 load_dotenv()
 
 ACCESS_TOKEN = os.getenv("LINE_CHANNEL_ACCESS_TOKEN")
-USER_ID = os.getenv("LINE_USER_ID", "U52d3d8f05063b1c6d2ace4f1acff20d2")
+USER_ID = os.getenv("LINE_USER_ID")
 JSON_PATH = "data/news_data.json"
 
 if not ACCESS_TOKEN:
