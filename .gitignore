@@ -23,5 +23,6 @@ logs/fetch_counts.json
 __pycache__/
 *.pyc
 .DS_Store
-logs/
+logs/fetch_counts.json
+
 
