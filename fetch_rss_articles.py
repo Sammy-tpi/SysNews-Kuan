@@ -46,7 +46,7 @@ MAX_ARTICLES_PER_SOURCE = 250
 
 
 def load_sources() -> List[Dict]:
-    """Return list of all RSS sources from configuration."""
+    """Return list of all RSS and RSSHub sources from configuration."""
     try:
         with open(CONFIG_FILE, "r", encoding="utf-8") as f:
             data = json.load(f)
@@ -57,8 +57,13 @@ def load_sources() -> List[Dict]:
         print(f"❌ Invalid JSON in {CONFIG_FILE}")
         return []
 
-    rss_sources = [s for s in data.get("rss_sources", []) if s.get("source_type") == "rss"]
-    return rss_sources
+    sources = []
+    # Add all rss_sources, whatever their type
+    sources.extend(data.get("rss_sources", []))
+    # Add all rsshub_sources, whatever their type
+    sources.extend(data.get("rsshub_sources", []))
+    return sources
+
 
 
 def parse_timestamp(entry: dict) -> str:

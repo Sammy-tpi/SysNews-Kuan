@@ -148,7 +148,7 @@
   "rsshub_sources": [
     {
       "name": "Nikkei Asia",
-      "rss_url": "https://rsshub.app/nikkei/index",
+      "rss_url": "https://rss.app/feeds/kPFP3qfxjq43xh3q.xml",
       "source_type": "rsshub",
       "region": "Japan/Asia",
       "topics": ["Finance", "Tech"],
@@ -156,7 +156,7 @@
     },
     {
       "name": "Caixin (财新网)",
-      "rss_url": "https://rsshub.app/caixin/roll?mode=fulltext",
+      "rss_url": "https://www.caixinglobal.com",
       "source_type": "rsshub",
       "region": "China",
       "topics": ["Finance", "Tech"],
@@ -164,7 +164,7 @@
     },
     {
       "name": "日経中文網 (Nikkei Chinese)",
-      "rss_url": "https://rsshub.app/nikkei/chinese",
+      "rss_url": "https://zh.cn.nikkei.com",
       "source_type": "rsshub",
       "region": "Japan/China",
       "topics": ["Finance", "Tech"],
@@ -172,7 +172,7 @@
     },
     {
       "name": "共同網 (Kyodo News)",
-      "rss_url": "https://rsshub.app/kyodonews/world",
+      "rss_url": "https://tchina.kyodonews.net",
       "source_type": "rsshub",
       "region": "Japan/China",
       "topics": ["Finance", "Tech"],
@@ -180,7 +180,7 @@
     },
     {
       "name": "信報財經新聞 (HKEJ)",
-      "rss_url": "https://rsshub.app/hkej/latest",
+      "rss_url": "https://www.hkej.com/instantnews",
       "source_type": "rsshub",
       "region": "Hong Kong",
       "topics": ["Finance", "Tech"],
@@ -188,7 +188,7 @@
     },
       {
         "name": "Fintech News Hong Kong",
-        "rss_url": "https://fintechnews.hk/feed/",
+        "rss_url": "https://fintechnews.hk",
         "source_type": "rss",
         "region": "Hong Kong",
         "topics": ["FinTech", "AI", "Finance"],
@@ -196,7 +196,7 @@
     },
     {
         "name": "BlockTempo (動區動趨)",
-        "rss_url": "https://www.blocktempo.com/feed/",
+        "rss_url": "https://www.blocktempo.com",
         "source_type": "rss",
         "region": "Taiwan",
         "topics": ["Blockchain", "Crypto", "Web3"],
@@ -204,7 +204,7 @@
     },
     {
         "name": "Coinpost (コインポスト)",
-        "rss_url": "https://coinpost.jp/?feed=rss2",
+        "rss_url": "https://coinpost.jp",
         "source_type": "rss",
         "region": "Japan",
         "topics": ["Blockchain", "Crypto", "Policy"],
@@ -212,7 +212,7 @@
     },
     {
         "name": "e27",
-        "rss_url": "https://e27.co/index_wp.php/feed",
+        "rss_url": "https://e27.co/news/",
         "source_type": "rss",
         "region": "Asia",
         "topics": ["Tech", "Startups", "FinTech", "AI"],
@@ -220,15 +220,24 @@
     },
     {
         "name": "Asia Times",
-        "rss_url": "https://asiatimes.com/feed",
+        "rss_url": "https://asiatimes.com",
         "source_type": "rss",
         "region": "Asia",
         "topics": ["Business", "Tech", "Finance"],
         "full_text": true
     },
+  
+    {
+        "name": "Techorange",
+        "rss_url": "https://buzzorange.com/techorange/",
+        "source_type": "rss",
+        "region": "Asia",
+        "topics": ["Blockchain", "Crypto", "Web3"],
+        "full_text": true
+    },
     {
         "name": "Digital News Asia",
-        "rss_url": "https://www.digitalnewsasia.com/rss.xml",
+        "rss_url": "https://www.digitalnewsasia.com",
         "source_type": "rss",
         "region": "Asia",
         "topics": ["Tech", "Startups", "FinTech"],
@@ -236,7 +245,7 @@
     },
     {
         "name": "Blockchain.News",
-        "rss_url": "https://blockchain.news/rss",
+        "rss_url": "https://blockchain.news",
         "source_type": "rss",
         "region": "China",
         "topics": ["Blockchain", "Crypto", "AI"],
@@ -244,7 +253,7 @@
     },
     {
         "name": "36Kr (36氪)",
-        "rss_url": "https://36kr.com/feed",
+        "rss_url": "https://36kr.com",
         "source_type": "rss",
         "region": "China",
         "topics": ["Startups", "Tech", "AI"],
@@ -252,31 +261,17 @@
     },
     {
         "name": "Fintech News Taiwan",
-        "rss_url": "https://fintechnews.hk/fintechtaiwan/feed/",
+        "rss_url": "https://fintechnews.hk/fintechtaiwan/",
         "source_type": "rss",
         "region": "Taiwan",
         "topics": ["FinTech", "Blockchain", "Policy"],
         "full_text": true
     },
-    {
-        "name": "BitTimes",
-        "rss_url": "https://bittimes.net/rss",
-        "source_type": "rss",
-        "region": "Japan",
-        "topics": ["Blockchain", "Crypto"],
-        "full_text": true
-    },
-    {
-        "name": "Fintech News Korea",
-        "rss_url": "https://fintechnews.hk/fintechkorea/feed/",
-        "source_type": "rss",
-        "region": "South Korea",
-        "topics": ["FinTech", "AI", "Policy"],
-        "full_text": true
-    },
+    
+  
     {
         "name": "Asia Financial",
-        "rss_url": "https://asiafinancial.com/feed",
+        "rss_url": "https://www.asiafinancial.com",
         "source_type": "rss",
         "region": "Asia",
         "topics": ["Finance", "FinTech", "Policy"],
@@ -284,7 +279,7 @@
     },
     {
         "name": "The Diplomat",
-        "rss_url": "https://thediplomat.com/feed",
+        "rss_url": "https://thediplomat.com",
         "source_type": "rss",
         "region": "Asia-Pacific",
         "topics": ["Business", "Tech", "Policy"],
@@ -292,51 +287,48 @@
     },
     {
         "name": "Siam Blockchain",
-        "rss_url": "https://siamblockchain.com/feed",
+        "rss_url": "https://siamblockchain.com/#google_vignette",
         "source_type": "rss",
         "region": "Thailand",
         "topics": ["Blockchain", "Crypto"],
         "full_text": true
     },
-    {
-        "name": "BitPinas",
-        "rss_url": "https://bitpinas.com/feed",
-        "source_type": "rss",
-        "region": "Philippines",
-        "topics": ["Blockchain", "Crypto", "Startups"],
-        "full_text": true
-    },
-    {
-        "name": "Crypto.News (Asia)",
-        "rss_url": "https://crypto.news/tag/asia/feed",
-        "source_type": "rss",
-        "region": "Asia",
-        "topics": ["Blockchain", "Crypto", "Web3"],
-        "full_text": true
-    },
-    {
-        "name": "Cointelegraph",
-        "rss_url": "https://cointelegraph.com/rss",
-        "source_type": "rss",
-        "region": "Global/Asia",
-        "topics": ["Blockchain", "Crypto", "Policy"],
-        "full_text": true
-    },
-    {
-        "name": "Chainalysis Blog",
-        "rss_url": "https://blog.chainalysis.com/rss",
-        "source_type": "rss",
-        "region": "Global/Asia",
-        "topics": ["Crypto", "Analysis", "Policy"],
-        "full_text": true
-    },
+
+ 
+    
     {
         "name": "Eco-Business",
-        "rss_url": "https://www.eco-business.com/feeds/news",
+        "rss_url": "https://www.eco-business.com",
         "source_type": "rss",
         "region": "Asia",
         "topics": ["Tech", "Sustainability", "Finance"],
         "full_text": true
+    },
+    {
+        "name": "MIT tech Review",
+        "rss_url": "https://www.technologyreview.com",
+        "source_type": "rss",
+        "region": "Asia",
+        "topics": ["Tech", "Startups", "FinTech"],
+        "full_text": true
+    },
+    {
+        "name": "Forbes",
+        "rss_url": "https://www.forbes.com",
+        "source_type": "rss",
+        "region": "Asia",
+        "topics": ["Tech", "Startups", "FinTech"],
+        "full_text": true
+    },
+    {
+        "name": "The next web",
+        "rss_url": "https://thenextweb.com",
+        "source_type": "rss",
+        "region": "Global",
+        "topics": ["Tech", "Startups", "FinTech"],
+        "full_text": true
     }
+
+    
   ]
 }
