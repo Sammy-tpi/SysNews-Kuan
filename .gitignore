@@ -17,6 +17,7 @@ digest.html
 
 # 🔐 本機機密
 .env
+logs/fetch_counts.json
 
 # 🐍 Python 快取
 __pycache__/
