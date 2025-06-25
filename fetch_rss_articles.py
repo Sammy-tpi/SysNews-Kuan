@@ -44,6 +44,16 @@ FETCH_COUNTS_FILE = "logs/fetch_counts.json"
 # Limit how many articles to fetch from each RSS feed to avoid long runtimes
 MAX_ARTICLES_PER_SOURCE = 250
 
+# Use a browser-like User-Agent to avoid being blocked by servers that
+# reject requests from unknown clients.
+DEFAULT_HEADERS = {
+    "User-Agent": (
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/118.0.0.0 Safari/537.36"
+    )
+}
+
 
 def load_sources() -> List[Dict]:
     """Return list of all RSS and RSSHub sources from configuration."""
@@ -84,7 +94,7 @@ async def fetch_full_text_async(
     candidates = [f"https://r.jina.ai/{url}", url]
     for link in candidates:
         try:
-            async with session.get(link, timeout=10) as resp:
+            async with session.get(link, headers=DEFAULT_HEADERS, timeout=10) as resp:
                 resp.raise_for_status()
                 html = await resp.text()
         except (aiohttp.ClientError, asyncio.TimeoutError):
@@ -112,7 +122,7 @@ async def process_feed_async(
         print(f"\u26a0\ufe0f {name} is missing rss_url")
         return []
     try:
-        async with session.get(url, timeout=10) as resp:
+        async with session.get(url, headers=DEFAULT_HEADERS, timeout=10) as resp:
             resp.raise_for_status()
             feed_data = await resp.text()
     except (aiohttp.ClientError, asyncio.TimeoutError) as exc:
@@ -145,7 +155,7 @@ async def process_feed_async(
 async def fetch_rss_articles_async() -> List[Dict]:
     sources = load_sources()
     keywords = load_keywords()
-    async with aiohttp.ClientSession() as session:
+    async with aiohttp.ClientSession(headers=DEFAULT_HEADERS) as session:
         results = await asyncio.gather(
             *(process_feed_async(src, session, keywords) for src in sources)
         )
