@@ -48,14 +48,7 @@
       "topics": ["Tech", "Gadgets"],
       "full_text": true
     },
-    {
-      "name": "Recode",
-      "rss_url": "https://www.vox.com/rss/recode/index.xml",
-      "source_type": "rss",
-      "region": "Global",
-      "topics": ["Tech", "Biz"],
-      "full_text": true
-    },
+
     {
       "name": "CryptoSlate",
       "rss_url": "https://cryptoslate.com/feed/",
@@ -114,36 +107,38 @@
     },
     {
       "name": "ACN Newswire",
-      "rss_url": "https://www.acnnewswire.com/rss/",
+      "rss_url": "https://rss.app/feeds/mhjZgtbXvh2NAMsJ.xml",
       "source_type": "rss",
       "region": "Asia-Pacific",
       "topics": ["Tech", "Business", "AI", "FinTech"],
       "full_text": true
     },
+
     {
-      "name": "CCN (Crypto News Network)",
-      "rss_url": "https://www.ccn.com/feed/",
-      "source_type": "rss",
-      "region": "Global",
-      "topics": ["Blockchain", "Crypto"],
-      "full_text": true
-    },
-    {
-      "name": "Finextra – AI in FinTech",
-      "rss_url": "https://www.finextra.com/rss/rss.aspx?category=Artificial%20Intelligence",
+      "name": "Finextra",
+      "rss_url": "https://rss.app/feeds/aBYEwmyKu3tFb6wU.xml",
       "source_type": "rss",
       "region": "Global",
       "topics": ["AI", "FinTech"],
       "full_text": true
     },
     {
-      "name": "Forbes – Tom Groenfeldt",
-      "rss_url": "https://forbes.com/sites/tomgroenfeldt/rss",
+      "name": "Forbes",
+      "rss_url": "https://rss.app/feeds/ZSZ4Ofh59oqJRPwE.xml",
       "source_type": "rss",
       "region": "Global",
       "topics": ["FinTech", "Digital Finance"],
       "full_text": true
+    },
+    {
+      "name": "Reuters",
+      "rss_url": "https://rss.app/feeds/80AOTZUA8bv7kuBB.xml",
+      "source_type": "rss",
+      "region": "Global",
+      "topics": ["AI", "FinTech", "Digital Finance"],
+      "full_text": true
     }
+   
   ],
   "rsshub_sources": [
     {
@@ -156,23 +151,15 @@
     },
     {
       "name": "Caixin (财新网)",
-      "rss_url": "https://www.caixinglobal.com",
+      "rss_url": "https://rss.app/feeds/b6qZhTm4QhQbWhrZ.xml",
       "source_type": "rsshub",
       "region": "China",
       "topics": ["Finance", "Tech"],
       "full_text": true
     },
     {
-      "name": "日経中文網 (Nikkei Chinese)",
-      "rss_url": "https://zh.cn.nikkei.com",
-      "source_type": "rsshub",
-      "region": "Japan/China",
-      "topics": ["Finance", "Tech"],
-      "full_text": true
-    },
-    {
       "name": "共同網 (Kyodo News)",
-      "rss_url": "https://tchina.kyodonews.net",
+      "rss_url": "https://rss.app/feeds/xxsdsfOI9hABSFCj.xml",
       "source_type": "rsshub",
       "region": "Japan/China",
       "topics": ["Finance", "Tech"],
@@ -180,7 +167,7 @@
     },
     {
       "name": "信報財經新聞 (HKEJ)",
-      "rss_url": "https://www.hkej.com/instantnews",
+      "rss_url": "https://rss.app/feeds/9UZM1bBmxSRLMMwV.xml",
       "source_type": "rsshub",
       "region": "Hong Kong",
       "topics": ["Finance", "Tech"],
@@ -188,7 +175,7 @@
     },
       {
         "name": "Fintech News Hong Kong",
-        "rss_url": "https://fintechnews.hk",
+        "rss_url": "https://rss.app/feeds/asO2LePrR0su4HQ1.xml",
         "source_type": "rss",
         "region": "Hong Kong",
         "topics": ["FinTech", "AI", "Finance"],
@@ -196,23 +183,16 @@
     },
     {
         "name": "BlockTempo (動區動趨)",
-        "rss_url": "https://www.blocktempo.com",
+        "rss_url": "https://rss.app/feeds/BSQI5hj2wfph6Ihs.xml ",
         "source_type": "rss",
         "region": "Taiwan",
         "topics": ["Blockchain", "Crypto", "Web3"],
         "full_text": true
     },
-    {
-        "name": "Coinpost (コインポスト)",
-        "rss_url": "https://coinpost.jp",
-        "source_type": "rss",
-        "region": "Japan",
-        "topics": ["Blockchain", "Crypto", "Policy"],
-        "full_text": true
-    },
+  
     {
         "name": "e27",
-        "rss_url": "https://e27.co/news/",
+        "rss_url": "https://rss.app/feeds/jZgRd3l36qYSmWlP.xml",
         "source_type": "rss",
         "region": "Asia",
         "topics": ["Tech", "Startups", "FinTech", "AI"],
@@ -220,7 +200,7 @@
     },
     {
         "name": "Asia Times",
-        "rss_url": "https://asiatimes.com",
+        "rss_url": "https://rss.app/feeds/JHN1fIRfblxCpNYR.xml",
         "source_type": "rss",
         "region": "Asia",
         "topics": ["Business", "Tech", "Finance"],
@@ -229,7 +209,7 @@
   
     {
         "name": "Techorange",
-        "rss_url": "https://buzzorange.com/techorange/",
+        "rss_url": "https://rss.app/feeds/44vw49mFWfichrZN.xml",
         "source_type": "rss",
         "region": "Asia",
         "topics": ["Blockchain", "Crypto", "Web3"],
@@ -237,7 +217,7 @@
     },
     {
         "name": "Digital News Asia",
-        "rss_url": "https://www.digitalnewsasia.com",
+        "rss_url": "https://rss.app/feeds/ATBKbb9fPBP5DcdA.xml",
         "source_type": "rss",
         "region": "Asia",
         "topics": ["Tech", "Startups", "FinTech"],
@@ -245,60 +225,24 @@
     },
     {
         "name": "Blockchain.News",
-        "rss_url": "https://blockchain.news",
+        "rss_url": "https://rss.app/feeds/xHkO7m9Vg15o7x8b.xml",
         "source_type": "rss",
         "region": "China",
         "topics": ["Blockchain", "Crypto", "AI"],
         "full_text": true
     },
-    {
-        "name": "36Kr (36氪)",
-        "rss_url": "https://36kr.com",
-        "source_type": "rss",
-        "region": "China",
-        "topics": ["Startups", "Tech", "AI"],
-        "full_text": true
-    },
-    {
-        "name": "Fintech News Taiwan",
-        "rss_url": "https://fintechnews.hk/fintechtaiwan/",
-        "source_type": "rss",
-        "region": "Taiwan",
-        "topics": ["FinTech", "Blockchain", "Policy"],
-        "full_text": true
-    },
-    
-  
+
     {
         "name": "Asia Financial",
-        "rss_url": "https://www.asiafinancial.com",
+        "rss_url": "https://rss.app/feeds/lHGPZEIHs5rENolY.xml",
         "source_type": "rss",
         "region": "Asia",
         "topics": ["Finance", "FinTech", "Policy"],
         "full_text": true
     },
     {
-        "name": "The Diplomat",
-        "rss_url": "https://thediplomat.com",
-        "source_type": "rss",
-        "region": "Asia-Pacific",
-        "topics": ["Business", "Tech", "Policy"],
-        "full_text": true
-    },
-    {
-        "name": "Siam Blockchain",
-        "rss_url": "https://siamblockchain.com/#google_vignette",
-        "source_type": "rss",
-        "region": "Thailand",
-        "topics": ["Blockchain", "Crypto"],
-        "full_text": true
-    },
-
- 
-    
-    {
         "name": "Eco-Business",
-        "rss_url": "https://www.eco-business.com",
+        "rss_url": "https://rss.app/feeds/NvjUGDXcsOStb7xU.xml",
         "source_type": "rss",
         "region": "Asia",
         "topics": ["Tech", "Sustainability", "Finance"],
@@ -306,29 +250,193 @@
     },
     {
         "name": "MIT tech Review",
-        "rss_url": "https://www.technologyreview.com",
+        "rss_url": "https://rss.app/feeds/8Rto5SuJEmWoac2V.xml",
         "source_type": "rss",
         "region": "Asia",
         "topics": ["Tech", "Startups", "FinTech"],
         "full_text": true
     },
     {
-        "name": "Forbes",
-        "rss_url": "https://www.forbes.com",
-        "source_type": "rss",
-        "region": "Asia",
-        "topics": ["Tech", "Startups", "FinTech"],
-        "full_text": true
-    },
-    {
-        "name": "The next web",
-        "rss_url": "https://thenextweb.com",
+        "name": "VentureBeat",
+        "rss_url": "https://rss.app/feeds/nlH3Xf24nVls7NuS.xml",
         "source_type": "rss",
         "region": "Global",
         "topics": ["Tech", "Startups", "FinTech"],
         "full_text": true
+    },
+    {
+        "name": "Business Insider",
+        "rss_url": "https://rss.app/feeds/L7ojSCfX12fKDuvR.xml",
+        "source_type": "rss",
+        "region": "Global",
+        "topics": ["Tech", "Startups", "FinTech"],
+        "full_text": true
+    },
+    {
+        "name": "WIRED",
+        "rss_url": "https://rss.app/feeds/562ep7XvQmVtcyeF.xml",
+        "source_type": "rss",
+        "region": "Global",
+        "topics": ["Tech", "Startups", "FinTech"],
+        "full_text": true
+    },
+    {
+      "name": "The Verge",
+      "rss_url": "https://www.theverge.com/rss/index.xml",
+      "source_type": "rss",
+      "region": "Global",
+      "topics": ["Tech", "Startups", "FinTech"],
+      "full_text": true
+    },
+
+    {
+      "name": "ZDNet",
+      "rss_url": "https://www.zdnet.com/news/rss.xml",
+      "source_type": "rss",
+      "region": "Global",
+      "topics": ["Tech", "Business"],
+      "full_text": true
+    },
+
+    {
+      "name": "Synced",
+      "rss_url": "https://www.syncedreview.com/feed/",
+      "source_type": "rss",
+      "region": "Global",
+      "topics": ["AI", "Tech"],
+      "full_text": true
+    },
+    {
+      "name": "Perplexity AI",
+      "rss_url": "https://rss.app/feeds/P6Wc6ZmTXrsNEwHG.xml",
+      "source_type": "rss",
+      "region": "Global",
+      "topics": ["Tech", "Startups", "FinTech"],
+      "full_text": true
+    },
+    {
+      "name": "Sifted",
+      "rss_url": "https://rss.app/feeds/km4017winRSuQwyZ.xml",
+      "source_type": "rss",
+      "region": "Global",
+      "topics": ["Tech", "Startups", "FinTech"],
+      "full_text": true
+    },
+    {
+      "name": "Finvote",
+      "rss_url": "https://rss.app/feeds/wV2kfwu60FYlb3YR.xml",
+      "source_type": "rss",
+      "region": "Global",
+      "topics": ["Tech", "Startups", "FinTech"],
+      "full_text": true
+    },
+    {
+      "name": "The Fintech Times",
+      "rss_url": "https://thefintechtimes.com/feed",
+      "source_type": "rss",
+      "region": "Global",
+      "topics": ["FinTech", "Finance", "Technology"],
+      "full_text": true
+    },
+    {
+      "name": "Finance Magnates » FinTech",
+      "rss_url": "https://www.financemagnates.com/fintech/feed",
+      "source_type": "rss",
+      "region": "Global",
+      "topics": ["FinTech", "Finance"],
+      "full_text": true
+    },
+    {
+      "name": "TechBullion",
+      "rss_url": "https://techbullion.com/feed",
+      "source_type": "rss",
+      "region": "Global",
+      "topics": ["FinTech", "Tech", "Crypto"],
+      "full_text": true
+    },
+    
+    {
+      "name": "Finovate Blog",
+      "rss_url": "https://finovate.com/feed",
+      "source_type": "rss",
+      "region": "Global",
+      "topics": ["FinTech", "Finance"],
+      "full_text": true
+    },
+    
+    {
+      "name": "DigFin",
+      "rss_url": "https://digfingroup.com/feed",
+      "source_type": "rss",
+      "region": "Asia",
+      "topics": ["FinTech", "Finance", "Tech"],
+      "full_text": true
+    },
+    {
+      "name": "FinTecBuzz",
+      "rss_url": "https://fintecbuzz.com/feed",
+      "source_type": "rss",
+      "region": "Global",
+      "topics": ["FinTech", "Tech", "News"],
+      "full_text": true
+    },
+    {
+      "name": "RegtechTimes",
+      "rss_url": "https://regtechtimes.com/feed",
+      "source_type": "rss",
+      "region": "Global/India",
+      "topics": ["RegTech", "FinTech"],
+      "full_text": true
+    },
+    {
+      "name": "Fintech InShorts",
+      "rss_url": "https://fintechinshorts.com/fintech/feed",
+      "source_type": "rss",
+      "region": "Global",
+      "topics": ["FinTech"],
+      "full_text": true
+    },
+    {
+      "name": "Bank Automation News",
+      "rss_url": "https://bankautomationnews.com/feed",
+      "source_type": "rss",
+      "region": "Global/US",
+      "topics": ["FinTech", "Banking", "Automation"],
+      "full_text": true
+    },
+    
+    {
+      "name": "AI nyheter",
+      "rss_url": "https://nyheter.aitool.se/feed",
+      "source_type": "rss",
+      "region": "Europe/Sweden",
+      "topics": ["AI", "Machine Learning", "Tech News"],
+      "full_text": true
+    },
+    {
+      "name": "DailyAI",
+      "rss_url": "https://dailyai.com/feed",
+      "source_type": "rss",
+      "region": "UK/Global",
+      "topics": ["AI", "Machine Learning", "News"],
+      "full_text": true
+    },
+    {
+      "name": "Qudata",
+      "rss_url": "https://qudata.com/en/news/rss.xml",
+      "source_type": "rss",
+      "region": "Europe/Global",
+      "topics": ["AI", "Machine Learning", "News"],
+      "full_text": true
+    },
+    {
+      "name": "AITime Journal",
+      "rss_url": "https://aitimejournal.com/feed",
+      "source_type": "rss",
+      "region": "Global",
+      "topics": ["AI", "Tech News", "Journal"],
+      "full_text": true
     }
 
-    
   ]
 }
