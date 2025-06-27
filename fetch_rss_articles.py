@@ -122,7 +122,7 @@ async def process_feed_async(
         print(f"\u26a0\ufe0f {name} is missing rss_url")
         return []
     try:
-        async with session.get(url, headers=DEFAULT_HEADERS, timeout=10) as resp:
+        async with session.get(url, headers=DEFAULT_HEADERS, timeout=120) as resp:
             resp.raise_for_status()
             feed_data = await resp.text()
     except (aiohttp.ClientError, asyncio.TimeoutError) as exc:

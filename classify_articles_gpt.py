@@ -42,6 +42,17 @@ Our team is building an internal news intelligence system to help product manage
 Your task is to analyze each article and assign:
 1. One category — the article’s primary topic
 2. One region — where the article is geographically focused
+3. Decide whether the article provides meaningful insight, Does the content offer helpful, new, or actionable information to professionals in AI, FinTech, or Blockchain?
+4. If the article is not relevant, you are authorized to delete it from the dataset.
+
+
+❌ Do NOT keep articles that:
+	•	Focus on social trends, youth culture, education inequality, or politics with no technical application
+	•	Mention crypto or AI without real content (e.g. just as a cultural or economic metaphor)
+	•	Discuss geopolitical conflicts, cyberattacks, or hacker activity unrelated to product innovation or enterprise adoption
+	•	Are overly vague, speculative, or lack product, funding, or technical depth
+
+
 
 Why this matters:
 Your classifications help us identify real-world use cases of AI and FinTech, track innovation across Asia and the world, and surface relevant news for internal strategy, product planning, and technical research.
@@ -49,7 +60,7 @@ Your classifications help us identify real-world use cases of AI and FinTech, tr
 Categories (choose one only):
 
 General Tech & Startups
-For news about general technology trends, enterprise tools, consumer apps, or startup activity not directly focused on AI, finance, or crypto.
+For news about general technology trends, enterprise tools, consumer apps, or startup activity.
 Example: A startup launches a productivity tool or a SaaS company raises funding.
 
 Applied AI & FinTech
@@ -57,8 +68,8 @@ For articles about practical uses of artificial intelligence or financial techno
 Example: A bank uses a large language model to automate customer service.
 
 Blockchain & Crypto
-For content about crypto exchanges, smart contracts, Web3 infrastructure, blockchain applications in finance, or central bank digital currencies.
-Example: A government announces a pilot program for a digital currency.
+For content about crypto exchanges, smart contracts, Web3 infrastructure, blockchain applications in finance, or central bank digital currencies. It should be realted to AI or FinTech.
+Example: The company applied AI in trading.
 
 Regions (choose one only):
 

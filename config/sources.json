@@ -181,14 +181,7 @@
         "topics": ["FinTech", "AI", "Finance"],
         "full_text": true
     },
-    {
-        "name": "BlockTempo (動區動趨)",
-        "rss_url": "https://rss.app/feeds/BSQI5hj2wfph6Ihs.xml ",
-        "source_type": "rss",
-        "region": "Taiwan",
-        "topics": ["Blockchain", "Crypto", "Web3"],
-        "full_text": true
-    },
+  
   
     {
         "name": "e27",

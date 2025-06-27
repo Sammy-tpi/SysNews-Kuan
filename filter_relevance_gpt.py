@@ -23,6 +23,7 @@ Financial Technology (FinTech), such as digital banking, fraud detection, robo-a
 Blockchain and Crypto technologies, especially their use in automation, intelligent agents, or AI-enhanced Web3 projects.
 
 We do not want articles that are mainly about politics, lifestyle, sports, culture, general economy, or unrelated industries.
+Make sure the article whether the article provides meaningful insight, Does the content offer helpful, new, or actionable information to professionals.
 
 Please focus on whether the article has any real or potential connection to AI, FinTech, or Blockchain innovation, especially if it has product, funding, technical, or strategic value.
 
