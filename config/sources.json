@@ -429,7 +429,64 @@
       "region": "Global",
       "topics": ["AI", "Tech News", "Journal"],
       "full_text": true
+    },
+    {
+      "name": "經濟日報",
+      "rss_url": "https://rss.app/feeds/8ZFPzQ8ICNqxZ60b.xml",
+      "source_type": "rss",
+      "region": "Global",
+      "topics": ["AI", "Tech News", "Journal"],
+      "full_text": true
+    },
+    {
+      "name": "工商時報",
+      "rss_url": "https://rss.app/feeds/BkEGPajcFVJuD1d8.xml",
+      "source_type": "rss",
+      "region": "Global",
+      "topics": ["AI", "Tech News", "Journal"],
+      "full_text": true
+    },
+    {
+      "name": "中央社",
+      "rss_url":"https://rss.app/feeds/OgnFmemLiXbkx33Z.xml",
+      "source_type": "rss",
+      "region": "Global",
+      "topics": ["AI", "Tech News", "Journal"],
+      "full_text": true
+    },
+    {
+      "name": "聯合新聞網",
+      "rss_url":"https://rss.app/feeds/kS599MaCtfbLogw8.xml",
+      "source_type": "rss",
+      "region": "Global",
+      "topics": ["AI", "Tech News", "Journal"],
+      "full_text": true
+    },
+    {
+      "name": "風傳媒",
+      "rss_url":"https://rss.app/feeds/B8NNpBtTHJPBS40N.xml",
+      "source_type": "rss",
+      "region": "Global",
+      "topics": ["AI", "Tech News", "Journal"],
+      "full_text": true
+    },
+    {
+      "name": "ETtoday新聞雲 ",
+      "rss_url":"https://rss.app/feeds/rCn7foSv1MADzqQ5.xml",
+      "source_type": "rss",
+      "region": "Global",
+      "topics": ["AI", "Tech News", "Journal"],
+      "full_text": true
+    },
+    {
+      "name": "數位時代 BusinessNext ",
+      "rss_url":"https://rss.app/feeds/ZytOvg8fNoHWsNIV.xml",
+      "source_type": "rss",
+      "region": "Global",
+      "topics": ["AI", "Tech News", "Journal"],
+      "full_text": true
     }
+
 
   ]
 }
