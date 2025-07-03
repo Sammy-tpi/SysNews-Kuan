@@ -9,14 +9,17 @@ import json
 import os
 import re
 import asyncio
-import aiohttp
+import google.generativeai as genai
+from dotenv import load_dotenv
 from typing import Dict, List, Any
 
 INPUT_FILE = "data/classified_articles.json"
 OUTPUT_ALL_FILE = "data/news_data.json"
 CATEGORY_DIR = "data/categorized"
 
-MODEL_ENDPOINT = "http://192.168.32.1:8001/api/v0/llm/rag"
+load_dotenv()
+genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+model = genai.GenerativeModel("gemini-1.5-flash")
 
 CATEGORIES = [
     "General Tech & Startups",
@@ -99,14 +102,9 @@ def load_articles(path: str) -> List[Dict[str, Any]]:
 semaphore = asyncio.Semaphore(3)
 
 
-def _parse_response(full_response: str) -> Dict[str, Any]:
-    raw_text = ""
+def _parse_response(text: str) -> Dict[str, Any]:
+    raw_text = text
     try:
-        obj = json.loads(full_response)
-        raw_text = obj.get("results", {}).get("text", "")
-        if not raw_text:
-            return {"category": "", "region": "Global"}
-
         match = re.search(r"\{[^{}]*\}", raw_text, re.DOTALL)
         if match:
             raw_text = match.group(0)
@@ -124,7 +122,7 @@ def _parse_response(full_response: str) -> Dict[str, Any]:
         return {"category": "", "region": "Global"}
 
 
-async def classify_article(session: aiohttp.ClientSession, article: Dict[str, Any]) -> Dict[str, Any] | None:
+async def classify_article(article: Dict[str, Any]) -> Dict[str, Any] | None:
     title = article.get("title", "")
     content = article.get("content") or article.get("description", "")
     if not title or not content:
@@ -132,24 +130,17 @@ async def classify_article(session: aiohttp.ClientSession, article: Dict[str, An
     short_content = truncate_text(content)
     prompt = f"{PROMPT_TEMPLATE.strip()}\n\nTitle: {title}\n\nArticle Content:\n{short_content}"
 
-    payload = {
-        "query": prompt,
-        "sys_prompt": "You are a JSON-only API that assigns a category and region to the article.",
-        "model_name": "Gemma-3-27B",
-        "temperature": 0.1,
-        "top_p": 0.1,
-        "top_k": 5,
-        "max_tokens": 4096,
-        "repetition_penalty": 1,
-        "parser": "text",
-    }
+    full_prompt = (
+        prompt
+        + "\nPlease return JSON like {\"category\": \"Applied AI & FinTech\", \"region\": \"East Asia\"}."
+    )
 
     async with semaphore:
         try:
-            async with session.post(MODEL_ENDPOINT, json=payload, timeout=60) as resp:
-                text = await resp.text()
-                print("📩 Model raw response:", text)
-                return _parse_response(text)
+            resp = await model.generate_content_async(full_prompt)
+            text = resp.text
+            print("📩 Model raw response:", text)
+            return _parse_response(text)
         except Exception as e:
             print(f"❌ Exception during request: {e}")
             return None
@@ -170,19 +161,18 @@ async def main_async() -> None:
             continue
         valid_articles.append(art)
 
-    async with aiohttp.ClientSession() as session:
-        tasks = [classify_article(session, art) for art in valid_articles]
-        responses = await asyncio.gather(*tasks)
-        for art, result in zip(valid_articles, responses):
-            if not result:
-                continue
-            art["category"] = result.get("category", "")
-            art["region"] = result.get("region", "Global")
-            results.append(art)
-            cat = art["category"]
-            region = art["region"]
-            if region in grouped and cat in grouped[region]:
-                grouped[region][cat].append(art)
+    tasks = [classify_article(art) for art in valid_articles]
+    responses = await asyncio.gather(*tasks)
+    for art, result in zip(valid_articles, responses):
+        if not result:
+            continue
+        art["category"] = result.get("category", "")
+        art["region"] = result.get("region", "Global")
+        results.append(art)
+        cat = art["category"]
+        region = art["region"]
+        if region in grouped and cat in grouped[region]:
+            grouped[region][cat].append(art)
 
     with open(OUTPUT_ALL_FILE, "w", encoding="utf-8") as f:
         json.dump(results, f, ensure_ascii=False, indent=2)

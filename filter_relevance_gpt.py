@@ -1,15 +1,19 @@
 import json
 import os
-import aiohttp
 import asyncio
+import google.generativeai as genai
+from dotenv import load_dotenv
 from typing import Any, Dict, List
 
 from utils import load_keywords, keyword_score, source_weight
 
 INPUT_FILE = "data/recent_articles.json"
 OUTPUT_FILE = "data/classified_articles.json"
-MODEL_ENDPOINT = "http://192.168.32.1:8001/api/v0/llm/rag"
 MAX_CONTENT_TOKENS = 1000  # Adjust based on your model's token limit
+
+load_dotenv()
+genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+model = genai.GenerativeModel("gemini-1.5-flash")
 
 
 PROMPT_TEMPLATE = """
@@ -81,37 +85,28 @@ def load_articles(path: str) -> List[Dict[str, Any]]:
         except json.JSONDecodeError:
             raise RuntimeError(f"Invalid JSON in {path}")
 
-def _parse_response(full_response: str) -> Dict[str, int]:
+def _parse_response(text: str) -> Dict[str, int]:
     try:
-        obj = json.loads(full_response)
-        raw_text = obj.get("results", {}).get("text", "")
-        if not raw_text:
-            return {"keep": False, "score": 0}
-
-        # 🧹 Step 1: Remove markdown block with regex
         import re
-        match = re.search(r"\{[^{}]*\}", raw_text, re.DOTALL)
+        match = re.search(r"{[^{}]*}", text, re.DOTALL)
         if match:
-            raw_text = match.group(0)
+            text = match.group(0)
         else:
-            # fallback: try to remove backticks manually
-            raw_text = raw_text.replace("```json", "").replace("```", "").strip()
-
-        # 🧹 Step 2: Load JSON
-        result_obj = json.loads(raw_text)
-        keep = bool(result_obj.get("keep", False))
+            text = text.replace("```json", "").replace("```", "").strip()
+        data = json.loads(text)
+        keep = bool(data.get("keep", False))
         try:
-            score = int(result_obj.get("score", 0))
+            score = int(data.get("score", 0))
         except (TypeError, ValueError):
             score = 0
         return {"keep": keep, "score": score}
-
     except Exception as e:
         print("⚠️ Failed to parse model response:", e)
-        print("🧪 Raw inner text was:", repr(raw_text))
+        print("🧪 Raw inner text was:", repr(text))
         return {"keep": False, "score": 0}
 
-async def check_relevance(session: aiohttp.ClientSession, article: Dict[str, Any]) -> Dict[str, int] | None:
+
+async def check_relevance(article: Dict[str, Any]) -> Dict[str, int] | None:
     title = article.get("title", "")
     content = article.get("content") or article.get("description", "")
     if not title or not content:
@@ -119,24 +114,14 @@ async def check_relevance(session: aiohttp.ClientSession, article: Dict[str, Any
     short_content = truncate_text(content)
     prompt = f"{PROMPT_TEMPLATE.strip()}\n\nTitle: {title}\n\nArticle Content:\n{short_content}"
 
-    payload = {
-        "query": prompt,
-        "sys_prompt": "You are a JSON-only API that determines if an article is relevant to AI, FinTech, or Blockchain.",
-        "model_name": "Gemma-3-27B",
-        "temperature": 0.1,
-        "top_p": 0.1,
-        "top_k": 5,
-        "max_tokens": 4096,
-        "repetition_penalty": 1,
-        "parser": "text"
-    }
+    full_prompt = prompt + "\nPlease answer only in JSON format like {\"keep\": true, \"score\": 18}."
 
     async with semaphore:
         try:
-            async with session.post(MODEL_ENDPOINT, json=payload, timeout=120, ssl=False) as resp:
-                text = await resp.text()
-                print("📩 Model raw response:", text)
-                return _parse_response(text)
+            resp = await model.generate_content_async(full_prompt)
+            text = resp.text
+            print("📩 Model raw response:", text)
+            return _parse_response(text)
         except Exception as e:
             print(f"❌ Exception during request: {e.__class__.__name__} - {e}")
             return None
@@ -151,21 +136,20 @@ async def main_async() -> None:
         if art.get("title") and (art.get("content") or art.get("description")):
             valid_articles.append(art)
 
-    async with aiohttp.ClientSession() as session:
-        tasks = [check_relevance(session, art) for art in valid_articles]
-        responses = await asyncio.gather(*tasks)
+    tasks = [check_relevance(art) for art in valid_articles]
+    responses = await asyncio.gather(*tasks)
 
-        for art, resp in zip(valid_articles, responses):
-            if resp and resp.get("keep"):
-                text = f"{art.get('title', '')} {art.get('content') or art.get('description', '')}"
-                kw_score = keyword_score(text, keywords)
-                source_name = art.get("source", {}).get("name", "")
-                kw_score *= source_weight(source_name)
-                gpt_score = resp.get("score", 0)
-                art["score"] = gpt_score + kw_score
-                results.append(art)
-            elif resp is None:
-                print(f"⚠️ Skipped article due to LLM error: {art['title']}")
+    for art, resp in zip(valid_articles, responses):
+        if resp and resp.get("keep"):
+            text = f"{art.get('title', '')} {art.get('content') or art.get('description', '')}"
+            kw_score = keyword_score(text, keywords)
+            source_name = art.get("source", {}).get("name", "")
+            kw_score *= source_weight(source_name)
+            gpt_score = resp.get("score", 0)
+            art["score"] = gpt_score + kw_score
+            results.append(art)
+        elif resp is None:
+            print(f"⚠️ Skipped article due to LLM error: {art['title']}")
 
     os.makedirs("data", exist_ok=True)
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
