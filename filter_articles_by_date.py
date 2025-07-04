@@ -4,6 +4,7 @@ from datetime import datetime, timedelta, timezone
 from typing import List, Dict
 
 RSS_FILE = "data/rss_articles.json"
+NEWSAPI_FILE = "data/newsapi_ai_articles.json"
 OUTPUT_FILE = "data/recent_articles.json"
 
 
@@ -48,7 +49,9 @@ def filter_recent(articles: List[Dict]) -> List[Dict]:
 
 def main() -> None:
     rss_articles = load_json(RSS_FILE)
-    recent = filter_recent(rss_articles)
+    newsapi_articles = load_json(NEWSAPI_FILE)
+    combined = rss_articles + newsapi_articles
+    recent = filter_recent(combined)
 
     os.makedirs("data", exist_ok=True)
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
