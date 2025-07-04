@@ -132,7 +132,7 @@
     },
     {
       "name": "Reuters",
-      "rss_url": "https://rss.app/feeds/80AOTZUA8bv7kuBB.xml",
+      "rss_url": "https://www.reutersagency.com/feed/?best-topics=technology",
       "source_type": "rss",
       "region": "Global",
       "topics": ["AI", "FinTech", "Digital Finance"],
@@ -143,7 +143,7 @@
   "rsshub_sources": [
     {
       "name": "Nikkei Asia",
-      "rss_url": "https://rss.app/feeds/kPFP3qfxjq43xh3q.xml",
+      "rss_url": "https://feeder.co/discover/7d80ba8605/asia-nikkei-com",
       "source_type": "rsshub",
       "region": "Japan/Asia",
       "topics": ["Finance", "Tech"],
@@ -151,7 +151,7 @@
     },
     {
       "name": "Caixin (财新网)",
-      "rss_url": "https://rss.app/feeds/b6qZhTm4QhQbWhrZ.xml",
+      "rss_url": "https://feeder.co/discover/146a1db4f9/caixinglobal-com",
       "source_type": "rsshub",
       "region": "China",
       "topics": ["Finance", "Tech"],
@@ -159,7 +159,7 @@
     },
     {
       "name": "共同網 (Kyodo News)",
-      "rss_url": "https://rss.app/feeds/xxsdsfOI9hABSFCj.xml",
+      "rss_url": "https://feeder.co/discover/3709e021f8/tchina-kyodonews-net",
       "source_type": "rsshub",
       "region": "Japan/China",
       "topics": ["Finance", "Tech"],
@@ -175,7 +175,7 @@
     },
       {
         "name": "Fintech News Hong Kong",
-        "rss_url": "https://rss.app/feeds/asO2LePrR0su4HQ1.xml",
+        "rss_url": "https://feeder.co/discover/79e7b4bf36/fintechnews-hk",
         "source_type": "rss",
         "region": "Hong Kong",
         "topics": ["FinTech", "AI", "Finance"],
@@ -202,7 +202,7 @@
   
     {
         "name": "Techorange",
-        "rss_url": "https://rss.app/feeds/44vw49mFWfichrZN.xml",
+        "rss_url": "https://techorange.com/feed/",
         "source_type": "rss",
         "region": "Asia",
         "topics": ["Blockchain", "Crypto", "Web3"],
@@ -210,7 +210,7 @@
     },
     {
         "name": "Digital News Asia",
-        "rss_url": "https://rss.app/feeds/ATBKbb9fPBP5DcdA.xml",
+        "rss_url": "https://www.digitalnewsasia.com/rss.xml",
         "source_type": "rss",
         "region": "Asia",
         "topics": ["Tech", "Startups", "FinTech"],
@@ -227,7 +227,7 @@
 
     {
         "name": "Asia Financial",
-        "rss_url": "https://rss.app/feeds/lHGPZEIHs5rENolY.xml",
+        "rss_url": "https://www.asiafinancial.com/feed",
         "source_type": "rss",
         "region": "Asia",
         "topics": ["Finance", "FinTech", "Policy"],
@@ -251,15 +251,15 @@
     },
     {
         "name": "VentureBeat",
-        "rss_url": "https://rss.app/feeds/nlH3Xf24nVls7NuS.xml",
+        "rss_url": "https://feeds.feedburner.com/venturebeat/SZYF",
         "source_type": "rss",
         "region": "Global",
         "topics": ["Tech", "Startups", "FinTech"],
         "full_text": true
     },
     {
-        "name": "Business Insider",
-        "rss_url": "https://rss.app/feeds/L7ojSCfX12fKDuvR.xml",
+        "name": " Insider",
+        "rss_url": "https://www.patreon.com/rss/insiderpodcast?auth=KyLaO4qbEUozzU5gmUrXH2exTHlKzmVn",
         "source_type": "rss",
         "region": "Global",
         "topics": ["Tech", "Startups", "FinTech"],
@@ -267,7 +267,7 @@
     },
     {
         "name": "WIRED",
-        "rss_url": "https://rss.app/feeds/562ep7XvQmVtcyeF.xml",
+        "rss_url": "https://www.wired.com/feed/rss",
         "source_type": "rss",
         "region": "Global",
         "topics": ["Tech", "Startups", "FinTech"],
@@ -275,7 +275,7 @@
     },
     {
       "name": "The Verge",
-      "rss_url": "https://www.theverge.com/rss/index.xml",
+      "rss_url": "http://www.theverge.com/rss/index.xml",
       "source_type": "rss",
       "region": "Global",
       "topics": ["Tech", "Startups", "FinTech"],
@@ -432,7 +432,7 @@
     },
     {
       "name": "經濟日報",
-      "rss_url": "https://rss.app/feeds/8ZFPzQ8ICNqxZ60b.xml",
+      "rss_url": "https://feeder.co/discover/115bd77622/money-udn-com-money-index",
       "source_type": "rss",
       "region": "Global",
       "topics": ["AI", "Tech News", "Journal"],
@@ -440,7 +440,7 @@
     },
     {
       "name": "工商時報",
-      "rss_url": "https://rss.app/feeds/BkEGPajcFVJuD1d8.xml",
+      "rss_url": "https://feeder.co/discover/8cb2cd5089/ctee-com-tw",
       "source_type": "rss",
       "region": "Global",
       "topics": ["AI", "Tech News", "Journal"],
