@@ -27,7 +27,7 @@ CATEGORIES = [
     "Blockchain & Crypto",
 ]
 
-REGIONS = ["global", "east asia"]
+REGIONS = ["Global", "East Asia"]
 
 # Limit the request size to avoid exceeding the model's context window
 MAX_CONTENT_TOKENS = 1000  # Adjust based on your model's token limit
@@ -112,15 +112,14 @@ def _parse_response(text: str) -> Dict[str, Any]:
             raw_text = raw_text.replace("```json", "").replace("```", "").strip()
 
         data = json.loads(raw_text)
-        region = str(data.get("region", "global")).lower()
         return {
             "category": data.get("category", ""),
-            "region": region,
+            "region": data.get("region", "Global"),
         }
     except Exception as e:
         print("⚠️ Failed to parse model response:", e)
         print("🧪 Raw inner text was:", repr(raw_text))
-        return {"category": "", "region": "global"}
+        return {"category": "", "region": "Global"}
 
 
 async def classify_article(article: Dict[str, Any]) -> Dict[str, Any] | None:
@@ -168,7 +167,7 @@ async def main_async() -> None:
         if not result:
             continue
         art["category"] = result.get("category", "")
-        art["region"] = str(result.get("region", "global")).lower()
+        art["region"] = result.get("region", "Global")
         results.append(art)
         cat = art["category"]
         region = art["region"]

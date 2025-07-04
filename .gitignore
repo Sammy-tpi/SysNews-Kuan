@@ -3,6 +3,7 @@
 # 🧪 自動產出的資料檔案
 data/classified_articles.json
 data/news_data.json
+data/newsapi_ai_articles.json
 data/recent_articles.json
 data/rss_articles.json
 data/selected_articles.json
