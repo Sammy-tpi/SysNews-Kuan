@@ -1,12 +1,12 @@
 # NewsRender
 
-**NewsRender** is a Python-powered pipeline that delivers a **daily bilingual (English + Traditional Chinese)** digest of the most relevant AI, FinTech, and startup news. It pulls content from curated **RSS/RSSHub feeds** and the **EventRegistry API**, filters it using custom keywords, ranks and summarizes with **LLM models**, and sends out a clean, branded HTML email to subscribed recipients.
+**NewsRender** is a Python-powered pipeline that delivers a **daily bilingual (English + Traditional Chinese)** digest of the most relevant AI, FinTech, and startup news. It pulls content from curated **RSS/RSSHub feeds**, filters them using custom keywords, ranks and summarizes with **LLM models**, and sends out a clean, branded HTML email to subscribed recipients.
 
 ---
 
 ## ✨ Features
 
-* ✅ Multi-source news aggregation (RSS, and EventRegistry)
+* ✅ Multi-source news aggregation via RSS/RSSHub
 * ✅ Region and topic-based classification
 * ✅ LLM-powered relevance filtering and bilingual summarization
 * ✅ Responsive HTML digest rendering with custom styling
@@ -27,7 +27,6 @@ NewsRender/
 ├── .github/workflows/         # GitHub Actions scheduler
 ├── main.py                    # Full pipeline runner
 ├── fetch_rss_articles.py      # Async RSS fetcher
-├── fetch_newsapi_ai.py        # EventRegistry API fetcher
 ├── filter_articles_by_date.py # Keeps articles from the past 2 days
 ├── filter_relevance_gpt.py    # GPT-based topic relevance filter & scoring
 ├── classify_articles_gpt.py   # Categorize and label region
@@ -47,7 +46,6 @@ Create a `.env` file in the project root with the following variables:
 DIGEST_SENDER=your_email@gmail.com
 DIGEST_PASSWORD=your_gmail_app_password
 DIGEST_RECIPIENT=recipient1@example.com,recipient2@example.com
-NEWSAPI_AI_KEY=your_eventregistry_api_key
 ```
 
 > ✅ **Note:** Gmail requires an [App Password](https://support.google.com/accounts/answer/185833?hl=en) if 2FA is enabled.
@@ -70,16 +68,15 @@ python main.py
 
 This executes the following steps:
 
-1. `fetch_newsapi_ai.py` — Query EventRegistry for AI/FinTech articles.
-2. `fetch_rss_articles.py` — Async fetch from RSS/RSSHub sources using `config/sources.json`.
-3. `filter_articles_by_date.py` — Keep articles published in the last two days.
-4. `filter_relevance_gpt.py` — Use GPT to decide if an article should be kept and assign a 0–10 relevance score.
-5. `classify_articles_gpt.py` — Categorize and tag the region.
-6. `select_top_articles.py` — Pick top article per category and region.
-7. `summarize_articles.py` — Generate Traditional Chinese summaries.
-8. `validate_news_data.py` — Validate format and remove duplicates.
-9. `generate_digest.py` — Render `digest.html` using a clean Jinja2 template.
-10. `send_digest.py` — Email the digest via Gmail SMTP.
+1. `fetch_rss_articles.py` — Async fetch from RSS/RSSHub sources using `config/sources.json`.
+2. `filter_articles_by_date.py` — Keep articles published in the last two days.
+3. `filter_relevance_gpt.py` — Use GPT to decide if an article should be kept and assign a 0–10 relevance score.
+4. `classify_articles_gpt.py` — Categorize and tag the region.
+5. `select_top_articles.py` — Pick top article per category and region.
+6. `summarize_articles.py` — Generate Traditional Chinese summaries.
+7. `validate_news_data.py` — Validate format and remove duplicates.
+8. `generate_digest.py` — Render `digest.html` using a clean Jinja2 template.
+9. `send_digest.py` — Email the digest via Gmail SMTP.
 
 Intermediate results are stored in the `data/` folder.
 
