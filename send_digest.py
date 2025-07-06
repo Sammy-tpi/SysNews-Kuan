@@ -25,7 +25,7 @@ def main():
 
     # --- Compose email ---
     msg = EmailMessage()
-    msg["Subject"] = f"📬 Polaris Daily Digest – {date_str}"
+    msg["Subject"] = f"📬 SysNew Daily – {date_str}"
     msg["From"] = SENDER
     msg["To"] = ", ".join(RECIPIENTS)  # visible To: header
     msg.set_content("This email requires an HTML-capable client.")
