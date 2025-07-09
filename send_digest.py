@@ -11,6 +11,10 @@ SENDER = os.getenv("DIGEST_SENDER")
 PASSWORD = os.getenv("DIGEST_PASSWORD")
 RECIPIENTS_RAW = os.getenv("DIGEST_RECIPIENT", "")
 RECIPIENTS = [email.strip() for email in RECIPIENTS_RAW.split(",") if email.strip()]
+BCC_RAW = os.getenv("DIGEST_BCC", "") 
+
+RECIPIENTS = [email.strip() for email in RECIPIENTS_RAW.split(",") if email.strip()]
+BCC = [email.strip() for email in BCC_RAW.split(",") if email.strip()]
 
 if not all([SENDER, PASSWORD]) or not RECIPIENTS:
     raise RuntimeError("❌ Missing sender, password, or recipient(s) in .env")
@@ -28,15 +32,19 @@ def main():
     msg["Subject"] = f"📬 SysNew Daily – {date_str}"
     msg["From"] = SENDER
     msg["To"] = ", ".join(RECIPIENTS)  # visible To: header
+    if BCC: 
+        msg["Bcc"] = ", ".join(BCC)
     msg.set_content("This email requires an HTML-capable client.")
     msg.add_alternative(html_content, subtype="html")
-
+    
+    ALL_RECIPIENTS = RECIPIENTS + BCC
+    
     # --- Send email ---
     try:
         with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
             smtp.login(SENDER, PASSWORD)
             # ✅ true recipient list here
-            smtp.sendmail(SENDER, RECIPIENTS, msg.as_string())
+            smtp.sendmail(SENDER, ALL_RECIPIENTS, msg.as_string())
 
     except smtplib.SMTPAuthenticationError:
         raise RuntimeError("❌ Gmail authentication failed — check app password.")
@@ -44,6 +52,8 @@ def main():
         raise RuntimeError(f"❌ Failed to send email: {exc}") from exc
 
     print("✅ Email sent to:", ", ".join(RECIPIENTS))
+    if BCC:
+        print("✅ BCC sent to:", ", ".join(BCC))
 
 
 if __name__ == "__main__":
