@@ -38,6 +38,8 @@ def main():
     msg.add_alternative(html_content, subtype="html")
     
     ALL_RECIPIENTS = RECIPIENTS + BCC
+    if "Bcc" in msg:
+        del msg["Bcc"]
     
     # --- Send email ---
     try:
