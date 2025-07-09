@@ -25,6 +25,7 @@ jobs:
           DIGEST_SENDER: ${{ secrets.DIGEST_SENDER }}
           DIGEST_PASSWORD: ${{ secrets.DIGEST_PASSWORD }}
           DIGEST_RECIPIENT: ${{ secrets.DIGEST_RECIPIENT }}
+          DIGEST_BCC: ${{ secrets.DIGEST_BCC }}  
           NEWSAPI_AI_KEY: ${{ secrets.NEWSAPI_AI_KEY }}
         run: python main.py
 
