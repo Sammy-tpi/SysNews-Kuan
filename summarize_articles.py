@@ -44,44 +44,45 @@ def _parse_summary(text: str) -> str:
         return ""
 
 
+def load_prompt(path: str) -> str:
+    with open(path, "r", encoding="utf-8") as f:
+        return f.read()
+
+VERSION = "v1"
+PROMPT_PATH = f"prompts/summarize_article_{VERSION}.txt"
+PROMPT_TEMPLATE = load_prompt(PROMPT_PATH)
+
+
 async def gemma_summarize(title: str, body: str) -> str:
-    """Return a Traditional Chinese summary of the article using Gemma."""
-    
-    prompt = f'''
-You are a bilingual AI assistant working for TPIsoftware, a Taiwan-based company specializing in enterprise platforms, AI development, and financial technologies.
-
-Your task is to help internal teams quickly understand news articles related to AI, FinTech, and emerging technology. Your summaries will appear in our internal daily news digest.
-
-You will be given full-text news articles in any languages.
-
-Guidelines:
-1. Summarize the article in Traditional Chinese. Use no more than 5 concise sentences, and keep the total length under 200 Chinese characters.
-2. Be accurate. Do not invent or infer information not in the original article.
-3. Retain important technical terms and include the English term in parentheses if needed.
-4. Only include the main event or finding. Do not mention event schedules, lists of speakers, or company history unless it is the main point.
-5. Use specific names and dates when available, not generic phrases.
-6. Directly output ONLY the summary. Do NOT include any greetings, explanations, titles, or any other introductory or closing phrases.
-7. Make sure the summary is useful and meaningful for internal teams, focusing on the most relevant information.
-
-
-Input:
-Title: {title}
-Article Content: {body}
-
-Output:
-Summary: [Your Traditional Chinese summary here]
-
-'''
+    """Return a Traditional Chinese summary of the article using Gemini."""
+    prompt = PROMPT_TEMPLATE.format(title=title, body=body)
 
     async with semaphore:
         try:
             resp = await model.generate_content_async(prompt)
             text = resp.text
             print("📩 Model raw response:", text)
-            return _parse_summary(text)
+            summary = _parse_summary(text)
+
+            # ✅ Log prompt, response, summary
+            log_entry = {
+                "title": title,
+                "version": VERSION,
+                "prompt": prompt,
+                "response": text,
+                "summary": summary,
+            }
+            os.makedirs("logs", exist_ok=True)
+            log_path = f"logs/summarize_log_{VERSION}.jsonl"
+            with open(log_path, "a", encoding="utf-8") as f:
+                f.write(json.dumps(log_entry, ensure_ascii=False) + "\n")
+
+            return summary
+
         except Exception as exc:
             logging.error("Gemini API call failed: %s", exc)
             return ""
+
 
 
 async def main_async() -> None:

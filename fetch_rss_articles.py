@@ -8,7 +8,6 @@ import aiohttp
 
 import feedparser
 from bs4 import BeautifulSoup
-from utils import load_keywords, keyword_score
 
 ALLOWED_CATEGORIES = {
     "tech",
@@ -86,6 +85,10 @@ def parse_timestamp(entry: dict) -> str:
     )
     return dt.isoformat().replace("+00:00", "Z")
 
+def load_keywords():
+    """Return the flat keyword list."""
+    with open("config/keywords.json", "r", encoding="utf-8") as f:
+        return json.load(f)["keywords"]
 
 async def fetch_full_text_async(
     url: str, session: aiohttp.ClientSession

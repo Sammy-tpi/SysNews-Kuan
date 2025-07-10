@@ -19,7 +19,7 @@ CATEGORY_DIR = "data/categorized"
 
 load_dotenv()
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
-model = genai.GenerativeModel("gemini-1.5-flash")
+model = genai.GenerativeModel("gemini-1.5-pro")
 
 CATEGORIES = [
     "General Tech & Startups",
@@ -37,56 +37,14 @@ def truncate_text(text: str, max_tokens: int = MAX_CONTENT_TOKENS) -> str:
     words = text.split()
     return " ".join(words[:max_tokens])
 
-PROMPT_TEMPLATE = """
-You are a news classification AI assistant working for the AI Innovation Department at TPIsoftware, a Taiwan-based software company specializing in artificial intelligence, financial technology, and enterprise software solutions.
+def load_prompt(path: str) -> str:
+    with open(path, "r", encoding="utf-8") as f:
+        return f.read()
 
-Our team is building an internal news intelligence system to help product managers, researchers, and engineers stay updated on real-world applications of AI and emerging technologies across global and East Asian markets.
+VERSION = "v1"
+PROMPT_PATH = f"prompts/classify_articles_{VERSION}.txt"
+PROMPT_TEMPLATE = load_prompt(PROMPT_PATH)
 
-Your task is to analyze each article and assign:
-1. One category — the article’s primary topic
-2. One region — where the article is geographically focused
-3. Decide whether the article provides meaningful insight, Does the content offer helpful, new, or actionable information to professionals in AI, FinTech, or Blockchain?
-4. If the article is not relevant, you are authorized to delete it from the dataset.
-
-
-❌ Do NOT keep articles that:
-	•	Focus on social trends, youth culture, education inequality, or politics with no technical application
-	•	Mention crypto or AI without real content (e.g. just as a cultural or economic metaphor)
-	•	Discuss geopolitical conflicts, cyberattacks, or hacker activity unrelated to product innovation or enterprise adoption
-	•	Are overly vague, speculative, or lack product, funding, or technical depth
-
-
-
-Why this matters:
-Your classifications help us identify real-world use cases of AI and FinTech, track innovation across Asia and the world, and surface relevant news for internal strategy, product planning, and technical research.
-
-Categories (choose one only):
-
-General Tech & Startups
-For news about general technology trends, enterprise tools, consumer apps, or startup activity.
-Example: A startup launches a productivity tool or a SaaS company raises funding.
-
-Applied AI & FinTech
-For articles about practical uses of artificial intelligence or financial technology. Includes LLM applications, algorithmic trading, AI customer service, robo-advisors, fraud detection, and similar topics.
-Example: A bank uses a large language model to automate customer service.
-
-Blockchain & Crypto
-For content about crypto exchanges, smart contracts, Web3 infrastructure, blockchain applications in finance, or central bank digital currencies. It should be realted to AI or FinTech.
-Example: The company applied AI in trading.
-
-Regions (choose one only):
-
-East Asia
-For news focused on Taiwan, China, Japan, South Korea, or Hong Kong. This region is our strategic priority and we track its trends closely.
-
-Global
-For all other regions, such as the United States, Europe, India, or if the article discusses global technology trends, multinational initiatives, or broad international applications.
-
-Output Format:
-Return only a JSON object on a single line, with no formatting or explanation.
-For example: {"category": "Applied AI & FinTech", "region": "East Asia"}
-
-"""
 
 
 def load_articles(path: str) -> List[Dict[str, Any]]:

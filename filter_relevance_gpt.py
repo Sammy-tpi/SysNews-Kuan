@@ -5,8 +5,6 @@ import google.generativeai as genai
 from dotenv import load_dotenv
 from typing import Any, Dict, List
 
-from utils import load_keywords, keyword_score, source_weight
-
 INPUT_FILE = "data/recent_articles.json"
 OUTPUT_FILE = "data/classified_articles.json"
 MAX_CONTENT_TOKENS = 1000  # Adjust based on your model's token limit
@@ -15,60 +13,14 @@ load_dotenv()
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 model = genai.GenerativeModel("gemini-1.5-pro")
 
+def load_prompt(version: str) -> str:
+    path = f"prompts/filter_relevance_{version}.txt"
+    with open(path, "r", encoding="utf-8") as f:
+        return f.read()
 
-PROMPT_TEMPLATE = """
-You are an AI-powered news filter working at TPIsoftware, a software company based in Taiwan that specializes in AI development, enterprise platforms, and financial technologies.
+VERSION = "v1"
+PROMPT_TEMPLATE = load_prompt(VERSION)
 
-Each day, your job is to help the product and strategy teams scan hundreds of global and East Asian news articles and identify only the ones that are relevant to our company’s interests.
-
-We are specifically interested in news articles related to:
-Artificial Intelligence (AI), including new applications, tools, models, or platforms.
-Financial Technology (FinTech), such as digital banking, fraud detection, robo-advisors, AI in risk control or personal finance.
-Blockchain and Crypto technologies, especially their use in automation, intelligent agents, or AI-enhanced Web3 projects.
-
-We do not want articles that are mainly about politics, lifestyle, sports, culture, general economy, or unrelated industries.
-Make sure the article provides meaningful insight, we only want the content offer helpful, new, or actionable information to professionals.
-
-Please focus on whether the article has any real or potential connection to AI, FinTech, or Blockchain innovation, especially if it has product, funding, technical value.
-
-Scoring Criteria:
- Topic Relevance (topic_score)
-
-How directly is the article focused on AI, FinTech, or Blockchain?
-	•	10  The article is entirely focused on a real-world application, product, or strategic move in AI/FinTech/Blockchain.
-	•	7-9 The article is strongly related, but the target topic is not the main theme.
-	•	4-6  The article contains general or brief mentions but not as a key focus.
-	•	1-3  Only a passing or marginal reference.
-	•	0  Completely unrelated to our target topics.
-
-⸻
-
-Source Credibility (source_score)
-
-How trustworthy and professional is the source of the article?
-	•	10  Top-tier industry or financial media (e.g., Bloomberg, TechCrunch, Reuters, 36Kr).
-	•	7-9 Reputable mainstream or regional tech/finance publications.
-	•	4-6 Aggregators, secondary news platforms.
-	•	1-3 Blogs, promotional content, unclear authorship.
-	•	0  Unverifiable or untrustworthy source.
-
-⸻
-
- Practical Value & Depth (value_score)
-
-Does the article provide concrete, useful information for business or technical insights?
-	•	10  Includes specific applications, architecture, investment details, or strategic decisions.
-	•	7-9  Offers relevant perspectives or analysis, but lacks detail.
-	•	4-6  Mostly general commentary or trend summaries.
-	•	1-3  Superficial or vague content.
-	•	0  No informative value.
-
-Instructions:
-Carefully read the article’s title and content.
-Think step by step. First, identify the topic. Second, judge relevance. Third, decide if it should be kept. Fourth, accumulate a total score.
-Output a single line of JSON with both keys, for example: {"keep": true, "score": 18}
-
-"""
 
 semaphore = asyncio.Semaphore(3)
 
@@ -104,6 +56,23 @@ def _parse_response(text: str) -> Dict[str, int]:
         print("⚠️ Failed to parse model response:", e)
         print("🧪 Raw inner text was:", repr(text))
         return {"keep": False, "score": 0}
+    
+def load_keywords():
+    """Return the flat keyword list."""
+    with open("config/keywords.json", "r", encoding="utf-8") as f:
+        return json.load(f)["keywords"]
+
+
+def keyword_score(article_text: str, keywords: List[str]) -> int:
+    """Return the number of keyword hits using a loose, case-insensitive match."""
+
+    lowered = article_text.lower()
+    score = 0
+    for kw in keywords:
+        kw_lower = kw.lower()
+        if kw_lower in lowered:
+            score += 1
+    return score
 
 
 async def check_relevance(article: Dict[str, Any]) -> Dict[str, int] | None:
@@ -143,8 +112,6 @@ async def main_async() -> None:
         if resp and resp.get("keep"):
             text = f"{art.get('title', '')} {art.get('content') or art.get('description', '')}"
             kw_score = keyword_score(text, keywords)
-            source_name = art.get("source", {}).get("name", "")
-            kw_score *= source_weight(source_name)
             gpt_score = resp.get("score", 0)
             art["score"] = gpt_score + kw_score
             results.append(art)

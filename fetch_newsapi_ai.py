@@ -18,6 +18,22 @@ NUM_AI_ARTICLES = 1
 # Persist the results inside the ``data`` directory
 OUTPUT_FILE = "data/newsapi_ai_articles.json"
 
+def load_keywords():
+    """Return the flat keyword list."""
+    with open("config/keywords.json", "r", encoding="utf-8") as f:
+        return json.load(f)["keywords"]
+
+def keyword_score(article_text: str, keywords: List[str]) -> int:
+    """Return the number of keyword hits using a loose, case-insensitive match."""
+
+    lowered = article_text.lower()
+    score = 0
+    for kw in keywords:
+        kw_lower = kw.lower()
+        if kw_lower in lowered:
+            score += 1
+    return score
+
 
 def fetch_newsapi_ai_articles(keywords: List[str]) -> List[Dict]:
     params = {
@@ -59,6 +75,7 @@ def fetch_and_store() -> List[Dict]:
     """Fetch articles that match keywords and store them."""
     keywords = load_keywords()
     return fetch_newsapi_ai_articles(keywords)
+
 
 
 def main() -> None:
