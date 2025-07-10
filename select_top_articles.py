@@ -9,9 +9,10 @@ OUTPUT_FILE = "data/selected_articles.json"
 # avoid mismatches in capitalization or spacing when reading the files.
 REGIONS = ["Global", "East Asia"]
 CATEGORIES = [
-    "General Tech & Startups",
-    "Applied AI & FinTech",
-    "Blockchain & Crypto",
+    "Research",
+    "Infrastructure", 
+    "Startup",
+    "FinTech",
 ]
 
 # Build the expected file list dynamically so changes in ``REGIONS`` or

@@ -6,23 +6,23 @@ INPUT_FILE = "data/news_data.json"
 OUTPUT_FILE = "data/news_data.json"
 
 CATEGORY_MAPPING = {
-    "startup_ai": "startup_ai",
+    "Startup_ai": "Startup_ai",
     "finance_ai": "finance_ai",
     "blockchain_ai": "blockchain_ai",
-    "General Tech & Startups": "startup_ai",
+    "General Tech & Startups": "Startup_ai",
     "Applied AI & FinTech": "finance_ai",
     "Applied AI & Fintech": "finance_ai",
     "Blockchain & Crypto": "blockchain_ai",
 }
 
 REGIONS = ["Global", "East Asia"]
-CATEGORIES = ["finance_ai", "startup_ai", "blockchain_ai"]
+CATEGORIES = ["Research_ai", "Infrastructure_ai", "Startup_ai", "FinTech_ai"]
 
 
 def normalize_category(cat: str) -> str:
     cat = cat.strip()
     if not cat:
-        return "startup_ai"
+        return "Startup_ai"
     # remove region prefix like "Global – "
     if "–" in cat:
         # ndash or hyphen

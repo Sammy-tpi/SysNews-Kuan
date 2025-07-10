@@ -23,7 +23,7 @@ if not ACCESS_TOKEN:
     raise RuntimeError("LINE_CHANNEL_ACCESS_TOKEN not set in environment")
 
 CATEGORY_LABELS = {
-    "startup_ai": "Startup",
+    "Startup_ai": "Startup",
     "finance_ai": "Fintech",
     "blockchain_ai": "Blockchain",
 }

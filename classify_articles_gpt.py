@@ -22,9 +22,10 @@ genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 model = genai.GenerativeModel("gemini-1.5-pro")
 
 CATEGORIES = [
-    "General Tech & Startups",
-    "Applied AI & FinTech",
-    "Blockchain & Crypto",
+    "Research",
+    "Infrastructure",
+    "FinTech",
+    "Startup",
 ]
 
 REGIONS = ["Global", "East Asia"]
@@ -41,7 +42,7 @@ def load_prompt(path: str) -> str:
     with open(path, "r", encoding="utf-8") as f:
         return f.read()
 
-VERSION = "v1"
+VERSION = "v2"
 PROMPT_PATH = f"prompts/classify_articles_{VERSION}.txt"
 PROMPT_TEMPLATE = load_prompt(PROMPT_PATH)
 
@@ -86,16 +87,11 @@ async def classify_article(article: Dict[str, Any]) -> Dict[str, Any] | None:
     if not title or not content:
         return None
     short_content = truncate_text(content)
-    prompt = f"{PROMPT_TEMPLATE.strip()}\n\nTitle: {title}\n\nArticle Content:\n{short_content}"
-
-    full_prompt = (
-        prompt
-        + "\nPlease return JSON like {\"category\": \"Applied AI & FinTech\", \"region\": \"East Asia\"}."
-    )
+    prompt = f"{PROMPT_TEMPLATE.strip()}\n\nTitle: {title}\n\n Content:\n{short_content}"
 
     async with semaphore:
         try:
-            resp = await model.generate_content_async(full_prompt)
+            resp = await model.generate_content_async(prompt)
             text = resp.text
             print("📩 Model raw response:", text)
             return _parse_response(text)

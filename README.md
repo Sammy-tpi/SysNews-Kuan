@@ -1,6 +1,6 @@
 # NewsRender
 
-**NewsRender** is a Python-powered pipeline that delivers a **daily bilingual (English + Traditional Chinese)** digest of the most relevant AI, FinTech, and startup news. It pulls content from curated **RSS/RSSHub feeds** and the **EventRegistry API**, filters it using custom keywords, ranks and summarizes with **LLM models**, and sends out a clean, branded HTML email to subscribed recipients.
+**NewsRender** is a Python-powered pipeline that delivers a **daily bilingual (English + Traditional Chinese)** digest of the most relevant AI, FinTech, and Startup news. It pulls content from curated **RSS/RSSHub feeds** and the **EventRegistry API**, filters it using custom keywords, ranks and summarizes with **LLM models**, and sends out a clean, branded HTML email to subscribed recipients.
 
 ---
 
@@ -118,7 +118,7 @@ Edit `config/keywords.json` to define keyword filters in multiple languages (EN/
 The output is a responsive, visually clean **HTML digest** with 6 cards:
 
 * 3 regions: 🌍 Global, 🇹🇼 East Asia
-* 3 categories: General Tech, Applied AI in Finance, Blockchain & Crypto
+* 3 categories: Research, Infrastructure, Startup, and FinTech
 
 Each card includes:
 

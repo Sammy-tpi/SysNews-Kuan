@@ -18,7 +18,7 @@ def load_prompt(version: str) -> str:
     with open(path, "r", encoding="utf-8") as f:
         return f.read()
 
-VERSION = "v1"
+VERSION = "v2"
 PROMPT_TEMPLATE = load_prompt(VERSION)
 
 

@@ -23,8 +23,8 @@ Your classifications help us identify real-world use cases of AI and FinTech, tr
 Categories (choose one only):
 
 General Tech & Startups
-For news about general technology trends, enterprise tools, consumer apps, or startup activity.
-Example: A startup launches a productivity tool or a SaaS company raises funding.
+For news about general technology trends, enterprise tools, consumer apps, or Startup activity.
+Example: A Startup launches a productivity tool or a SaaS company raises funding.
 
 Applied AI & FinTech
 For articles about practical uses of artificial intelligence or financial technology. Includes LLM applications, algorithmic trading, AI customer service, robo-advisors, fraud detection, and similar topics.

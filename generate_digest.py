@@ -44,11 +44,12 @@ def generate_html(articles):
           for a in east_asian_articles])
 
     CATEGORY_DISPLAY_NAME = {
-        "finance_ai": "Applied AI & Fintech",
-        "startup_ai": "General Tech & Startups",
-        "blockchain_ai": "Blockchain & Crypto",
+        "Research_ai": "Research",
+        "Startup_ai": "Startup",
+        "Infrastructure_ai": "Infrastructure",
+        "FinTech_ai": "FinTech",
     }
-    CATEGORIES = ["finance_ai", "startup_ai", "blockchain_ai"]
+    CATEGORIES = ["Research_ai", "Startup_ai", "Infrastructure_ai", "FinTech_ai"]
 
     def normalize(cat: str) -> str:
         cat = cat or ""
@@ -57,10 +58,10 @@ def generate_html(articles):
         if "-" in cat and cat.split("-", 1)[0].strip() in ["Global", "East Asia"]:
             cat = cat.split("-", 1)[1].strip()
         return {
-            "Applied AI & FinTech": "finance_ai",
-            "Applied AI & Fintech": "finance_ai",
-            "General Tech & Startups": "startup_ai",
-            "Blockchain & Crypto": "blockchain_ai",
+            "Research": "Research_ai",
+            "Startup": "Startup_ai",
+            "Infrastructure": "Infrastructure_ai",
+            "FinTech": "FinTech_ai",
         }.get(cat, cat)
 
     for article in global_articles + east_asian_articles:

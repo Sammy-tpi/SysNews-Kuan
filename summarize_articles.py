@@ -99,7 +99,7 @@ async def main_async() -> None:
             continue
 
         region = art.get('region') or "Global"
-        category = art.get('category') or "General Tech & Startups"
+        category = art.get('category') 
 
         print("✅ Title:", art['title'])
         print("📝 Category:", category)

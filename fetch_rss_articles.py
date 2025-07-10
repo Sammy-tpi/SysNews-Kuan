@@ -16,10 +16,12 @@ ALLOWED_CATEGORIES = {
     "artificial intelligence",
     "fintech",
     "finance",
-    "startup",
+    "Startup",
     "crypto",
     "blockchain",
     "business",
+    "infrastructure",
+    "research",
 }
 
 
