@@ -1,15 +1,33 @@
 {
   "keywords": [
     "AI", "ai", "人工智能", "人工智慧", "machine learning", "deep learning",
-    "智能風控", "智能客服", "AI風控", "AI客服", "AI保險", "AI投資",
-    "智能投資", "算法交易", "algo trading", "AI wealth", "智能理財",
-    "AI lending", "AI loan", "AI信用", "智能信貸",
-    "AI Startup", "AI初創", "AI新創", "生成式AI", "GenAI",
-    "AI product", "AI solution", "AI平台", "AI-as-a-Service", "SaaS AI",
-    "生成模型", "ChatGPT", "大語言模型", "LLM Startup",
-    "Blockchain", "區塊鏈", "智能合約", "smart contract", "加密貨幣",
-    "crypto", "DeFi", "Web3", "去中心化", "比特幣", "Bitcoin",
-    "以太坊", "Ethereum", "stablecoin", "crypto exchange",
-    "crypto trading", "crypto lending", "blockchain應用", "區塊鏈技術"
+    "生成式AI", "GenAI", "生成模型", "大語言模型", "LLM", "ChatGPT",
+    "AI research", "AI研究", "人工智慧研究", "模型訓練", "算法", "演算法",
+    "AI breakthroughs", "AI breakthrough", "AI創新", "科學研究", "學術論文",
+    "神經網路", "neural network", "computational linguistics",
+
+    
+    "AI infrastructure", "AI基礎建設", "雲計算", "cloud computing", "數據中心",
+    "data center", "伺服器", "GPU", "算力", "超算", "高性能計算", "HPC",
+    "網路架構", "network architecture", "邊緣計算", "edge computing",
+    "系統平台", "platform development", "後端系統", "backend systems",
+
+
+    "FinTech", "金融科技", "智能風控", "AI風控", "智能客服", "AI客服",
+    "AI保險", "AI投資", "智能投資", "算法交易", "algo trading",
+    "AI wealth", "智能理財", "AI lending", "AI loan", "AI信用", "智能信貸",
+    "區塊鏈", "Blockchain", "智能合約", "smart contract", "加密貨幣", "crypto",
+    "DeFi", "Web3", "去中心化", "比特幣", "Bitcoin", "以太坊", "Ethereum",
+    "穩定幣", "stablecoin", "加密貨幣交易所", "crypto exchange",
+    "加密貨幣交易", "crypto trading", "區塊鏈應用", "金融創新", "數位支付",
+    "digital payment", "行動支付", "online banking",
+
+
+    "AI Startup", "AI初創", "AI新創", "新創", "初創公司", "創業公司", "startup",
+    "創投", "venture capital", "VC funding", "募資", "融資", "資金", "pre-seed",
+    "seed round", "series A", "IPO", "獨角獸", "unicorn", "併購", "acquisition",
+    "商業模式", "business model", "市場擴張", "market expansion", "產品發佈",
+    "product launch", "SaaS", "企業成長", "business growth", "tech company",
+    "技術公司", "科技公司", "企業應用", "B2B solution", "消費級產品", "B2C product"
   ]
 }

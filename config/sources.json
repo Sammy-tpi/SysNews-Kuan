@@ -48,7 +48,6 @@
       "topics": ["Tech", "Gadgets"],
       "full_text": true
     },
-
     {
       "name": "CryptoSlate",
       "rss_url": "https://cryptoslate.com/feed/",
@@ -107,85 +106,81 @@
     },
     {
       "name": "ACN Newswire",
-      "rss_url": "https://rss.app/feeds/mhjZgtbXvh2NAMsJ.xml",
+      "rss_url": "https://www.acnnewswire.com/rss/lang/traditional_Chinese.xml",
       "source_type": "rss",
       "region": "Asia-Pacific",
       "topics": ["Tech", "Business", "AI", "FinTech"],
       "full_text": true
     },
-
     {
-      "name": "Finextra",
-      "rss_url": "https://rss.app/feeds/aBYEwmyKu3tFb6wU.xml",
+      "name": "Finextra-headlines",
+      "rss_url": "https://www.finextra.com/rss/headlines.aspx",
       "source_type": "rss",
       "region": "Global",
-      "topics": ["AI", "FinTech"],
+      "topics": ["FinTech", "AI", "Tech"],
       "full_text": true
     },
     {
-      "name": "Forbes",
-      "rss_url": "https://rss.app/feeds/ZSZ4Ofh59oqJRPwE.xml",
+      "name": "Finextra-AI",
+      "rss_url": "https://www.finextra.com/rss/channel.aspx?channel=ai",
       "source_type": "rss",
       "region": "Global",
-      "topics": ["FinTech", "Digital Finance"],
+      "topics": ["AI", "FinTech", "Tech"],
       "full_text": true
     },
     {
-      "name": "Reuters",
-      "rss_url": "https://www.reutersagency.com/feed/?best-topics=technology",
+      "name": "Finextra-Cloud",
+      "rss_url": "https://www.finextra.com/rss/channel.aspx?channel=cloud",
       "source_type": "rss",
       "region": "Global",
-      "topics": ["AI", "FinTech", "Digital Finance"],
+      "topics": ["Infrastructure", "FinTech", "Tech"],
+      "full_text": true
+    },
+    {
+      "name": "Finextra-Startups",
+      "rss_url": "https://www.finextra.com/rss/channel.aspx?channel=startups",
+      "source_type": "rss",
+      "region": "Global",
+      "topics": ["Startup", "FinTech", "Tech"],
+      "full_text": true
+    },
+    {
+      "name": "中央社",
+      "rss_url":"https://feeds.feedburner.com/rsscna/technology",
+      "source_type": "rss",
+      "region": "Taiwan",
+      "topics": ["AI", "Tech News", "Journal"],
+      "full_text": true
+    },
+    {
+      "name": "ETtoday新聞雲",
+      "rss_url":"https://www.ettoday.net/rssfeed/ai.xml",
+      "source_type": "rss",
+      "region": "Taiwan",
+      "topics": ["AI", "Tech News"],
       "full_text": true
     }
-   
   ],
   "rsshub_sources": [
     {
-      "name": "Nikkei Asia",
-      "rss_url": "https://feeder.co/discover/7d80ba8605/asia-nikkei-com",
-      "source_type": "rsshub",
-      "region": "Japan/Asia",
-      "topics": ["Finance", "Tech"],
-      "full_text": true
-    },
-    {
-      "name": "Caixin (财新网)",
-      "rss_url": "https://feeder.co/discover/146a1db4f9/caixinglobal-com",
-      "source_type": "rsshub",
-      "region": "China",
-      "topics": ["Finance", "Tech"],
-      "full_text": true
-    },
-    {
       "name": "共同網 (Kyodo News)",
-      "rss_url": "https://feeder.co/discover/3709e021f8/tchina-kyodonews-net",
+      "rss_url": "https://tchina.kyodonews.net/rss/news.xml",
       "source_type": "rsshub",
       "region": "Japan/China",
       "topics": ["Finance", "Tech"],
       "full_text": true
     },
     {
-      "name": "信報財經新聞 (HKEJ)",
-      "rss_url": "https://rss.app/feeds/9UZM1bBmxSRLMMwV.xml",
-      "source_type": "rsshub",
-      "region": "Hong Kong",
-      "topics": ["Finance", "Tech"],
-      "full_text": true
-    },
-      {
         "name": "Fintech News Hong Kong",
-        "rss_url": "https://feeder.co/discover/79e7b4bf36/fintechnews-hk",
+        "rss_url": "https://fintechnews.hk/feed/",
         "source_type": "rss",
         "region": "Hong Kong",
         "topics": ["FinTech", "AI", "Finance"],
         "full_text": true
     },
-  
-  
     {
         "name": "e27",
-        "rss_url": "https://rss.app/feeds/jZgRd3l36qYSmWlP.xml",
+        "rss_url": "https://e27.co/index_wp.php/feed/",
         "source_type": "rss",
         "region": "Asia",
         "topics": ["Tech", "Startups", "FinTech", "AI"],
@@ -193,19 +188,18 @@
     },
     {
         "name": "Asia Times",
-        "rss_url": "https://rss.app/feeds/JHN1fIRfblxCpNYR.xml",
+        "rss_url": "https://asiatimes.com/feed/",
         "source_type": "rss",
         "region": "Asia",
         "topics": ["Business", "Tech", "Finance"],
         "full_text": true
     },
-  
     {
         "name": "Techorange",
         "rss_url": "https://techorange.com/feed/",
         "source_type": "rss",
-        "region": "Asia",
-        "topics": ["Blockchain", "Crypto", "Web3"],
+        "region": "Taiwan",
+        "topics": ["Blockchain", "Crypto", "Web3", "AI", "Tech", "Startups"],
         "full_text": true
     },
     {
@@ -218,13 +212,12 @@
     },
     {
         "name": "Blockchain.News",
-        "rss_url": "https://rss.app/feeds/xHkO7m9Vg15o7x8b.xml",
+        "rss_url": "https://blockchain.news/RSS/",
         "source_type": "rss",
         "region": "China",
         "topics": ["Blockchain", "Crypto", "AI"],
         "full_text": true
     },
-
     {
         "name": "Asia Financial",
         "rss_url": "https://www.asiafinancial.com/feed",
@@ -234,8 +227,16 @@
         "full_text": true
     },
     {
-        "name": "Eco-Business",
-        "rss_url": "https://rss.app/feeds/NvjUGDXcsOStb7xU.xml",
+        "name": "Eco-Business_news",
+        "rss_url": "https://www.eco-business.com/feeds/news/",
+        "source_type": "rss",
+        "region": "Asia",
+        "topics": ["Tech", "Sustainability", "Finance"],
+        "full_text": true
+    },
+        {
+        "name": "Eco-Business_research",
+        "rss_url": "https://www.eco-business.com/feeds/research/",
         "source_type": "rss",
         "region": "Asia",
         "topics": ["Tech", "Sustainability", "Finance"],
@@ -243,23 +244,15 @@
     },
     {
         "name": "MIT tech Review",
-        "rss_url": "https://rss.app/feeds/8Rto5SuJEmWoac2V.xml",
+        "rss_url": "https://www.technologyreview.com/feed/",
         "source_type": "rss",
         "region": "Asia",
-        "topics": ["Tech", "Startups", "FinTech"],
+        "topics": ["Tech", "Startups", "FinTech", "AI", "Research"],
         "full_text": true
     },
     {
         "name": "VentureBeat",
         "rss_url": "https://feeds.feedburner.com/venturebeat/SZYF",
-        "source_type": "rss",
-        "region": "Global",
-        "topics": ["Tech", "Startups", "FinTech"],
-        "full_text": true
-    },
-    {
-        "name": " Insider",
-        "rss_url": "https://www.patreon.com/rss/insiderpodcast?auth=KyLaO4qbEUozzU5gmUrXH2exTHlKzmVn",
         "source_type": "rss",
         "region": "Global",
         "topics": ["Tech", "Startups", "FinTech"],
@@ -281,7 +274,6 @@
       "topics": ["Tech", "Startups", "FinTech"],
       "full_text": true
     },
-
     {
       "name": "ZDNet",
       "rss_url": "https://www.zdnet.com/news/rss.xml",
@@ -290,7 +282,6 @@
       "topics": ["Tech", "Business"],
       "full_text": true
     },
-
     {
       "name": "Synced",
       "rss_url": "https://www.syncedreview.com/feed/",
@@ -300,16 +291,8 @@
       "full_text": true
     },
     {
-      "name": "Perplexity AI",
-      "rss_url": "https://rss.app/feeds/P6Wc6ZmTXrsNEwHG.xml",
-      "source_type": "rss",
-      "region": "Global",
-      "topics": ["Tech", "Startups", "FinTech"],
-      "full_text": true
-    },
-    {
       "name": "Sifted",
-      "rss_url": "https://rss.app/feeds/km4017winRSuQwyZ.xml",
+      "rss_url": "https://sifted.eu/feed?post_type=article",
       "source_type": "rss",
       "region": "Global",
       "topics": ["Tech", "Startups", "FinTech"],
@@ -317,7 +300,7 @@
     },
     {
       "name": "Finvote",
-      "rss_url": "https://rss.app/feeds/wV2kfwu60FYlb3YR.xml",
+      "rss_url": "https://feeds.feedblitz.com/finovate&x=1",
       "source_type": "rss",
       "region": "Global",
       "topics": ["Tech", "Startups", "FinTech"],
@@ -347,7 +330,6 @@
       "topics": ["FinTech", "Tech", "Crypto"],
       "full_text": true
     },
-    
     {
       "name": "Finovate Blog",
       "rss_url": "https://finovate.com/feed",
@@ -356,7 +338,6 @@
       "topics": ["FinTech", "Finance"],
       "full_text": true
     },
-    
     {
       "name": "DigFin",
       "rss_url": "https://digfingroup.com/feed",
@@ -397,7 +378,6 @@
       "topics": ["FinTech", "Banking", "Automation"],
       "full_text": true
     },
-    
     {
       "name": "AI nyheter",
       "rss_url": "https://nyheter.aitool.se/feed",
@@ -431,62 +411,77 @@
       "full_text": true
     },
     {
-      "name": "經濟日報",
-      "rss_url": "https://feeder.co/discover/115bd77622/money-udn-com-money-index",
+      "name": "自由時報",
+      "rss_url": "https://news.ltn.com.tw/rss/business.xml",
       "source_type": "rss",
-      "region": "Global",
-      "topics": ["AI", "Tech News", "Journal"],
+      "region": "Taiwan",
+      "topics": ["Business", "FinTech", "Tech News"],
       "full_text": true
     },
     {
-      "name": "工商時報",
-      "rss_url": "https://feeder.co/discover/8cb2cd5089/ctee-com-tw",
+      "name": "關鍵評論網",
+      "rss_url": "https://feeds.feedburner.com/TheNewsLens",
       "source_type": "rss",
-      "region": "Global",
-      "topics": ["AI", "Tech News", "Journal"],
+      "region": "Taiwan",
+      "topics": ["Tech News", "Business", "Research", "Analysis"],
       "full_text": true
     },
     {
-      "name": "中央社",
-      "rss_url":"https://rss.app/feeds/OgnFmemLiXbkx33Z.xml",
+      "name": "風傳媒_財經",
+      "rss_url": "https://www.storm.mg/api/getRss/channel_id/4?path=https%3A%2F%2Fwww.storm.mg%2Farticle",
       "source_type": "rss",
-      "region": "Global",
-      "topics": ["AI", "Tech News", "Journal"],
+      "region": "Taiwan",
+      "topics": ["Finance", "Business", "FinTech"],
       "full_text": true
     },
     {
-      "name": "聯合新聞網",
-      "rss_url":"https://rss.app/feeds/kS599MaCtfbLogw8.xml",
+      "name": "風傳媒_國內",
+      "rss_url": "https://www.storm.mg/api/getRss/channel_id/9?path=https%3A%2F%2Fwww.storm.mg%2Farticle",
       "source_type": "rss",
-      "region": "Global",
-      "topics": ["AI", "Tech News", "Journal"],
+      "region": "Taiwan",
+      "topics": ["Taiwan News", "Politics", "Society", "Business"],
       "full_text": true
     },
     {
-      "name": "風傳媒",
-      "rss_url":"https://rss.app/feeds/B8NNpBtTHJPBS40N.xml",
+      "name": "風傳媒_新聞",
+      "rss_url": "https://www.storm.mg/api/getRss/channel_id/2?path=https%3A%2F%2Fwww.storm.mg%2Farticle",
       "source_type": "rss",
-      "region": "Global",
-      "topics": ["AI", "Tech News", "Journal"],
+      "region": "Taiwan",
+      "topics": ["General News", "Taiwan News", "Politics", "Business", "Tech News"],
       "full_text": true
     },
     {
-      "name": "ETtoday新聞雲 ",
-      "rss_url":"https://rss.app/feeds/rCn7foSv1MADzqQ5.xml",
+      "name": "風傳媒_國際",
+      "rss_url": "https://www.storm.mg/api/getRss/channel_id/10?path=https%3A%2F%2Fwww.storm.mg%2Farticle",
       "source_type": "rss",
-      "region": "Global",
-      "topics": ["AI", "Tech News", "Journal"],
+      "region": "Taiwan",
+      "topics": ["International News", "Global Affairs"],
       "full_text": true
     },
     {
-      "name": "數位時代 BusinessNext ",
-      "rss_url":"https://rss.app/feeds/ZytOvg8fNoHWsNIV.xml",
+      "name": "風傳媒_新新聞",
+      "rss_url": "https://www.storm.mg/api/getRss/channel_id/109?path=https%3A%2F%2Fwww.storm.mg%2Farticle",
       "source_type": "rss",
-      "region": "Global",
-      "topics": ["AI", "Tech News", "Journal"],
+      "region": "Taiwan",
+      "topics": ["Politics", "Investigative Journalism", "Society", "Taiwan News"],
+      "full_text": true
+    },
+    {
+      "name": "金融監督管理委員會 - 新聞稿",
+      "rss_url": "https://www.fsc.gov.tw/RSS/Messages?serno=201202290009&language=chinese",
+      "source_type": "rss",
+      "region": "Taiwan",
+      "topics": ["FinTech", "Policy", "Regulation", "Finance"],
+      "full_text": true
+    },
+    {
+      "name": "中華民國經濟部 - 新聞",
+      "rss_url": "https://www.moea.gov.tw/MNS/Populace/news/NewsRSSdetail.aspx?Kind=1",
+      "source_type": "rss",
+      "region": "Taiwan",
+      "topics": ["Tech News", "Business", "Policy", "Industry"],
       "full_text": true
     }
-
 
   ]
 }

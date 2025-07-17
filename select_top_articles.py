@@ -7,7 +7,7 @@ OUTPUT_FILE = "data/selected_articles.json"
 
 # These should mirror the values used in ``classify_articles_gpt.py`` to
 # avoid mismatches in capitalization or spacing when reading the files.
-REGIONS = ["Global", "East Asia"]
+REGIONS = ["Global", "Taiwan"]
 CATEGORIES = [
     "Research",
     "Infrastructure", 

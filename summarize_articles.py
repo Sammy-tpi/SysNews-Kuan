@@ -15,7 +15,7 @@ OUTPUT_FILE = "data/news_data.json"
 
 load_dotenv()
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
-model = genai.GenerativeModel("gemini-1.5-flash")
+model = genai.GenerativeModel("gemini-2.5-flash")
 
 
 def load_articles() -> List[Dict]:
@@ -48,7 +48,8 @@ def load_prompt(path: str) -> str:
     with open(path, "r", encoding="utf-8") as f:
         return f.read()
 
-VERSION = "v1"
+
+VERSION = "v2"
 PROMPT_PATH = f"prompts/summarize_article_{VERSION}.txt"
 PROMPT_TEMPLATE = load_prompt(PROMPT_PATH)
 
@@ -132,7 +133,7 @@ async def main_async() -> None:
         json.dump(summarized, f, ensure_ascii=False, indent=2)
 
     print(f"✅ Wrote summaries to {OUTPUT_FILE}")
-    print(f"\U0001F4DD \u6210\u529F\u6458\u8981\u7684\u6587\u7AE0\u7E3D\u6578: {len(summarized)}")
+    print(f"📝 成功摘要的文章總數: {len(summarized)}")
 
 
 if __name__ == '__main__':

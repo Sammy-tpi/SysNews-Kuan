@@ -30,7 +30,7 @@ CATEGORY_LABELS = {
 
 REGION_ICONS = {
     "Global": "🌏",
-    "East Asia": "🇹🇼",
+    "Taiwan": "🇹🇼",
 }
 
 

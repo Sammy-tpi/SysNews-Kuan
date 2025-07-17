@@ -2,19 +2,30 @@ import json
 import math
 from datetime import datetime
 from jinja2 import Template
+from collections import defaultdict
+import os
+import asyncio
+import google.generativeai as genai
+from dotenv import load_dotenv
 
 TEMPLATE_FILE = "templates/digest_single_column.html"
 JSON_PATH = "data/news_data.json"
-OUTPUT_FILE = "digest.html"
-REGIONS = ["East Asia", "Global"]
+OUTPUT_FILE = "result/digest.html"
+REGIONS = ["Taiwan", "Global"]
 
+CATEGORY_DISPLAY_NAME = {
+    "Research": "Research",
+    "Startup": "Startup",
+    "Infrastructure": "Infrastructure",
+    "FinTech": "FinTech",
+}
+CATEGORIES = list(CATEGORY_DISPLAY_NAME.keys())
+
+load_dotenv()
+genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+summary_model = genai.GenerativeModel("gemini-2.5-flash")
 
 def load_articles(path: str):
-    """Load the news articles from ``path``.
-
-    Returns an empty list if the file does not exist. Raises ``RuntimeError`` if
-    the JSON is malformed.
-    """
     try:
         with open(path, "r", encoding="utf-8") as f:
             return json.load(f)
@@ -22,6 +33,41 @@ def load_articles(path: str):
         return []
     except json.JSONDecodeError as e:
         raise RuntimeError(f"Invalid JSON in {path}") from e
+
+
+def normalize(cat: str) -> str:
+    cat = cat or ""
+    if "\u2013" in cat:
+        cat = cat.split("\u2013", 1)[1].strip()
+    if "-" in cat and cat.split("-", 1)[0].strip() in ["Global", "Taiwan"]:
+        cat = cat.split("-", 1)[1].strip()
+    return {
+        "Research": "Research",
+        "Startup": "Startup",
+        "Infrastructure": "Infrastructure",
+        "FinTech": "FinTech",
+    }.get(cat, cat)
+
+
+def prepare_articles(articles):
+    for article in articles:
+        src = article.get("source")
+        if isinstance(src, dict):
+            src = src.get("name")
+        article["source"] = src or "Unknown Source"
+
+        if not article.get("read_time"):
+            content = article.get("content", "")
+            word_count = len(content.split())
+            article["read_time"] = f"{max(1, math.ceil(word_count / 200))} min read"
+
+        article["published_at"] = article.get("published_at") or article["read_time"]
+        article["url"] = article.get("url") or "#"
+        article["tags"] = article.get("tags") or ["General"]
+
+        cat_key = normalize(article.get("category", ""))
+        article["category_key"] = cat_key
+        article["category_display"] = CATEGORY_DISPLAY_NAME.get(cat_key, cat_key)
 
 
 def group_articles_by_region(articles):
@@ -34,78 +80,38 @@ def group_articles_by_region(articles):
     return grouped
 
 
+def group_articles_by_category(articles_list):
+    grouped = defaultdict(list)
+    for article in articles_list:
+        grouped[article["category_key"]].append(article)
+    for cat_key in CATEGORIES:
+        if cat_key not in grouped or not grouped[cat_key]:
+            grouped[cat_key].append({
+                "title": "(No article selected)",
+                "summary_zh": "今日沒有相關新聞。",
+                "category_key": cat_key,
+                "category_display": CATEGORY_DISPLAY_NAME.get(cat_key, cat_key),
+                "source": "",
+                "url": "#",
+                "tags": [],
+                "read_time": "",
+                "published_at": "",
+            })
+    return grouped
+
+
 def generate_html(articles):
+    prepare_articles(articles)
     grouped = group_articles_by_region(articles)
+
     global_articles = grouped.get("Global", [])
-    east_asian_articles = grouped.get("East Asia", [])
+    taiwan_articles = grouped.get("Taiwan", []) 
 
-    print("Global categories:", [a.get("category") for a in global_articles])
-    print("East Asia categories:", [a.get("category")
-          for a in east_asian_articles])
+    filtered_global_articles = [a for a in global_articles if a.get("title") and a["title"] != "(No article selected)"]
+    filtered_taiwan_articles = [a for a in taiwan_articles if a.get("title") and a["title"] != "(No article selected)"] 
 
-    CATEGORY_DISPLAY_NAME = {
-        "Research_ai": "Research",
-        "Startup_ai": "Startup",
-        "Infrastructure_ai": "Infrastructure",
-        "FinTech_ai": "FinTech",
-    }
-    CATEGORIES = ["Research_ai", "Startup_ai", "Infrastructure_ai", "FinTech_ai"]
-
-    def normalize(cat: str) -> str:
-        cat = cat or ""
-        if "\u2013" in cat:
-            cat = cat.split("\u2013", 1)[1].strip()
-        if "-" in cat and cat.split("-", 1)[0].strip() in ["Global", "East Asia"]:
-            cat = cat.split("-", 1)[1].strip()
-        return {
-            "Research": "Research_ai",
-            "Startup": "Startup_ai",
-            "Infrastructure": "Infrastructure_ai",
-            "FinTech": "FinTech_ai",
-        }.get(cat, cat)
-
-    for article in global_articles + east_asian_articles:
-        # Log the raw category for debugging
-        print("Category:", article.get("category"))
-
-        src = article.get("source")
-        if isinstance(src, dict):
-            src = src.get("name")
-        article["source"] = src or "Unknown Source"
-
-        if not article.get("read_time"):
-            content = article.get("content", "")
-            word_count = len(content.split())
-            article["read_time"] = f"{max(1, math.ceil(word_count / 200))} min read"
-
-        article["published_at"] = article.get(
-            "published_at") or article.get("read_time", "1 min read")
-        article["url"] = article.get("url") or "#"
-        article["tags"] = article.get("tags") or ["General"]
-
-        cat_key = normalize(article.get("category", ""))
-        article["category_key"] = cat_key
-        article["category_display"] = CATEGORY_DISPLAY_NAME.get(
-            cat_key, cat_key)
-
-    def ensure_categories(articles_list):
-        existing = {a.get("category_key") for a in articles_list}
-        for cat_key in CATEGORIES:
-            if cat_key not in existing:
-                articles_list.append({
-                    "title": "(No article selected)",
-                    "summary_zh": "今日沒有相關新聞。",
-                    "category_key": cat_key,
-                    "category_display": CATEGORY_DISPLAY_NAME.get(cat_key, cat_key),
-                    "source": "",
-                    "url": "#",
-                    "tags": [],
-                    "read_time": "",
-                    "published_at": "",
-                })
-
-    ensure_categories(global_articles)
-    ensure_categories(east_asian_articles)
+    grouped_global = group_articles_by_category(filtered_global_articles)
+    grouped_taiwan = group_articles_by_category(filtered_taiwan_articles) 
 
     with open(TEMPLATE_FILE, "r", encoding="utf-8") as f:
         template = Template(f.read())
@@ -113,8 +119,8 @@ def generate_html(articles):
     date_str = datetime.now().strftime("%Y-%m-%d")
     return template.render(
         date=date_str,
-        global_articles=global_articles,
-        east_asian_articles=east_asian_articles,
+        global_articles=grouped_global,
+        taiwan_articles=grouped_taiwan,
     )
 
 

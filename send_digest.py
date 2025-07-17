@@ -29,7 +29,7 @@ def main():
 
     # --- Compose email ---
     msg = EmailMessage()
-    msg["Subject"] = f"📬 SysNew Daily – {date_str}"
+    msg["Subject"] = f"📬 AI 新知速遞：SysNews Daily – {date_str}"
     msg["From"] = SENDER
     msg["To"] = ", ".join(RECIPIENTS)  # visible To: header
     if BCC: 

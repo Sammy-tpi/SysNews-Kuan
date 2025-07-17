@@ -11,7 +11,7 @@ MAX_CONTENT_TOKENS = 1000  # Adjust based on your model's token limit
 
 load_dotenv()
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
-model = genai.GenerativeModel("gemini-1.5-pro")
+model = genai.GenerativeModel("gemini-2.5-flash")
 
 def load_prompt(version: str) -> str:
     path = f"prompts/filter_relevance_{version}.txt"
